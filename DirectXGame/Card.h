@@ -58,4 +58,5 @@ protected:
 	int rverseLuck;
 	CardType cardType;
 	CardRange cardRange;
+	int id;
 };

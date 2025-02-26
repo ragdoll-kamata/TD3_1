@@ -3,22 +3,24 @@
 #include <KamataEngine.h>
 
 using namespace KamataEngine;
+
+enum class CardType {
+	Damage,
+	Shield,
+	Skill,
+	StateAnomaly,
+};
+enum class CardRange {
+	One,
+	EnemyWhole,
+	Whole,
+	Random,
+	Self,
+};
 class Card {
 public:
 	virtual ~Card() = default;
-	enum class CardType {
-		Damage,
-		Shield,
-		Skill, 
-		StateAnomaly,
-	};
-	enum class CardRange {
-		One,
-		EnemyWhole,
-		Whole,
-		Random, 
-		Self,
-	};
+
 
 
 	virtual void Initialize();
@@ -35,9 +37,17 @@ public:
 
 	bool GetIsReverse() const { return isReverse; }
 
-	int GetLuck() const { return luck; }
+	void SetIsReverse(bool is) { isReverse = is; }
 
-private:
+	int GetLuck() const { 
+		if (!isReverse) {
+			return luck;
+		} else {
+			return rverseLuck;
+		}
+	}
+
+protected:
 	Sprite sprite;
 	uint32_t TH;
 
@@ -45,6 +55,7 @@ private:
 	int value;
 	bool isReverse;
 	int luck;
+	int rverseLuck;
 	CardType cardType;
 	CardRange cardRange;
 };

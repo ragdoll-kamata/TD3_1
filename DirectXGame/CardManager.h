@@ -2,6 +2,7 @@
 #include <memory>
 #include <vector>
 #include "StandardAtack.h"
+#include "StandardShield.h"
 
 #include <random>
 #include <KamataEngine.h>
@@ -42,6 +43,8 @@ public:
 
 	void CardDraw();
 	
+	void DeckShuffle();
+
 	void DeckRefresh();
 
 	void AllHandLack();
@@ -72,4 +75,17 @@ private:
 	int drawIndex = 0;
 	int drawTimer = 0;
 	const int kDrawTimer = 10;
+
+	const Vector2 turnEndButtonPos = {1100.0f, 450.0f};
+
+	Sprite turnEndButton;
+	uint32_t turnEndButtonTH;
+
+	const Vector2 allReverseButtonHalfSize = {60.0f,20.0f};
+	const Vector2 allReverseYssButtonPos = {640.0f - allReverseButtonHalfSize.x - 20.0f, 360.0f};
+	const Vector2 allReverseNoButtonPos = {640.0f + allReverseButtonHalfSize.x + 20.0f, 360.0f};
+
+	Sprite allReverseYssButton;
+	Sprite allReverseNoButton;
+	bool isReverseButton = false;
 };

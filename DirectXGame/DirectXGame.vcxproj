@@ -118,6 +118,7 @@
     <ClCompile Include="scene\SceneFactory.cpp" />
     <ClCompile Include="scene\SceneManager.cpp" />
     <ClCompile Include="StandardAtack.cpp" />
+    <ClCompile Include="StandardShield.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\TerrainPS.hlsl">
@@ -208,6 +209,7 @@
     <ClInclude Include="scene\SceneName.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="StandardAtack.h" />
+    <ClInclude Include="StandardShield.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

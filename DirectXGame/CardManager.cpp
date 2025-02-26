@@ -231,11 +231,11 @@ void CardManager::DeckShuffle() {
 }
 
 void CardManager::DeckRefresh() {
-
-	// cemetery から deck にカードを移動
-	deck.push_back(std::move(cemetery.back())); // 一番最後のカードを移動
-	cemetery.pop_back();                        // 移動後に元のデッキから削除
-
+	while (cemetery.size() > 0) {
+		// cemetery から deck にカードを移動
+		deck.push_back(std::move(cemetery.back())); // 一番最後のカードを移動
+		cemetery.pop_back();                        // 移動後に元のデッキから削除
+	}
 	DeckShuffle();
 }
 

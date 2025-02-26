@@ -104,6 +104,8 @@ Vector3 operator*(const Vector3& v, const Matrix4x4& m);
 // 線形補間
 float Lerp(float a, float b, float t);
 
+Vector3 Vector3Lerp(Vector3 a, Vector3 b, float t);
+
 } // namespace MathUtility
 
 } // namespace KamataEngine

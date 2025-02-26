@@ -108,12 +108,16 @@
   <ItemGroup>
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CardManager.cpp" />
+    <ClCompile Include="CollisionDetection.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MathUtilityEX.cpp" />
+    <ClCompile Include="scene\Blackout.cpp" />
     <ClCompile Include="scene\GameScene.cpp" />
     <ClCompile Include="scene\Scene.cpp" />
     <ClCompile Include="scene\SceneFactory.cpp" />
     <ClCompile Include="scene\SceneManager.cpp" />
+    <ClCompile Include="StandardAtack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\TerrainPS.hlsl">
@@ -191,14 +195,19 @@
     <None Include="Resources\shaders\Sprite.hlsli" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AABB.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="CardManager.h" />
+    <ClInclude Include="CollisionDetection.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="scene\Blackout.h" />
     <ClInclude Include="scene\GameScene.h" />
     <ClInclude Include="scene\Scene.h" />
     <ClInclude Include="scene\SceneFactory.h" />
     <ClInclude Include="scene\SceneManager.h" />
     <ClInclude Include="scene\SceneName.h" />
+    <ClInclude Include="Sphere.h" />
+    <ClInclude Include="StandardAtack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

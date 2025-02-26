@@ -16,16 +16,18 @@ void GameScene::Initialize2() {
 	camera_->UpdateMatrix();
 
 
-	SH_ = audio_->LoadWave("audio/BattleBGM.mp3");
+	//SH_ = audio_->LoadWave("audio/BattleBGM.mp3");
 
 
-	VH_ = audio_->PlayWave(SH_, true, 0.5f);
+	//VH_ = audio_->PlayWave(SH_, true, 0.5f);
 
+
+	cardManager_ = std::make_unique<CardManager>();
+	cardManager_->Initialize();
 }
 
-void GameScene::Update() {
-
-
+void GameScene::Update() { 
+	cardManager_->BattleUpdata();
 }
 
 
@@ -69,6 +71,9 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>
+
+
+	cardManager_->DrawBattle();
 
 	// スプライト描画後処理
 	Sprite::PostDraw();

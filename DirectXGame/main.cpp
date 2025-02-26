@@ -2,6 +2,8 @@
 
 using namespace KamataEngine;
 
+#include "SceneManager.h"
+
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	WinApp* win = nullptr;
@@ -51,6 +53,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	primitiveDrawer->Initialize();
 #pragma endregion
 
+
+	SceneManager* sceneManager = SceneManager::GetInstance();
+	sceneManager->Initialize();
+	sceneManager->SetNextScene(SceneName::GameScene);
 	// メインループ
 	while (true) {
 		// メッセージ処理
@@ -62,6 +68,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		imguiManager->Begin();
 		// 入力関連の毎フレーム処理
 		input->Update();
+
+		sceneManager->Update();
 		// 軸表示の更新
 		axisIndicator->Update();
 		// ImGui受付終了
@@ -69,6 +77,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		// 描画開始
 		dxCommon->PreDraw();
+
+		sceneManager->Draw();
 		// 軸表示の描画
 		axisIndicator->Draw();
 		// プリミティブ描画のリセット
@@ -78,7 +88,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		// 描画終了
 		dxCommon->PostDraw();
 	}
-
+	sceneManager->Finalize();
 	// 3Dモデル解放
 	Model::StaticFinalize();
 	audio->Finalize();

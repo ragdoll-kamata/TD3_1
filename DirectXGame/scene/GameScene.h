@@ -7,6 +7,7 @@
 using namespace KamataEngine;
 
 #include "Scene.h"
+#include "CardManager.h"
 
 /// <summary>
 /// ゲームシーン
@@ -54,6 +55,8 @@ private: // メンバ変数
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>
+
+	std::unique_ptr<CardManager> cardManager_ = nullptr;
 
 
 	// カメラ

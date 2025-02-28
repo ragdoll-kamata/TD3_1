@@ -1,9 +1,11 @@
 #include "CardManager.h"
 #include "CollisionDetection.h"
 #include <algorithm>
+#include "EnemyManager.h"
 using namespace CollisionDetection;
 using namespace MathUtility;
-void CardManager::Initialize() {
+void CardManager::Initialize(EnemyManager* enemy) {
+	enemyManager = enemy;
 	std::random_device rd; // 乱数の種
 	g.seed(rd());
 
@@ -25,27 +27,18 @@ void CardManager::Initialize() {
 
 	StartBattle();
 
-	turnEndButtonTH = TextureManager::GetInstance()->Load("white1x1.png");
-	turnEndButton.Initialize();
-	turnEndButton.SetTextureHandle(turnEndButtonTH);
-	turnEndButton.SetAnchorPoint({0.5f, 0.5f});
-	turnEndButton.SetSize({160.0f, 40.0f});
-	turnEndButton.SetColor({1.0f, 0.0f, 0.0f, 1.0f});
-	turnEndButton.SetPosition(turnEndButtonPos);
 
-	allReverseYssButton.Initialize();
-	allReverseYssButton.SetTextureHandle(turnEndButtonTH);
-	allReverseYssButton.SetAnchorPoint({0.5f, 0.5f});
-	allReverseYssButton.SetSize({allReverseButtonHalfSize.x * 2.0f, allReverseButtonHalfSize.y * 2.0f});
-	allReverseYssButton.SetColor({0.0f, 1.0f, 0.0f, 1.0f});
-	allReverseYssButton.SetPosition(allReverseYssButtonPos);
+	turnEndButton = std::make_unique<Button>();
+	turnEndButton->Initialize(turnEndButtonPos, turnEndButtonSize, "white1x1.png", {1.0f, 0.0f, 0.0f, 1.0f});
 
-	allReverseNoButton.Initialize();
-	allReverseNoButton.SetTextureHandle(turnEndButtonTH);
-	allReverseNoButton.SetAnchorPoint({0.5f, 0.5f});
-	allReverseNoButton.SetSize({allReverseButtonHalfSize.x * 2.0f, allReverseButtonHalfSize.y * 2.0f});
-	allReverseNoButton.SetColor({1.0f, 0.0f, 0.0f, 1.0f});
-	allReverseNoButton.SetPosition(allReverseNoButtonPos);
+
+	allReverseYssButton = std::make_unique<Button>();
+	allReverseYssButton->Initialize(allReverseYssButtonPos, allReverseButtonSize, "white1x1.png", {0.0f, 1.0f, 0.0f, 1.0f});
+
+	allReverseNoButton = std::make_unique<Button>();
+	allReverseNoButton->Initialize(allReverseNoButtonPos, allReverseButtonSize, "white1x1.png", {1.0f, 0.0f, 0.0f, 1.0f});
+
+	number.Initialize({100.0f,500.0f});
 }
 
 void CardManager::BattleUpdata() { 
@@ -54,15 +47,17 @@ void CardManager::BattleUpdata() {
 
 void CardManager::DrawBattle() {
 	if (isReverseButton) {
-		allReverseYssButton.Draw();
-		allReverseNoButton.Draw();
+		allReverseYssButton->Draw();
+		allReverseNoButton->Draw();
 	}
 
 
-	turnEndButton.Draw();
+	turnEndButton->Draw();
+	number.Draw();
 	for (int i = 0; i < handCard.size(); i++) {
 		handCard[i]->Draw();
 	}
+
 }
 
 void CardManager::StartMainTurn() {
@@ -82,37 +77,19 @@ void CardManager::StartMainTurn() {
 		isReverseButton = true;
 		Vector2 mousePos = Input::GetInstance()->GetMousePosition();
 		if (Input::GetInstance()->IsTriggerMouse(0)) {
-			if (handLack >= 0) {
-				Vector2 hPos{
-				    std::clamp(mousePos.x, allReverseYssButtonPos.x - allReverseButtonHalfSize.x, allReverseYssButtonPos.x + allReverseButtonHalfSize.x),
-				    std::clamp(mousePos.y, allReverseYssButtonPos.y - allReverseButtonHalfSize.y, allReverseYssButtonPos.y + allReverseButtonHalfSize.y),
-				};
-
-				hPos.x -= mousePos.x;
-				hPos.y -= mousePos.y;
-				float len = Length(hPos);
-				if (len <= 0.0f) {
-					isReverseButton = false;
-					battlePhase = BattlePhase::MainTurn;
-					drawIndex = 0;
-					for (int i = 0; i < handCard.size(); i++) {
-						handCard[i]->SetIsReverse(!handCard[i]->GetIsReverse());
-					}
+			if (allReverseYssButton->IsOnCollision(mousePos)) {
+				isReverseButton = false;
+				battlePhase = BattlePhase::MainTurn;
+				drawIndex = 0;
+				for (int i = 0; i < handCard.size(); i++) {
+					handCard[i]->SetIsReverse(!handCard[i]->GetIsReverse());
 				}
+			}
 
-				hPos = {
-				    std::clamp(mousePos.x, allReverseNoButtonPos.x - allReverseButtonHalfSize.x, allReverseNoButtonPos.x + allReverseButtonHalfSize.x),
-				    std::clamp(mousePos.y, allReverseNoButtonPos.y - allReverseButtonHalfSize.y, allReverseNoButtonPos.y + allReverseButtonHalfSize.y),
-				};
-
-				hPos.x -= mousePos.x;
-				hPos.y -= mousePos.y;
-				len = Length(hPos);
-				if (len <= 0.0f) {
-					isReverseButton = false;
-					battlePhase = BattlePhase::MainTurn;
-					drawIndex = 0;
-				}
+			if (allReverseNoButton->IsOnCollision(mousePos)) {
+				isReverseButton = false;
+				battlePhase = BattlePhase::MainTurn;
+				drawIndex = 0;
 			}
 		}
 	}
@@ -127,15 +104,7 @@ void CardManager::MainTurn() {
 
 		handCard[i]->SetSpritePos(pos);
 
-		Vector2 hPos{
-		    std::clamp(mousePos.x, pos.x - 60.0f, pos.x + 60.0f),
-		    std::clamp(mousePos.y, pos.y - 80.0f, pos.y + 80.0f),
-		};
-
-		hPos.x -= mousePos.x;
-		hPos.y -= mousePos.y;
-		float len = Length(hPos);
-		if (len <= 0.0f) {
+		if (handCard[i]->IsOnCollision(mousePos)) {
 			if (Input::GetInstance()->IsTriggerMouse(0)) {
 				holdH = i;
 				isHold = true;
@@ -147,9 +116,19 @@ void CardManager::MainTurn() {
 				if (Input::GetInstance()->IsPressMouse(0)) {
 					handCard[i]->SetSpritePos(mousePos);
 				} else {
-					if (mousePos.y <= 360.0f) {
-						execution.push_back(std::move(handCard[holdH])); // ムーブ
-						handCard.erase(handCard.begin() + holdH);        // 元のリストから削除
+					if (handCard[i]->GetCardRange() == CardRange::One) {
+						uint32_t EH = enemyManager->IsOnCollision(mousePos);
+
+						if (EH > 0) {
+							handCard[holdH]->SetTargetEnemy(enemyManager->GetEnemy(EH)); // ターゲットエネミーのセット
+							execution.push_back(std::move(handCard[holdH]));             // ムーブ
+							handCard.erase(handCard.begin() + holdH);                    // 元のリストから削除
+						}
+					} else {
+						if (mousePos.y <= 360.0f) {
+							execution.push_back(std::move(handCard[holdH])); // ムーブ
+							handCard.erase(handCard.begin() + holdH);        // 元のリストから削除
+						}
 					}
 
 					isHold = false;
@@ -159,21 +138,12 @@ void CardManager::MainTurn() {
 	}
 
 	if (execution.size()) {
-		cemetery.push_back(std::move(execution[0])); // ムーブ
-		execution.erase(execution.begin());       // 元のリストから削除
+		EffectProcessing();
 	}
 
 	if (Input::GetInstance()->IsTriggerMouse(0)) {
 		if (handLack >= 0) {
-			Vector2 hPos{
-			    std::clamp(mousePos.x, turnEndButtonPos.x - 80.0f, turnEndButtonPos.x + 80.0f),
-			    std::clamp(mousePos.y, turnEndButtonPos.y - 20.0f, turnEndButtonPos.y + 20.0f),
-			};
-
-			hPos.x -= mousePos.x;
-			hPos.y -= mousePos.y;
-			float len = Length(hPos);
-			if (len <= 0.0f) {
+			if (turnEndButton->IsOnCollision(mousePos)) {
 				battlePhase = BattlePhase::EndMainTurn;
 			}
 		}
@@ -219,6 +189,7 @@ void CardManager::CardDraw() {
 	// deck から handCard にカードを移動
 	handCard.push_back(std::move(deck.back())); // 一番最後のカードを移動
 	deck.pop_back();                        // 移動後に元のデッキから削除
+	AllHandLack();
 }
 
 void CardManager::DeckShuffle() {
@@ -239,9 +210,15 @@ void CardManager::DeckRefresh() {
 	DeckShuffle();
 }
 
+void CardManager::EffectProcessing() {
+	cemetery.push_back(std::move(execution[0])); // ムーブ
+	execution.erase(execution.begin());          // 元のリストから削除
+}
+
 void CardManager::AllHandLack() {
 	handLack = 0;
 	for (int i = 0; i < handCard.size(); i++) {
 		handLack += handCard[i]->GetLuck();
 	}
+	number.SetNumber(handLack);
 }

@@ -21,13 +21,16 @@ void GameScene::Initialize2() {
 
 	//VH_ = audio_->PlayWave(SH_, true, 0.5f);
 
+	enemyManager_ = std::make_unique<EnemyManager>();
+	enemyManager_->Initialize();
 
 	cardManager_ = std::make_unique<CardManager>();
-	cardManager_->Initialize();
+	cardManager_->Initialize(enemyManager_.get());
 }
 
 void GameScene::Update() { 
 	cardManager_->BattleUpdata();
+	enemyManager_->Update();
 }
 
 
@@ -72,8 +75,10 @@ void GameScene::Draw() {
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>
 
+	enemyManager_->Draw();
 
 	cardManager_->DrawBattle();
+
 
 	// スプライト描画後処理
 	Sprite::PostDraw();

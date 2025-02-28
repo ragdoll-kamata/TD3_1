@@ -8,6 +8,7 @@ using namespace KamataEngine;
 
 #include "Scene.h"
 #include "CardManager.h"
+#include "EnemyManager.h"
 
 /// <summary>
 /// ゲームシーン
@@ -57,7 +58,7 @@ private: // メンバ変数
 	/// </summary>
 
 	std::unique_ptr<CardManager> cardManager_ = nullptr;
-
+	std::unique_ptr<EnemyManager> enemyManager_ = nullptr;
 
 	// カメラ
 	Camera* camera_ = nullptr;

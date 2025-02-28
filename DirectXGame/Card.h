@@ -3,7 +3,7 @@
 #include <KamataEngine.h>
 
 using namespace KamataEngine;
-
+class Enemy;
 enum class CardType {
 	Damage,
 	Shield,
@@ -16,6 +16,7 @@ enum class CardRange {
 	Whole,
 	Random,
 	Self,
+	Card,
 };
 class Card {
 public:
@@ -35,6 +36,8 @@ public:
 
 	virtual std::unique_ptr<Card> clone() const = 0;
 
+	CardRange GetCardRange() { return cardRange; }
+
 	bool GetIsReverse() const { return isReverse; }
 
 	void SetIsReverse(bool is) { isReverse = is; }
@@ -47,7 +50,13 @@ public:
 		}
 	}
 
+	void SetTargetEnemy(Enemy* enemy) { targetEnemy = enemy; }
+
+	bool IsOnCollision(Vector2 pos);
+
 protected:
+	Enemy* targetEnemy;
+
 	Sprite sprite;
 	uint32_t TH;
 

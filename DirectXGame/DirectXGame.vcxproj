@@ -106,12 +106,17 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BattleManager.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CardManager.cpp" />
     <ClCompile Include="CollisionDetection.cpp" />
+    <ClCompile Include="Dummy.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MathUtilityEX.cpp" />
+    <ClCompile Include="NumberSprite.cpp" />
     <ClCompile Include="scene\Blackout.cpp" />
     <ClCompile Include="scene\GameScene.cpp" />
     <ClCompile Include="scene\Scene.cpp" />
@@ -197,10 +202,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AABB.h" />
+    <ClInclude Include="BattleManager.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="CardManager.h" />
     <ClInclude Include="CollisionDetection.h" />
+    <ClInclude Include="Dummy.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyManager.h" />
+    <ClInclude Include="NumberSprite.h" />
     <ClInclude Include="scene\Blackout.h" />
     <ClInclude Include="scene\GameScene.h" />
     <ClInclude Include="scene\Scene.h" />

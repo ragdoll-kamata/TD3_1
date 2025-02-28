@@ -8,6 +8,10 @@
 #include <KamataEngine.h>
 #include <unordered_map>
 #include <functional>
+#include "Button.h"
+#include "numberSprite.h"
+
+class EnemyManager;
 
 using namespace KamataEngine;
 class CardManager {
@@ -20,7 +24,7 @@ public:
 	};
 
 
-	void Initialize();
+	void Initialize(EnemyManager* enemy);
 	void BattleUpdata();
 
 
@@ -46,6 +50,8 @@ public:
 	void DeckShuffle();
 
 	void DeckRefresh();
+
+	void EffectProcessing();
 
 	void AllHandLack();
 
@@ -77,15 +83,21 @@ private:
 	const int kDrawTimer = 10;
 
 	const Vector2 turnEndButtonPos = {1100.0f, 450.0f};
+	const Vector2 turnEndButtonSize = {160.0f, 40.0f};
 
-	Sprite turnEndButton;
-	uint32_t turnEndButtonTH;
+	const Vector2 allReverseButtonSize = {120.0f, 40.0f};
+	const Vector2 allReverseYssButtonPos = {640.0f - allReverseButtonSize.x / 2.0f - 20.0f, 360.0f};
+	const Vector2 allReverseNoButtonPos = {640.0f + allReverseButtonSize.x / 2.0f + 20.0f, 360.0f};
 
-	const Vector2 allReverseButtonHalfSize = {60.0f,20.0f};
-	const Vector2 allReverseYssButtonPos = {640.0f - allReverseButtonHalfSize.x - 20.0f, 360.0f};
-	const Vector2 allReverseNoButtonPos = {640.0f + allReverseButtonHalfSize.x + 20.0f, 360.0f};
+	std::unique_ptr<Button> turnEndButton;
+	std::unique_ptr<Button> allReverseYssButton;
+	std::unique_ptr<Button> allReverseNoButton;
 
-	Sprite allReverseYssButton;
-	Sprite allReverseNoButton;
+
+
 	bool isReverseButton = false;
+
+	EnemyManager* enemyManager = nullptr;
+
+	NumberSprite number;
 };

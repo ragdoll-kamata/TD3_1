@@ -7,8 +7,9 @@ void StandardShield::Initialize() {
 	sprite.SetColor({0.0f, 1.0f, 1.0f, 1.0f});
 	cardType = CardType::Shield;
 	cardRange = CardRange::Self;
+	id = 2;
 }
 
-void StandardShield::Effect() {}
+bool StandardShield::Effect() { return true; }
 
-void StandardShield::ReverseEffect() {}
+bool StandardShield::ReverseEffect() { return true; }

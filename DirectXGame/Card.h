@@ -4,6 +4,8 @@
 
 using namespace KamataEngine;
 class Enemy;
+class CardManager;
+class Player;
 enum class CardType {
 	Damage,
 	Shield,
@@ -30,9 +32,9 @@ public:
 
 	void Draw();
 
-	virtual void Effect() = 0;
+	virtual bool Effect() = 0;
 
-	virtual void ReverseEffect() = 0;
+	virtual bool ReverseEffect() = 0;
 
 	virtual std::unique_ptr<Card> clone() const = 0;
 
@@ -41,6 +43,8 @@ public:
 	bool GetIsReverse() const { return isReverse; }
 
 	void SetIsReverse(bool is) { isReverse = is; }
+
+	int GetId() const { return id; }
 
 	int GetLuck() const { 
 		if (!isReverse) {
@@ -54,8 +58,15 @@ public:
 
 	bool IsOnCollision(Vector2 pos);
 
+
+	void SetCardManager(CardManager* cardManager) { cardManager_ = cardManager; }
+	void SetPlayer(Player* player) { player_ = player; }
+
 protected:
-	Enemy* targetEnemy;
+	Enemy* targetEnemy = nullptr;
+
+	CardManager* cardManager_ = nullptr;
+	Player* player_ = nullptr;
 
 	Sprite sprite;
 	uint32_t TH;

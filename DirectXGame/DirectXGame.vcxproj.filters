@@ -16,61 +16,115 @@
     <Filter Include="シェーダー ファイル">
       <UniqueIdentifier>{718c7f4c-fc51-40ad-a221-b9456a7a1a3c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Enemy">
+      <UniqueIdentifier>{a20bbdb4-f882-46d4-91a8-7f35041ac980}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene">
+      <UniqueIdentifier>{53afee22-9c5f-42ff-8a42-56f03bef6806}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Card">
+      <UniqueIdentifier>{59853f43-065a-4077-a896-1345e20bc08c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Enemy\Action">
+      <UniqueIdentifier>{c4831b90-d26a-4ee9-9b03-4535d052522b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Card\Card">
+      <UniqueIdentifier>{d0bbd724-30e0-4d85-bb4f-83c2007ad06d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Enemy\Enemy">
+      <UniqueIdentifier>{fe3a9516-4f00-45c6-9495-8b663e1fd096}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Other">
+      <UniqueIdentifier>{3435202e-2906-4bc5-8ab5-1789dd77d61f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Other">
+      <UniqueIdentifier>{c7cae206-4323-4fac-971c-11db64334482}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Card">
+      <UniqueIdentifier>{4fcf5a18-d018-45a4-bf8e-c803f6866def}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Enemy">
+      <UniqueIdentifier>{4a4ea810-c009-49ad-a1f2-e1e304e7e2e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene">
+      <UniqueIdentifier>{5dc0a434-f0d5-4f56-8d14-7cde3235584f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Enemy\Enemy">
+      <UniqueIdentifier>{5b3d88e0-35ec-4a3f-a6d6-b9e7b9581077}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Enemy\Action">
+      <UniqueIdentifier>{737e3371-5229-47cf-98bf-9bca527ae740}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Card\Card">
+      <UniqueIdentifier>{4cf1e29e-24d9-4d54-b0b5-1c0b97f9a48c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="scene\Scene.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="scene\SceneFactory.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="scene\SceneManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="scene\GameScene.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Card.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="CardManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="StandardAtack.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="EnemyAction.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="scene\Blackout.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="CollisionDetection.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="scene\Scene.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="MathUtilityEX.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="scene\SceneFactory.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\SceneManager.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Card.cpp">
+      <Filter>ソース ファイル\Card</Filter>
+    </ClCompile>
+    <ClCompile Include="CardManager.cpp">
+      <Filter>ソース ファイル\Card</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\GameScene.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="StandardAtack.cpp">
+      <Filter>ソース ファイル\Card\Card</Filter>
     </ClCompile>
     <ClCompile Include="StandardShield.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="BattleManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyManager.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Card\Card</Filter>
     </ClCompile>
     <ClCompile Include="Dummy.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Enemy\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleManager.cpp">
+      <Filter>ソース ファイル\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>ソース ファイル\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyManager.cpp">
+      <Filter>ソース ファイル\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="MathUtilityEX.cpp">
+      <Filter>ソース ファイル\Other</Filter>
     </ClCompile>
     <ClCompile Include="NumberSprite.cpp">
+      <Filter>ソース ファイル\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawCard.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Reverse.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="AtackAction.cpp">
+      <Filter>ソース ファイル\Enemy\Action</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -123,62 +177,68 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="scene\Scene.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="scene\SceneFactory.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="scene\SceneManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="scene\SceneName.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="scene\GameScene.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Card.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="CardManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="StandardAtack.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="scene\Blackout.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="AABB.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionDetection.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Sphere.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="StandardShield.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="BattleManager.h">
+      <Filter>ヘッダー ファイル\Other</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Other</Filter>
     </ClInclude>
-    <ClInclude Include="BattleManager.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="Card.h">
+      <Filter>ヘッダー ファイル\Card</Filter>
+    </ClInclude>
+    <ClInclude Include="CardManager.h">
+      <Filter>ヘッダー ファイル\Card</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>ヘッダー ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyAction.h">
+      <Filter>ヘッダー ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\Scene.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\SceneManager.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\SceneFactory.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\SceneName.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\GameScene.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
     <ClInclude Include="EnemyManager.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Dummy.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Enemy\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\Blackout.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
     <ClInclude Include="NumberSprite.h">
+      <Filter>ヘッダー ファイル\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="StandardAtack.h">
+      <Filter>ヘッダー ファイル\Card\Card</Filter>
+    </ClInclude>
+    <ClInclude Include="StandardShield.h">
+      <Filter>ヘッダー ファイル\Card\Card</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawCard.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Reverse.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="AtackAction.h">
+      <Filter>ヘッダー ファイル\Enemy\Action</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

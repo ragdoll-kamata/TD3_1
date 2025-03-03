@@ -11,11 +11,17 @@ public:
 	/// </summary>
 	void Update();
 
-	/// <summary>
-	/// 描画
-	/// </summary>
-	void Draw();
+
+
+
+	static BattleManager* GetInstance();
 
 private:
+private:
+	static BattleManager* instance;
 
+	BattleManager() = default;
+	~BattleManager() = default;
+	BattleManager(BattleManager&) = default;
+	BattleManager& operator=(BattleManager&) = default;
 };

@@ -1,8 +1,8 @@
 #include "NumberSprite.h"
-
-void NumberSprite::Initialize(Vector2 pos, const Center centor) {
+using namespace MathUtility;
+void NumberSprite::Initialize(Vector2 pos, float size, const Center centor) {
 	pos_ = pos;
-	size = {40.0f, 64.0f};
+	size_ = size;
 	centor_ = centor;
 }
 
@@ -22,12 +22,12 @@ void NumberSprite::SetNumber(int num) {
 	int index = num <= 0 ? -num : num;
 	int index2 = 0;
 	sprite.clear();
-	if (num >= 100) {
+	if (index >= 100) {
 		index2 = index / 100;
 		index = index % 100;
 		sprite.push_back(CreateSprite(index2));
 	}
-	if (num >= 10) {
+	if (index >= 10) {
 		index2 = index / 10;
 		index = index % 10;
 		sprite.push_back(CreateSprite(index2));
@@ -41,7 +41,7 @@ void NumberSprite::SetNumber(int num) {
 		break;
 	case Center::Central:
 		for (int i = 0; i < sprite.size(); i++) {
-			Vector2 pos = {pos_.x - (size.x * ((sprite.size() - 1) / 2.0f - i)), pos_.y};
+			Vector2 pos = {pos_.x - ((cSize.x * size_) * ((sprite.size() - 1) / 2.0f - i)), pos_.y};
 			sprite[i].SetPosition(pos);
 			if (is) {
 				sprite[i].SetColor({1.0f, 0.0f, 0.0f, 1.0f});
@@ -61,7 +61,7 @@ Sprite NumberSprite::CreateSprite(int num) {
 	TH = TextureManager::GetInstance()->Load("number.png");
 	s.SetTextureHandle(TH);
 	s.SetAnchorPoint({0.5f, 0.5f});
-	s.SetSize(size);
-	s.SetTextureRect({size.x * num, 0.0f}, size);
+	s.SetSize(cSize * size_);
+	s.SetTextureRect({cSize.x * num, 0.0f}, cSize);
 	return s;
 }

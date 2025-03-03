@@ -1,12 +1,21 @@
 #include "EnemyManager.h"
 #include "Dummy.h"
-void EnemyManager::Initialize() {
+void EnemyManager::Initialize(Player* player) {
 
 	enemy.push_back(std::make_unique<Dummy>());
 	enemy[0]->Initialize();
+	player_ = player;
 }
 
-void EnemyManager::Update() {}
+void EnemyManager::Update() {
+	if (isEnemyTurn) {
+		isEnemyTurn = !isEnemyTurn;
+	}
+
+	for (int i = 0; i < enemy.size(); i++) {
+		enemy[i]->Update();
+	}
+}
 
 void EnemyManager::Draw() {
 	for (int i = 0; i < enemy.size(); i++) {

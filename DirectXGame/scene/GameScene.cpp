@@ -21,16 +21,22 @@ void GameScene::Initialize2() {
 
 	//VH_ = audio_->PlayWave(SH_, true, 0.5f);
 
+	player_ = std::make_unique<Player>();
+	player_->Initialize();
+
 	enemyManager_ = std::make_unique<EnemyManager>();
-	enemyManager_->Initialize();
+	enemyManager_->Initialize(player_.get());
 
 	cardManager_ = std::make_unique<CardManager>();
-	cardManager_->Initialize(enemyManager_.get());
+	cardManager_->Initialize(enemyManager_.get(), player_.get());
+
+
 }
 
 void GameScene::Update() { 
 	cardManager_->BattleUpdata();
 	enemyManager_->Update();
+	player_->Update();
 }
 
 
@@ -76,6 +82,8 @@ void GameScene::Draw() {
 	/// </summary>
 
 	enemyManager_->Draw();
+
+	player_->Draw();
 
 	cardManager_->DrawBattle();
 

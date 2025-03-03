@@ -1,9 +1,30 @@
 #include "Enemy.h"
 #include <algorithm>
 
-void Enemy::Update() {}
+void Enemy::Update() { 
+	if (maxHP < HP) {
+		HP = maxHP;
+	}
+	if (enemyTurn == EnemyTurn::End) {
+		index++;
+		if (index > enemyAction.size()) {
+			index = 0;
+		}
+		enemyTurn = EnemyTurn::Standby;
+	}
+	numberSprite.SetNumber(HP);
+}
 
-void Enemy::Draw() { sprite.Draw(); }
+void Enemy::StartEnemyTurn() {
+	if (enemyTurn == EnemyTurn::Standby) {
+		enemyTurn = EnemyTurn::Start;
+	}
+}
+
+void Enemy::Draw() { 
+	sprite.Draw();
+	numberSprite.Draw();
+}
 
 bool Enemy::IsOnCollision(Vector2 pos) {
 	Vector2 hPos{

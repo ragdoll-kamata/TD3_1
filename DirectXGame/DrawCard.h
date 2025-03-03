@@ -1,7 +1,7 @@
 #pragma once
 #include "Card.h"
-class StandardShield : public Card {
-public:
+class DrawCard : public Card {
+
 	void Initialize() override;
 
 	bool Effect() override;
@@ -9,7 +9,7 @@ public:
 	bool ReverseEffect() override;
 
 	std::unique_ptr<Card> clone() const override {
-		return std::make_unique<StandardShield>(*this); // 自分のコピーを作成
+		return std::make_unique<DrawCard>(*this); // 自分のコピーを作成
 	}
 
 private:

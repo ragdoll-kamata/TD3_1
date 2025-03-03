@@ -14,7 +14,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize(Vector2 pos, const Center centor = Center::Central);
+	void Initialize(Vector2 pos, float size = 1.0f, const Center centor = Center::Central);
 
 	/// <summary>
 	/// 描画
@@ -34,5 +34,6 @@ private:
 	uint32_t TH;
 
 	Vector2 pos_;
-	Vector2 size;
+	float size_;
+	const Vector2 cSize = {40.0f, 64.0f};
 };

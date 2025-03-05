@@ -24,7 +24,7 @@ public:
 	/// </summary>
 	void Draw();
 
-	void SetIsEnemyTurn(bool is) { isEnemyTurn = is; }
+	void StartEnemyTurn();
 
 	bool GetIsEnemyTurn() const { return isEnemyTurn; }
 

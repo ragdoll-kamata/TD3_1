@@ -5,12 +5,28 @@ void Enemy::Update() {
 	if (maxHP < HP) {
 		HP = maxHP;
 	}
-	if (enemyTurn == EnemyTurn::End) {
+
+	switch (enemyTurn) {
+	case Enemy::EnemyTurn::Standby:
+		break;
+	case Enemy::EnemyTurn::Start:
+		enemyTurn = EnemyTurn::Main;
+		break;
+	case Enemy::EnemyTurn::Main:
+		if (!isReverse) {
+			enemyAction[index]->Execute();
+		} else {
+			reverseEnemyAction[index]->Execute();
+		}
+		enemyTurn = EnemyTurn::End;
+		break;
+	case Enemy::EnemyTurn::End:
 		index++;
-		if (index > enemyAction.size()) {
+		if (index >= enemyAction.size()) {
 			index = 0;
 		}
 		enemyTurn = EnemyTurn::Standby;
+		break;
 	}
 	numberSprite.SetNumber(HP);
 }

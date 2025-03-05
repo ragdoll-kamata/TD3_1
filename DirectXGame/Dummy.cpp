@@ -1,7 +1,7 @@
 #include "Dummy.h"
 #include "AtackAction.h"
 using namespace MathUtility;
-void Dummy::Initialize() {
+void Dummy::Initialize(Player* player) {
 	TH = TextureManager::GetInstance()->Load("white1x1.png");
 	sprite.Initialize();
 	sprite.SetTextureHandle(TH);
@@ -22,5 +22,5 @@ void Dummy::Initialize() {
 
 	enemyAction.push_back(std::make_unique<AtackAction>());
 	enemyAction[0]->Initialize(5);
-	enemyAction[0]->SetPlayer(player_);
+	enemyAction[0]->SetPlayer(player);
 }

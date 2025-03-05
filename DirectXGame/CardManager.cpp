@@ -221,7 +221,7 @@ void CardManager::EndMainTurn() {
 		cemetery.push_back(std::move(handCard.back())); // 一番最後のカードを移動
 		handCard.pop_back();                            // 移動後に元のデッキから削除
 	}
-	enemyManager->SetIsEnemyTurn(true);
+	enemyManager->StartEnemyTurn();
 	battlePhase = BattlePhase::EnemyTurn;
 }
 

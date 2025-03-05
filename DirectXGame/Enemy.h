@@ -20,7 +20,7 @@ public:
 		End,
 	};
 
-	virtual void Initialize() = 0;
+	virtual void Initialize(Player* player) = 0;
 
 	void Update();
 
@@ -35,6 +35,8 @@ public:
 
 
 	void SetPlayer(Player* player) { player_ = player; }
+
+	EnemyTurn GetEnemyTurn() const { return enemyTurn; }
 
 protected:
 	Player* player_ = nullptr;

@@ -6,6 +6,7 @@
 #include "StandardShield.h"
 #include "Reverse.h"
 #include "DrawCard.h"
+#include "Player.h"
 using namespace MathUtility;
 void CardManager::Initialize(EnemyManager* enemy, Player* player) {
 	enemyManager = enemy;
@@ -248,6 +249,7 @@ void CardManager::EndBattle() {
 
 void CardManager::EnemyTurn() {
 	if (!enemyManager->GetIsEnemyTurn()) {
+		player_->ClearShield();
 		battlePhase = BattlePhase::StartMainTurn;
 	}
 

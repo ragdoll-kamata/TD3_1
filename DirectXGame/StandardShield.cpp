@@ -1,5 +1,5 @@
 #include "StandardShield.h"
-
+#include "Player.h"
 void StandardShield::Initialize() {
 	Card::Initialize();
 	luck = 1;
@@ -10,6 +10,12 @@ void StandardShield::Initialize() {
 	id = 2;
 }
 
-bool StandardShield::Effect() { return true; }
+bool StandardShield::Effect() { 
+	player_->AddShield(5);
+	return true; 
+}
 
-bool StandardShield::ReverseEffect() { return true; }
+bool StandardShield::ReverseEffect() { 
+	player_->Damage(5);
+	return true;
+}

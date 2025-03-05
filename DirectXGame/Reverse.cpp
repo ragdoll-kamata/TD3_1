@@ -23,4 +23,4 @@ bool Reverse::Effect() {
 	return false; 
 }
 
-bool Reverse::ReverseEffect() { return false; }
+bool Reverse::ReverseEffect() { return true; }

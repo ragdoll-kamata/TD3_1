@@ -27,13 +27,17 @@ void Player::AddShield(int v) {
 }
 
 void Player::Damage(int damage) {
-	if (shield > 0) {
-		shield -= damage;
-		HP -= shield;
-	} else {
-		HP -= damage;
+	if (damage >= 0) {
+		if (shield > 0) {
+			shield -= damage;
+			if (shield < 0) {
+				HP += shield;
+				shield = 0;
+			}
+		} else {
+			HP -= damage;
+		}
 	}
-
 
 
 }

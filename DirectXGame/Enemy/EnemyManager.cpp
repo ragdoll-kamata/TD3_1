@@ -1,0 +1,73 @@
+#include "EnemyManager.h"
+#include "Dummy.h"
+void EnemyManager::Initialize() {
+
+	enmeyFactory_ = std::make_unique<EnemyFactory>();
+
+
+}
+
+void EnemyManager::Update() {
+
+	for (int i = 0; i < enemy.size(); i++) {
+		enemy[i]->Update();
+	}
+}
+
+void EnemyManager::Draw() {
+	for (int i = 0; i < enemy.size(); i++) {
+		enemy[i]->Draw();
+	}
+}
+
+bool EnemyManager::StartMainTurn() {
+	for (int i = 0; i < enemy.size(); i++) {
+		enemy[i]->StartMainTurn();
+	}
+	return true;
+}
+
+bool EnemyManager::MainTurn() {
+	for (int i = 0; i < enemy.size(); i++) {
+		enemy[i]->MainTurn();
+	}
+	return true;
+}
+
+bool EnemyManager::EndMainTurn() {
+	for (int i = 0; i < enemy.size(); i++) {
+		enemy[i]->EndMainTurn();
+	}
+	return true;
+}
+
+void EnemyManager::StartBattle() {
+	CreateEnemy();
+	for (int i = 0; i < enemy.size(); i++) {
+		enemy[i]->StartBattle();
+	}
+}
+
+void EnemyManager::CreateEnemy() {
+	std::unique_ptr<Enemy> e = std::move(enmeyFactory_->CreateEnemy("dummy"));
+	e->Initialize();
+	e->SetBattleManager(battleManager_);
+	
+	enemy.push_back(std::move(e));
+}
+
+uint32_t EnemyManager::IsOnCollision(Vector2 pos) {
+	for (int i = 0; i < enemy.size(); i++) {
+		if (enemy[i]->IsOnCollision(pos)) {
+			return i + 1;
+		}
+	}
+	return 0;
+}
+
+Enemy* EnemyManager::GetEnemy(const uint32_t& EH) { 
+	if (enemy.size() >= EH && EH > 0) {
+		return enemy[EH - 1].get();
+	}
+	return nullptr;
+}

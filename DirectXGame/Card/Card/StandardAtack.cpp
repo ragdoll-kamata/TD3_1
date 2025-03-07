@@ -1,7 +1,6 @@
 #include "StandardAtack.h"
 #include "Enemy.h"
-void StandardAtack::Initialize() { 
-	Card::Initialize();
+void StandardAtack::IndividualInitialize() { 
 	luck = 1;
 	rverseLuck = -1;
 	cardType = CardType::Damage;
@@ -11,11 +10,11 @@ void StandardAtack::Initialize() {
 }
 
 bool StandardAtack::Effect() { 
-	targetEnemy->DamageHP(value);
+	battleManager_->DamageEnemy(value, targetEnemy);
 	return true;
 }
 
 bool StandardAtack::ReverseEffect() { 
-	targetEnemy->DamageHP(-value); 
+	battleManager_->DamageEnemy(-value, targetEnemy);
 	return true;
 }

@@ -11,56 +11,79 @@
 #include "numberSprite.h"
 
 class EnemyManager;
+class BattleManager;
 class Player;
 
 using namespace KamataEngine;
 class CardManager {
 public:
-	enum class BattlePhase {
-		StartMainTurn,
-		MainTurn,
-		EndMainTurn,
-		EnemyTurn,
-	};
-
 
 	void Initialize(EnemyManager* enemy, Player* player);
 	void BattleUpdata();
 
-
-
 	void DrawBattle();
 
+	bool StartMainTurn();
 
+	bool MainTurn();
 
-	void StartMainTurn();
-
-	void MainTurn();
-
-	void EndMainTurn();
+	bool EndMainTurn();
 
 	void StartBattle();
 
 	void EndBattle();
-
-	void EnemyTurn();
-
-	void CardDraw(int num);
 	
+private:
+	/// <summary>
+	/// デッキシャッフル
+	/// </summary>
 	void DeckShuffle();
 
+	/// <summary>
+	/// デッキリフレッシュ
+	/// </summary>
 	void DeckRefresh();
 
+	/// <summary>
+	/// カード効果処理
+	/// </summary>
 	void EffectProcessing();
 
+	/// <summary>
+	/// ハンドラック計算
+	/// </summary>
 	void AllHandLack();
 
 	bool CardConfirmation();
 
+public:
+	/// <summary>
+	/// カードドロー
+	/// </summary>
+	/// <param name="num">ドロー枚数</param>
+	void CardDraw(int num);
 
-	void RandomHandDeath(int num);
+	/// <summary>
+	/// ランダム手札破壊!
+	/// </summary>
+	/// <param name="num">破壊する数</param>
+	/// <returns>破壊できなかった数</returns>
+	int RandomHandDeath(int num);
 
-	std::vector<Card*> SelectionHand(int num);
+	/// <summary>
+	/// 手札からカードの取得
+	/// </summary>
+	/// <param name="num">枚数</param>
+	/// <param name="isMax">枚数分選ぶ必要があるか</param>
+	/// <returns>選択カード</returns>
+	std::vector<Card*> SelectionHand(int num, bool isMax);
+
+	/// <summary>
+	/// 初期デッキ生成
+	/// </summary>
+	void StartCreateSDeck();
+
+	void SetBattleManager(BattleManager* battleManager) { battleManager_ = battleManager; }
 
 private:
 	// シャッフルのための乱数エンジンを用意
@@ -81,19 +104,11 @@ private:
 	int holdH;
 	bool isHold;
 
-	std::unordered_map<BattlePhase, std::function<void()>> mBattlePhase{
-	    {BattlePhase::StartMainTurn, [this]() { StartMainTurn(); }},
-	    {BattlePhase::MainTurn,      [this]() { MainTurn(); }     },
-	    {BattlePhase::EndMainTurn,   [this]() { EndMainTurn(); }  },
-	    {BattlePhase::EnemyTurn,     [this]() { EnemyTurn(); }    },
-	};
-	BattlePhase battlePhase = BattlePhase::StartMainTurn;
-
 	int drawIndex = 0;
 	int drawTimer = 0;
 	const int kDrawTimer = 10;
 
-	const Vector2 turnEndButtonPos = {1100.0f, 450.0f};
+	const Vector2 turnEndButtonPos = {1100.0f, 500.0f};
 	const Vector2 turnEndButtonSize = {160.0f, 40.0f};
 
 	const Vector2 allReverseButtonSize = {120.0f, 40.0f};
@@ -128,6 +143,8 @@ private:
 	uint32_t TH;
 
 	bool isReverseButton = false;
+
+	BattleManager* battleManager_ = nullptr;
 
 	EnemyManager* enemyManager = nullptr;
 

@@ -10,6 +10,7 @@ using namespace KamataEngine;
 #include "CardManager.h"
 #include "EnemyManager.h"
 #include "Player.h"
+#include "BattleManager.h"
 /// <summary>
 /// ゲームシーン
 /// </summary>
@@ -56,10 +57,11 @@ private: // メンバ変数
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>
-
+	
 	std::unique_ptr<CardManager> cardManager_ = nullptr;
 	std::unique_ptr<EnemyManager> enemyManager_ = nullptr;
 	std::unique_ptr<Player> player_ = nullptr;
+	std::unique_ptr<BattleManager> battleManager_ = nullptr;
 	// カメラ
 	Camera* camera_ = nullptr;
 	bool isClear;

@@ -45,14 +45,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)..\External\DirectXTex\include;$(ProjectDir)..\External\imgui;$(ProjectDir)..\External\KamataEngine\include;$(ProjectDir);$(ProjectDir)/scene;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\External\DirectXTex\include;$(ProjectDir)..\External\imgui;$(ProjectDir)..\External\KamataEngine\include;$(ProjectDir);$(ProjectDir)/scene;$(ProjectDir)/Card;$(ProjectDir)/Card/Card;$(ProjectDir)/Enemy;$(ProjectDir)/Enemy/Enemy;$(ProjectDir)/Enemy/Action;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\External\KamataEngine\lib\$(Configuration);$(ProjectDir)..\External\DirectXTex\lib\$(Configuration);$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)..\Generated\Outputs\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)..\Generated\Obj\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)..\External\DirectXTex\include;$(ProjectDir)..\External\imgui;$(ProjectDir)..\External\KamataEngine\include;$(ProjectDir);$(ProjectDir)/scene;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\External\DirectXTex\include;$(ProjectDir)..\External\imgui;$(ProjectDir)..\External\KamataEngine\include;$(ProjectDir);$(ProjectDir)/scene;$(ProjectDir)/Card;$(ProjectDir)/Card/Card;$(ProjectDir)/Enemy;$(ProjectDir)/Enemy/Enemy;$(ProjectDir)/Enemy/Action;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\External\KamataEngine\lib\$(Configuration);$(ProjectDir)..\External\DirectXTex\lib\$(Configuration);$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)..\Generated\Outputs\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)..\Generated\Obj\$(ProjectName)\$(Configuration)\</IntDir>
@@ -106,28 +106,33 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AtackAction.cpp" />
+    <ClCompile Include="Enemy\Action\AtackAction.cpp" />
     <ClCompile Include="BattleManager.cpp" />
+    <ClCompile Include="Buff.cpp" />
     <ClCompile Include="Button.cpp" />
-    <ClCompile Include="Card.cpp" />
-    <ClCompile Include="CardManager.cpp" />
-    <ClCompile Include="DrawCard.cpp" />
-    <ClCompile Include="Dummy.cpp" />
-    <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="EnemyAction.cpp" />
-    <ClCompile Include="EnemyManager.cpp" />
+    <ClCompile Include="Card\Card.cpp" />
+    <ClCompile Include="Card\CardManager.cpp" />
+    <ClCompile Include="Debuff.cpp" />
+    <ClCompile Include="Card\Card\DrawCard.cpp" />
+    <ClCompile Include="Enemy\Enemy\Dummy.cpp" />
+    <ClCompile Include="Enemy\Enemy.cpp" />
+    <ClCompile Include="Enemy\EnemyAction.cpp" />
+    <ClCompile Include="Enemy\EnemyFactory.cpp" />
+    <ClCompile Include="Enemy\EnemyManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MathUtilityEX.cpp" />
     <ClCompile Include="NumberSprite.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Reverse.cpp" />
+    <ClCompile Include="Card\Card\Reverse.cpp" />
+    <ClCompile Include="Poison.cpp" />
     <ClCompile Include="scene\Blackout.cpp" />
     <ClCompile Include="scene\GameScene.cpp" />
     <ClCompile Include="scene\Scene.cpp" />
     <ClCompile Include="scene\SceneFactory.cpp" />
     <ClCompile Include="scene\SceneManager.cpp" />
-    <ClCompile Include="StandardAtack.cpp" />
-    <ClCompile Include="StandardShield.cpp" />
+    <ClCompile Include="Card\Card\StandardAtack.cpp" />
+    <ClCompile Include="Card\Card\StandardShield.cpp" />
+    <ClCompile Include="StatusEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\TerrainPS.hlsl">
@@ -205,27 +210,32 @@
     <None Include="Resources\shaders\Sprite.hlsli" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AtackAction.h" />
+    <ClInclude Include="Enemy\Action\AtackAction.h" />
     <ClInclude Include="BattleManager.h" />
+    <ClInclude Include="Buff.h" />
     <ClInclude Include="Button.h" />
-    <ClInclude Include="Card.h" />
-    <ClInclude Include="CardManager.h" />
-    <ClInclude Include="DrawCard.h" />
-    <ClInclude Include="Dummy.h" />
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="EnemyAction.h" />
-    <ClInclude Include="EnemyManager.h" />
+    <ClInclude Include="Card\Card.h" />
+    <ClInclude Include="Card\CardManager.h" />
+    <ClInclude Include="Debuff.h" />
+    <ClInclude Include="Card\Card\DrawCard.h" />
+    <ClInclude Include="Enemy\Enemy\Dummy.h" />
+    <ClInclude Include="Enemy\Enemy.h" />
+    <ClInclude Include="Enemy\EnemyAction.h" />
+    <ClInclude Include="Enemy\EnemyFactory.h" />
+    <ClInclude Include="Enemy\EnemyManager.h" />
     <ClInclude Include="NumberSprite.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Reverse.h" />
+    <ClInclude Include="Card\Card\Reverse.h" />
+    <ClInclude Include="Poison.h" />
     <ClInclude Include="scene\Blackout.h" />
     <ClInclude Include="scene\GameScene.h" />
     <ClInclude Include="scene\Scene.h" />
     <ClInclude Include="scene\SceneFactory.h" />
     <ClInclude Include="scene\SceneManager.h" />
     <ClInclude Include="scene\SceneName.h" />
-    <ClInclude Include="StandardAtack.h" />
-    <ClInclude Include="StandardShield.h" />
+    <ClInclude Include="Card\Card\StandardAtack.h" />
+    <ClInclude Include="Card\Card\StandardShield.h" />
+    <ClInclude Include="StatusEffect.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -26,7 +26,11 @@ public:
 
 private:
 
+	int Number(int num, int num2 = 1);
+
 	Sprite CreateSprite(int num);
+
+
 
 private:
 	Center centor_;

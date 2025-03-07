@@ -1,21 +1,21 @@
 #include "StandardShield.h"
 #include "Player.h"
-void StandardShield::Initialize() {
-	Card::Initialize();
+void StandardShield::IndividualInitialize() {
 	luck = 1;
 	rverseLuck = -1;
 	sprite.SetColor({0.0f, 1.0f, 1.0f, 1.0f});
 	cardType = CardType::Shield;
 	cardRange = CardRange::Self;
 	id = 2;
+	value = 5;
 }
 
 bool StandardShield::Effect() { 
-	player_->AddShield(5);
+	battleManager_->ShieldPlayer(value);
 	return true; 
 }
 
 bool StandardShield::ReverseEffect() { 
-	player_->Damage(5);
+	battleManager_->DamagePlayer(value);
 	return true;
 }

@@ -25,15 +25,24 @@ void GameScene::Initialize2() {
 	player_->Initialize();
 
 	enemyManager_ = std::make_unique<EnemyManager>();
-	enemyManager_->Initialize(player_.get());
+	enemyManager_->Initialize();
 
 	cardManager_ = std::make_unique<CardManager>();
 	cardManager_->Initialize(enemyManager_.get(), player_.get());
 
+	battleManager_ = std::make_unique<BattleManager>();
+	battleManager_->Initialize(player_.get(), cardManager_.get(), enemyManager_.get());
+	enemyManager_->SetBattleManager(battleManager_.get());
+	cardManager_->SetBattleManager(battleManager_.get());
 
+	cardManager_->StartCreateSDeck();
+	
+
+	battleManager_->StartBattle();
 }
 
 void GameScene::Update() { 
+	battleManager_->Update();
 	cardManager_->BattleUpdata();
 	enemyManager_->Update();
 	player_->Update();

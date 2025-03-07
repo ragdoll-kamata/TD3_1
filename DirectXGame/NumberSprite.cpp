@@ -17,24 +17,11 @@ void NumberSprite::SetNumber(int num) {
 	if (num < 0) {
 		is = true;
 	}
-
+	sprite.clear();
 
 	int index = num <= 0 ? -num : num;
-	int index2 = 0;
-	sprite.clear();
-	if (index >= 100) {
-		index2 = index / 100;
-		index = index % 100;
-		sprite.push_back(CreateSprite(index2));
-	}
-	if (index >= 10) {
-		index2 = index / 10;
-		index = index % 10;
-		sprite.push_back(CreateSprite(index2));
-	}
-	index2 = index;
-	sprite.push_back(CreateSprite(index2));
 
+	Number(index);
 	switch (centor_) {
 	case Center::Left:
 
@@ -52,6 +39,18 @@ void NumberSprite::SetNumber(int num) {
 		break;
 	}
 	
+}
+
+int NumberSprite::Number(int num, int num2) {
+	int i = num;
+	if (num >= num2 * 10) {
+		i = Number(num, num2 * 10);
+		i = i / num2;
+	} else {
+		i = num / num2;
+	}
+	sprite.push_back(CreateSprite(i));
+	return num % num2;
 }
 
 Sprite NumberSprite::CreateSprite(int num) {

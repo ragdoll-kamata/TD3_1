@@ -15,30 +15,6 @@ void CardManager::Initialize(EnemyManager* enemy, Player* player) {
 	std::random_device rd; // 乱数の種
 	g.seed(rd());
 
-	sDeck.push_back(std::make_unique<StandardAtack>());
-	sDeck.push_back(std::make_unique<StandardAtack>());
-	sDeck.push_back(std::make_unique<StandardAtack>());
-	sDeck.push_back(std::make_unique<StandardAtack>());
-	sDeck.push_back(std::make_unique<StandardAtack>());
-	sDeck.push_back(std::make_unique<StandardShield>());
-	sDeck.push_back(std::make_unique<StandardShield>());
-	sDeck.push_back(std::make_unique<StandardShield>());
-	sDeck.push_back(std::make_unique<StandardShield>());
-	sDeck.push_back(std::make_unique<StandardShield>());
-	sDeck.push_back(std::make_unique<DrawCard>());
-	sDeck.push_back(std::make_unique<DrawCard>());
-	sDeck.push_back(std::make_unique<Reverse>());
-
-
-	for (int i = 0; i < sDeck.size(); i++) {
-		sDeck[i]->Initialize();
-		sDeck[i]->SetCardManager(this);
-		sDeck[i]->SetPlayer(player_);
-	}
-
-	StartBattle();
-
-
 	turnEndButton = std::make_unique<Button>();
 	turnEndButton->Initialize(turnEndButtonPos, turnEndButtonSize, "white1x1.png", {1.0f, 0.0f, 0.0f, 1.0f});
 
@@ -68,8 +44,7 @@ void CardManager::Initialize(EnemyManager* enemy, Player* player) {
 	sprite.SetColor({0.0f, 0.0f, 0.0f, 0.5f});
 }
 
-void CardManager::BattleUpdata() { 
-	mBattlePhase[battlePhase]();
+void CardManager::BattleUpdata() {
 }
 
 void CardManager::DrawBattle() {
@@ -122,7 +97,8 @@ void CardManager::DrawBattle() {
 	}
 }
 
-void CardManager::StartMainTurn() {
+bool CardManager::StartMainTurn() {
+	bool is = false;
 	if (drawIndex < 5) {
 		drawTimer++;
 
@@ -138,7 +114,7 @@ void CardManager::StartMainTurn() {
 			if (Input::GetInstance()->IsTriggerMouse(0)) {
 				if (allReverseYssButton->IsOnCollision(mousePos)) {
 					isReverseButton = false;
-					battlePhase = BattlePhase::MainTurn;
+					is = true;
 					drawIndex = 0;
 					for (int i = 0; i < handCard.size(); i++) {
 						handCard[i]->SetIsReverse(!handCard[i]->GetIsReverse());
@@ -150,16 +126,17 @@ void CardManager::StartMainTurn() {
 
 				if (allReverseNoButton->IsOnCollision(mousePos)) {
 					isReverseButton = false;
-					battlePhase = BattlePhase::MainTurn;
+					is = true;
 					drawIndex = 0;
 				}
 			}
 		}
 	}
-
+	return is;
 }
 
-void CardManager::MainTurn() {
+bool CardManager::MainTurn() {
+	bool is = false;
 	Vector2 mousePos = Input::GetInstance()->GetMousePosition();
 	AllHandLack();
 
@@ -177,53 +154,55 @@ void CardManager::MainTurn() {
 						handCard[i]->SetSpritePos(mousePos);
 					}
 				}
-				if (holdH == i) {
-					if (isHold) {
-						if (Input::GetInstance()->IsPressMouse(0)) {
-							handCard[i]->SetSpritePos(mousePos);
-						} else {
-							if (handCard[i]->GetCardRange() == CardRange::One) {
-								uint32_t EH = enemyManager->IsOnCollision(mousePos);
+			}
 
-								if (EH > 0) {
-									handCard[holdH]->SetTargetEnemy(enemyManager->GetEnemy(EH)); // ターゲットエネミーのセット
-									execution.push_back(std::move(handCard[holdH]));             // ムーブ
-									handCard.erase(handCard.begin() + holdH);                    // 元のリストから削除
-								}
-							} else {
-								if (mousePos.y <= 360.0f) {
-									execution.push_back(std::move(handCard[holdH])); // ムーブ
-									handCard.erase(handCard.begin() + holdH);        // 元のリストから削除
-								}
-							}
+			if (isHold) {
+				if (Input::GetInstance()->IsPressMouse(0)) {
+					handCard[holdH]->SetSpritePos(mousePos);
+				} else {
+					if (handCard[holdH]->GetCardRange() == CardRange::One) {
+						uint32_t EH = enemyManager->IsOnCollision(mousePos);
 
-							isHold = false;
+						if (EH > 0) {
+							handCard[holdH]->SetTargetEnemy(enemyManager->GetEnemy(EH)); // ターゲットエネミーのセット
+							execution.push_back(std::move(handCard[holdH]));             // ムーブ
+							handCard.erase(handCard.begin() + holdH);                    // 元のリストから削除
+						}
+					} else {
+						if (mousePos.y <= 360.0f) {
+							execution.push_back(std::move(handCard[holdH])); // ムーブ
+							handCard.erase(handCard.begin() + holdH);        // 元のリストから削除
 						}
 					}
+
+					isHold = false;
 				}
 			}
+
 			if (Input::GetInstance()->IsTriggerMouse(0)) {
 				if (handLack >= 0) {
 					if (turnEndButton->IsOnCollision(mousePos)) {
-						battlePhase = BattlePhase::EndMainTurn;
+						is = true;
 					}
 				}
 			}
+
 		}
 	}
 	if (execution.size()) {
 		EffectProcessing();
 	}
+	return is;
 }
 
-void CardManager::EndMainTurn() {
+bool CardManager::EndMainTurn() {
 	while (handCard.size() > 0) {
 		// handCard から cemetery にカードを移動
 		cemetery.push_back(std::move(handCard.back())); // 一番最後のカードを移動
 		handCard.pop_back();                            // 移動後に元のデッキから削除
 	}
-	enemyManager->StartEnemyTurn();
-	battlePhase = BattlePhase::EnemyTurn;
+
+	return true;
 }
 
 void CardManager::StartBattle() {
@@ -245,30 +224,6 @@ void CardManager::EndBattle() {
 		cemetery.pop_back();
 	}
 
-}
-
-void CardManager::EnemyTurn() {
-	if (!enemyManager->GetIsEnemyTurn()) {
-		player_->ClearShield();
-		battlePhase = BattlePhase::StartMainTurn;
-	}
-
-}
-
-void CardManager::CardDraw(int num) {
-	for (int j = 0; j < num; j++) {
-		if (deck.size() <= 0) {
-			DeckRefresh();
-		}
-		// deck から handCard にカードを移動
-		handCard.push_back(std::move(deck.back())); // 一番最後のカードを移動
-		deck.pop_back();                            // 移動後に元のデッキから削除
-		for (int i = 0; i < handCard.size(); i++) {
-			Vector2 pos = {640.0f - (121.0f * ((handCard.size() - 1) / 2.0f - i)), 600.0f};
-			handCard[i]->SetSpritePos(pos);
-		}
-		AllHandLack();
-	}
 }
 
 void CardManager::DeckShuffle() {
@@ -353,10 +308,30 @@ bool CardManager::CardConfirmation() {
 	return !isDeck && !isCemetery;
 }
 
-void CardManager::RandomHandDeath(int num) {
+void CardManager::CardDraw(int num) {
+	for (int j = 0; j < num; j++) {
+		if (deck.size() <= 0) {
+			if (cemetery.size() <= 0) {
+				return;
+			}
+			DeckRefresh();
+		}
+		// deck から handCard にカードを移動
+		handCard.push_back(std::move(deck.back())); // 一番最後のカードを移動
+		deck.pop_back();                            // 移動後に元のデッキから削除
+		for (int i = 0; i < handCard.size(); i++) {
+			Vector2 pos = {640.0f - (121.0f * ((handCard.size() - 1) / 2.0f - i)), 600.0f};
+			handCard[i]->SetSpritePos(pos);
+		}
+		AllHandLack();
+	}
+}
+
+int CardManager::RandomHandDeath(int num) {
 
 	for (int i = 0; i < num; i++) {
 		if (handCard.size() <= 0) {
+			return num - i;
 			break;
 		}
 		std::uniform_int_distribution<int> get_rand_uni_int(0, static_cast<int>(handCard.size()) - 1);
@@ -364,15 +339,22 @@ void CardManager::RandomHandDeath(int num) {
 		cemetery.push_back(std::move(handCard[a])); // ムーブ
 		handCard.erase(handCard.begin() + a);       // 元のリストから削除
 	}
-
-
-
-
+	return 0;
 }
 
-std::vector<Card*> CardManager::SelectionHand(int num) {
+std::vector<Card*> CardManager::SelectionHand(int num, bool isMax) {
 	Vector2 mousePos = Input::GetInstance()->GetMousePosition();
-	
+
+	isSelectOK = false;
+	if (isMax) {
+		if (handCard.size() <= num) {
+			std::vector<Card*> cards;
+			for (int i = 0; i < handCard.size(); i++) {
+				cards.push_back(handCard[i].get());
+			}
+			return cards;
+		}
+	}
 	isSelectionHand = true;
 	for (int i = 0; i < handCard.size(); i++) {
 		Vector2 pos = {640.0f - (121.0f * ((handCard.size() - 1) / 2.0f - i)), 600.0f};
@@ -403,13 +385,16 @@ std::vector<Card*> CardManager::SelectionHand(int num) {
 			}
 		}
 	}
-	if (num <= nnnum.size()) {
+	if (num <= nnnum.size() || !isMax) {
 		isSelectOK = true;
 		if (selectHandButton->IsOnCollision(mousePos)) {
 			if (Input::GetInstance()->IsTriggerMouse(0)) {
 				std::vector<Card*> cards;
 				for (int j = 0; j < nnnum.size(); j++) {
 					cards.push_back(handCard[nnnum[j]].get());
+				}
+				if (cards.size() <= 0) {
+					cards.push_back(nullptr);
 				}
 				isSelectionHand = false;
 				isSelectOK = false;
@@ -419,5 +404,27 @@ std::vector<Card*> CardManager::SelectionHand(int num) {
 		}
 	}
 	return std::vector<Card*>();
+}
+
+void CardManager::StartCreateSDeck() {
+	sDeck.push_back(std::make_unique<StandardAtack>());
+	sDeck.push_back(std::make_unique<StandardAtack>());
+	sDeck.push_back(std::make_unique<StandardAtack>());
+	sDeck.push_back(std::make_unique<StandardAtack>());
+	sDeck.push_back(std::make_unique<StandardAtack>());
+	sDeck.push_back(std::make_unique<StandardShield>());
+	sDeck.push_back(std::make_unique<StandardShield>());
+	sDeck.push_back(std::make_unique<StandardShield>());
+	sDeck.push_back(std::make_unique<StandardShield>());
+	sDeck.push_back(std::make_unique<StandardShield>());
+	sDeck.push_back(std::make_unique<DrawCard>());
+	sDeck.push_back(std::make_unique<DrawCard>());
+	sDeck.push_back(std::make_unique<Reverse>());
+
+	for (int i = 0; i < sDeck.size(); i++) {
+		sDeck[i]->Initialize();
+		sDeck[i]->SetCardManager(this);
+		sDeck[i]->SetBattleManager(battleManager_);
+	}
 }
 

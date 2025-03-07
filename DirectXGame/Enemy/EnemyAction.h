@@ -1,11 +1,11 @@
 #pragma once
-
+#include "BattleManager.h"
 enum class Debuff {
 	Poison,
 
 };
 
-class Player;
+
 class EnemyAction {
 public:
 
@@ -15,10 +15,10 @@ public:
 
 	virtual void Execute() = 0; // 純粋仮想関数
 
-	void SetPlayer(Player* player) { player_ = player; }
+	void SetBattleManager(BattleManager* battleManager) { battleManager_ = battleManager; }
 	
 protected:
-	Player* player_ = nullptr;
+	BattleManager* battleManager_ = nullptr;
 
 	int value_;
 	int value2_;

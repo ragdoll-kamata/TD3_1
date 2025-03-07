@@ -1,8 +1,8 @@
 #include "DrawCard.h"
 #include "CardManager.h"
 
-void DrawCard::Initialize() {
-	Card::Initialize();
+void DrawCard::IndividualInitialize() {
+
 	luck = 2;
 	rverseLuck = -4;
 	cardType = CardType::Skill;
@@ -18,6 +18,7 @@ bool DrawCard::Effect() {
 }
 
 bool DrawCard::ReverseEffect() { 
-	cardManager_->RandomHandDeath(2);
+	int i = cardManager_->RandomHandDeath(2);
+	battleManager_->DamagePlayer(i * 3);
 	return true;
 }

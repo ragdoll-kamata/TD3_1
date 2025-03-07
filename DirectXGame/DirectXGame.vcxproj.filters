@@ -58,15 +58,21 @@
     <Filter Include="ヘッダー ファイル\Card\Card">
       <UniqueIdentifier>{4cf1e29e-24d9-4d54-b0b5-1c0b97f9a48c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\StatusEffect">
+      <UniqueIdentifier>{42696dd2-686b-4fae-a968-62f64d7a4568}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\StatusEffect">
+      <UniqueIdentifier>{eb9ab928-2b58-4cdb-8784-c470013a0f38}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
+    <ClCompile Include="Enemy\Enemy.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyAction.cpp">
+    <ClCompile Include="Enemy\EnemyAction.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="scene\Blackout.cpp">
@@ -81,22 +87,22 @@
     <ClCompile Include="scene\SceneManager.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Card.cpp">
+    <ClCompile Include="Card\Card.cpp">
       <Filter>ソース ファイル\Card</Filter>
     </ClCompile>
-    <ClCompile Include="CardManager.cpp">
+    <ClCompile Include="Card\CardManager.cpp">
       <Filter>ソース ファイル\Card</Filter>
     </ClCompile>
     <ClCompile Include="scene\GameScene.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="StandardAtack.cpp">
+    <ClCompile Include="Card\Card\StandardAtack.cpp">
       <Filter>ソース ファイル\Card\Card</Filter>
     </ClCompile>
-    <ClCompile Include="StandardShield.cpp">
+    <ClCompile Include="Card\Card\StandardShield.cpp">
       <Filter>ソース ファイル\Card\Card</Filter>
     </ClCompile>
-    <ClCompile Include="Dummy.cpp">
+    <ClCompile Include="Enemy\Enemy\Dummy.cpp">
       <Filter>ソース ファイル\Enemy\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="BattleManager.cpp">
@@ -105,7 +111,7 @@
     <ClCompile Include="Button.cpp">
       <Filter>ソース ファイル\Other</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyManager.cpp">
+    <ClCompile Include="Enemy\EnemyManager.cpp">
       <Filter>ソース ファイル\Other</Filter>
     </ClCompile>
     <ClCompile Include="MathUtilityEX.cpp">
@@ -114,17 +120,32 @@
     <ClCompile Include="NumberSprite.cpp">
       <Filter>ソース ファイル\Other</Filter>
     </ClCompile>
-    <ClCompile Include="DrawCard.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Reverse.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="AtackAction.cpp">
+    <ClCompile Include="Enemy\Action\AtackAction.cpp">
       <Filter>ソース ファイル\Enemy\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Card\Card\DrawCard.cpp">
+      <Filter>ソース ファイル\Card\Card</Filter>
+    </ClCompile>
+    <ClCompile Include="Card\Card\Reverse.cpp">
+      <Filter>ソース ファイル\Card\Card</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\EnemyFactory.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="StatusEffect.cpp">
+      <Filter>ソース ファイル\StatusEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Buff.cpp">
+      <Filter>ソース ファイル\StatusEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Debuff.cpp">
+      <Filter>ソース ファイル\StatusEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Poison.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -183,16 +204,16 @@
     <ClInclude Include="Button.h">
       <Filter>ヘッダー ファイル\Other</Filter>
     </ClInclude>
-    <ClInclude Include="Card.h">
+    <ClInclude Include="Card\Card.h">
       <Filter>ヘッダー ファイル\Card</Filter>
     </ClInclude>
-    <ClInclude Include="CardManager.h">
+    <ClInclude Include="Card\CardManager.h">
       <Filter>ヘッダー ファイル\Card</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
+    <ClInclude Include="Enemy\Enemy.h">
       <Filter>ヘッダー ファイル\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyAction.h">
+    <ClInclude Include="Enemy\EnemyAction.h">
       <Filter>ヘッダー ファイル\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="scene\Scene.h">
@@ -210,10 +231,10 @@
     <ClInclude Include="scene\GameScene.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyManager.h">
+    <ClInclude Include="Enemy\EnemyManager.h">
       <Filter>ヘッダー ファイル\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Dummy.h">
+    <ClInclude Include="Enemy\Enemy\Dummy.h">
       <Filter>ヘッダー ファイル\Enemy\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="scene\Blackout.h">
@@ -222,23 +243,38 @@
     <ClInclude Include="NumberSprite.h">
       <Filter>ヘッダー ファイル\Other</Filter>
     </ClInclude>
-    <ClInclude Include="StandardAtack.h">
+    <ClInclude Include="Card\Card\StandardAtack.h">
       <Filter>ヘッダー ファイル\Card\Card</Filter>
     </ClInclude>
-    <ClInclude Include="StandardShield.h">
+    <ClInclude Include="Card\Card\StandardShield.h">
       <Filter>ヘッダー ファイル\Card\Card</Filter>
-    </ClInclude>
-    <ClInclude Include="DrawCard.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Reverse.h">
-      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="AtackAction.h">
+    <ClInclude Include="Enemy\Action\AtackAction.h">
       <Filter>ヘッダー ファイル\Enemy\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Card\Card\DrawCard.h">
+      <Filter>ヘッダー ファイル\Card\Card</Filter>
+    </ClInclude>
+    <ClInclude Include="StatusEffect.h">
+      <Filter>ヘッダー ファイル\StatusEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\EnemyFactory.h">
+      <Filter>ヘッダー ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Card\Card\Reverse.h">
+      <Filter>ヘッダー ファイル\Card\Card</Filter>
+    </ClInclude>
+    <ClInclude Include="Debuff.h">
+      <Filter>ヘッダー ファイル\StatusEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Buff.h">
+      <Filter>ヘッダー ファイル\StatusEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Poison.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

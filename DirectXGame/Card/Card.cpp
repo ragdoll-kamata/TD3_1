@@ -1,7 +1,7 @@
 #include "Card.h"
 #include <algorithm>
 
-void Card::Initialize() { 
+void Card::Initialize() {
 	sprite.Initialize();
 
 	TH = TextureManager::GetInstance()->Load("temporaryCard.png");
@@ -9,7 +9,8 @@ void Card::Initialize() {
 	sprite.SetAnchorPoint({0.5f, 0.5f});
 	sprite.SetSize({120.0f, 160.0f});
 	sprite.SetTextureRect({}, {120.0f, 160.0f});
-	//sprite.SetColor({1.0f, 1.0f, 0.0f, 1.0f});
+
+	IndividualInitialize();
 }
 
 void Card::Draw() { 

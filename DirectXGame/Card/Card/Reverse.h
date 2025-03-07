@@ -1,15 +1,15 @@
 #pragma once
 #include "Card.h"
-class StandardShield : public Card {
+class Reverse : public Card {
 public:
-	void Initialize() override;
+	void IndividualInitialize() override;
 
 	bool Effect() override;
 
 	bool ReverseEffect() override;
 
 	std::unique_ptr<Card> clone() const override {
-		return std::make_unique<StandardShield>(*this); // 自分のコピーを作成
+		return std::make_unique<Reverse>(*this); // 自分のコピーを作成
 	}
 
 private:

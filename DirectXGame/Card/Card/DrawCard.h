@@ -2,7 +2,7 @@
 #include "Card.h"
 class DrawCard : public Card {
 
-	void Initialize() override;
+	void IndividualInitialize() override;
 
 	bool Effect() override;
 

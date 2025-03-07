@@ -8,7 +8,7 @@
 
 using namespace KamataEngine;
 
-class Player;
+class BattleManager;
 
 class Enemy {
 public:
@@ -20,13 +20,25 @@ public:
 		End,
 	};
 
-	virtual void Initialize(Player* player) = 0;
+	virtual void Initialize() = 0;
 
 	void Update();
 
 
 	void StartEnemyTurn();
+
+	virtual void PredictNextAction() = 0;
 	void Draw();
+
+	bool StartMainTurn();
+
+	bool MainTurn();
+
+	bool EndMainTurn();
+
+	void StartBattle();
+
+	virtual void StartBattlePeculiar() = 0;
 
 	bool IsOnCollision(Vector2 pos);
 
@@ -34,12 +46,12 @@ public:
 	void DamageHP(int hp) { HP -= hp; }
 
 
-	void SetPlayer(Player* player) { player_ = player; }
+	void SetBattleManager(BattleManager* battleManager) { battleManager_ = battleManager; }
 
 	EnemyTurn GetEnemyTurn() const { return enemyTurn; }
 
 protected:
-	Player* player_ = nullptr;
+	BattleManager* battleManager_ = nullptr;
 
 	Sprite sprite;
 	uint32_t TH;
@@ -48,12 +60,12 @@ protected:
 	Vector2 pos_;
 	Vector2 halfSize;
 
-	std::vector<std::unique_ptr<EnemyAction>> enemyAction;
-	std::vector<std::unique_ptr<EnemyAction>> reverseEnemyAction;
+	std::unique_ptr<EnemyAction> enemyAction;
+	std::unique_ptr<EnemyAction> reverseEnemyAction;
 	int index = 0;
 	int value;
 	int HP;
 	int maxHP;
 	bool isReverse = false;
-	EnemyTurn enemyTurn = EnemyTurn::Standby;
+	EnemyTurn enemyTurn = EnemyTurn::End;
 };

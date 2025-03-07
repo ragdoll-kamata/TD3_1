@@ -1,11 +1,11 @@
 #pragma once
 #include <memory>
 #include <KamataEngine.h>
+#include "BattleManager.h"
 
 using namespace KamataEngine;
 class Enemy;
 class CardManager;
-class Player;
 enum class CardType {
 	Damage,
 	Shield,
@@ -23,10 +23,13 @@ enum class CardRange {
 class Card {
 public:
 	virtual ~Card() = default;
+	void Initialize();
 
+protected:
+	virtual void IndividualInitialize() = 0;
+public:
 
-
-	virtual void Initialize();
+	
 
 	void SetSpritePos(const Vector2& pos) { sprite.SetPosition(pos); }
 
@@ -60,13 +63,13 @@ public:
 
 
 	void SetCardManager(CardManager* cardManager) { cardManager_ = cardManager; }
-	void SetPlayer(Player* player) { player_ = player; }
+	void SetBattleManager(BattleManager* battleManager) { battleManager_ = battleManager; }
 
 protected:
 	Enemy* targetEnemy = nullptr;
 
 	CardManager* cardManager_ = nullptr;
-	Player* player_ = nullptr;
+	BattleManager* battleManager_ = nullptr;
 
 	Sprite sprite;
 	uint32_t TH;

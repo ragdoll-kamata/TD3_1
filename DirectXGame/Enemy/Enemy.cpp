@@ -13,33 +13,41 @@ void Enemy::Update() {
 		enemyTurn = EnemyTurn::Main;
 		break;
 	case Enemy::EnemyTurn::Main:
-		if (!isReverse) {
-			enemyAction[index]->Execute();
-		} else {
-			reverseEnemyAction[index]->Execute();
-		}
+
 		enemyTurn = EnemyTurn::End;
 		break;
 	case Enemy::EnemyTurn::End:
-		index++;
-		if (index >= enemyAction.size()) {
-			index = 0;
-		}
+		PredictNextAction();
 		enemyTurn = EnemyTurn::Standby;
 		break;
 	}
 	numberSprite.SetNumber(HP);
 }
 
-void Enemy::StartEnemyTurn() {
-	if (enemyTurn == EnemyTurn::Standby) {
-		enemyTurn = EnemyTurn::Start;
-	}
-}
-
 void Enemy::Draw() { 
 	sprite.Draw();
 	numberSprite.Draw();
+}
+
+bool Enemy::StartMainTurn() { return true; }
+
+bool Enemy::MainTurn() { 
+	if (!isReverse) {
+		enemyAction->Execute();
+	} else {
+		reverseEnemyAction->Execute();
+	}
+	return true;
+}
+
+bool Enemy::EndMainTurn() { 
+	PredictNextAction();
+	return true;
+}
+
+void Enemy::StartBattle() {
+	PredictNextAction();
+	StartBattlePeculiar();
 }
 
 bool Enemy::IsOnCollision(Vector2 pos) {

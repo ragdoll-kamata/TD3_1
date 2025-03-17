@@ -64,6 +64,18 @@
     <Filter Include="ヘッダー ファイル\StatusEffect">
       <UniqueIdentifier>{eb9ab928-2b58-4cdb-8784-c470013a0f38}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\StatusEffect\Debuff">
+      <UniqueIdentifier>{cde9772a-bb44-4fb5-a667-db1ee9c04d35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\StatusEffect\Debuff">
+      <UniqueIdentifier>{0dee8211-b115-434b-9df7-351b3276be66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\StatusEffect\Buff">
+      <UniqueIdentifier>{93ee8cc8-5760-4ea9-a0a1-c5ef2885857a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\StatusEffect\Buff">
+      <UniqueIdentifier>{7f72ceea-f0b7-46ea-90ef-60dcd79b71da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -86,9 +98,6 @@
     </ClCompile>
     <ClCompile Include="scene\SceneManager.cpp">
       <Filter>ソース ファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Card\Card.cpp">
-      <Filter>ソース ファイル\Card</Filter>
     </ClCompile>
     <ClCompile Include="Card\CardManager.cpp">
       <Filter>ソース ファイル\Card</Filter>
@@ -135,16 +144,49 @@
     <ClCompile Include="Enemy\EnemyFactory.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="StatusEffect.cpp">
+    <ClCompile Include="StatusEffect\StatusEffect.cpp">
       <Filter>ソース ファイル\StatusEffect</Filter>
     </ClCompile>
-    <ClCompile Include="Buff.cpp">
+    <ClCompile Include="StatusEffect\Buff.cpp">
       <Filter>ソース ファイル\StatusEffect</Filter>
     </ClCompile>
-    <ClCompile Include="Debuff.cpp">
+    <ClCompile Include="StatusEffect\StatusEffectFactory.cpp">
       <Filter>ソース ファイル\StatusEffect</Filter>
     </ClCompile>
-    <ClCompile Include="Poison.cpp">
+    <ClCompile Include="Card\Card\PoisonDagger.cpp">
+      <Filter>ソース ファイル\Card\Card</Filter>
+    </ClCompile>
+    <ClCompile Include="StatusEffect\Debuff\Poison.cpp">
+      <Filter>ソース ファイル\StatusEffect\Debuff</Filter>
+    </ClCompile>
+    <ClCompile Include="Status.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\ActionFactory.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\Action\ShieldAction.cpp">
+      <Filter>ソース ファイル\Enemy\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\Action\DebuffAtackAction.cpp">
+      <Filter>ソース ファイル\Enemy\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="StatusEffect\Debuff.cpp">
+      <Filter>ソース ファイル\StatusEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Regeneration.cpp">
+      <Filter>ソース ファイル\StatusEffect\Buff</Filter>
+    </ClCompile>
+    <ClCompile Include="Card\Card.cpp">
+      <Filter>ソース ファイル\Card\Card</Filter>
+    </ClCompile>
+    <ClCompile Include="Fragility.cpp">
+      <Filter>ソース ファイル\StatusEffect\Debuff</Filter>
+    </ClCompile>
+    <ClCompile Include="StatusEffectPair.cpp">
+      <Filter>ソース ファイル\StatusEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Blow.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -258,7 +300,7 @@
     <ClInclude Include="Card\Card\DrawCard.h">
       <Filter>ヘッダー ファイル\Card\Card</Filter>
     </ClInclude>
-    <ClInclude Include="StatusEffect.h">
+    <ClInclude Include="StatusEffect\StatusEffect.h">
       <Filter>ヘッダー ファイル\StatusEffect</Filter>
     </ClInclude>
     <ClInclude Include="Enemy\EnemyFactory.h">
@@ -267,14 +309,58 @@
     <ClInclude Include="Card\Card\Reverse.h">
       <Filter>ヘッダー ファイル\Card\Card</Filter>
     </ClInclude>
-    <ClInclude Include="Debuff.h">
+    <ClInclude Include="StatusEffect\Debuff.h">
       <Filter>ヘッダー ファイル\StatusEffect</Filter>
     </ClInclude>
-    <ClInclude Include="Buff.h">
+    <ClInclude Include="StatusEffect\Buff.h">
       <Filter>ヘッダー ファイル\StatusEffect</Filter>
     </ClInclude>
-    <ClInclude Include="Poison.h">
+    <ClInclude Include="Card\Card\PoisonDagger.h">
+      <Filter>ヘッダー ファイル\Card\Card</Filter>
+    </ClInclude>
+    <ClInclude Include="StatusEffect\StackDecreaseTiming.h">
+      <Filter>ヘッダー ファイル\StatusEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="StatusEffect\EffectTiming.h">
+      <Filter>ヘッダー ファイル\StatusEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="StatusEffect\Debuff\Poison.h">
+      <Filter>ヘッダー ファイル\StatusEffect\Debuff</Filter>
+    </ClInclude>
+    <ClInclude Include="Status.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="StatusEffect\StatusEffectFactory.h">
+      <Filter>ヘッダー ファイル\StatusEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\Action\ShieldAction.h">
+      <Filter>ヘッダー ファイル\Enemy\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\ActionFactory.h">
+      <Filter>ヘッダー ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\Action\DebuffAtackAction.h">
+      <Filter>ヘッダー ファイル\Enemy\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>リソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Regeneration.h">
+      <Filter>ヘッダー ファイル\StatusEffect\Buff</Filter>
+    </ClInclude>
+    <ClInclude Include="Fragility.h">
+      <Filter>ヘッダー ファイル\StatusEffect\Debuff</Filter>
+    </ClInclude>
+    <ClInclude Include="StatusEffectPair.h">
+      <Filter>ヘッダー ファイル\StatusEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Blow.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DirectXGame.rc">
+      <Filter>リソース ファイル</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

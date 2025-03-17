@@ -10,11 +10,11 @@ void StandardAtack::IndividualInitialize() {
 }
 
 bool StandardAtack::Effect() { 
-	battleManager_->DamageEnemy(value, targetEnemy);
+	battleManager_->DamageEnemy(value, targetEnemy, playrStatus_);
 	return true;
 }
 
 bool StandardAtack::ReverseEffect() { 
-	battleManager_->DamageEnemy(-value, targetEnemy);
+	battleManager_->DamageEnemy(-value, targetEnemy, playrStatus_);
 	return true;
 }

@@ -1,25 +1,29 @@
 #pragma once
 #include "BattleManager.h"
-enum class Debuff {
-	Poison,
-
-};
-
-
+#include <string>
+#include"Status.h"
+class Enemy;
 class EnemyAction {
 public:
 
 	virtual ~EnemyAction() = default;
 
-	void Initialize(int value, int value2 = 0);
+	void Initialize(Status* status, int value, int value2 = 0, Enemy* enemy = nullptr);
 
 	virtual void Execute() = 0; // 純粋仮想関数
 
 	void SetBattleManager(BattleManager* battleManager) { battleManager_ = battleManager; }
 	
-protected:
-	BattleManager* battleManager_ = nullptr;
+	void SetStatusEffectName(std::string statusEffectName) { statusEffectName_ = statusEffectName; }
+	void SetStack(int stack) { stack_ = stack; }
 
+protected:
+	Status* status_;
+	BattleManager* battleManager_ = nullptr;
+	Enemy* enemy_ = nullptr;
+
+	std::string statusEffectName_;
 	int value_;
 	int value2_;
+	int stack_;
 };

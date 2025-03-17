@@ -1,9 +1,11 @@
 #include "EnemyManager.h"
 #include "Dummy.h"
+#include <random>
 void EnemyManager::Initialize() {
 
 	enmeyFactory_ = std::make_unique<EnemyFactory>();
-
+	std::random_device rd; // 乱数の種
+	g.seed(rd());
 
 }
 
@@ -65,9 +67,20 @@ uint32_t EnemyManager::IsOnCollision(Vector2 pos) {
 	return 0;
 }
 
+uint32_t EnemyManager::GetRadomEnemy() { 
+	std::uniform_int_distribution<int> get_rand_uni_int(1, enemy.size());
+	return get_rand_uni_int(g);
+}
+
 Enemy* EnemyManager::GetEnemy(const uint32_t& EH) { 
 	if (enemy.size() >= EH && EH > 0) {
 		return enemy[EH - 1].get();
 	}
 	return nullptr;
+}
+
+void EnemyManager::Effect(EffectTiming effectTiming, StackDecreaseTiming stackDecreaseTiming) {
+	for (int i = 0; i < enemy.size(); i++) {
+		enemy[i]->Effect(effectTiming, stackDecreaseTiming);
+	}
 }

@@ -1,11 +1,14 @@
 #pragma once
 #include <unordered_map>
+#include <memory>
 #include <functional>
+#include "StatusEffect.h"
 
 class EnemyManager;
 class CardManager;
 class Player;
 class Enemy;
+
 class BattleManager {
 public:
 	enum class BattlePhase {
@@ -31,17 +34,18 @@ public:
 
 	void EndBattle();
 
-	void DamagePlayer(int num);
+	void DamagePlayer(int num, Status* status);
 
-	void ShieldPlayer(int num);
+	void ShieldPlayer(int num, Status* status);
 
-	void InflictsAbnormalityPlayer();
+	void StatusEffectPlayer(std::unique_ptr<StatusEffect> statusEffect, int stack);
 
-	void DamageEnemy(int num, Enemy* enmey);
+	void DamageEnemy(int num, Enemy* enmey, Status* status);
 
-	void ShieldEnemy(int num, Enemy* enmey);
+	void ShieldEnemy(int num, Enemy* enmey, Status* status);
 
-	void InflictsAbnormalityEnemy(Enemy* enemy);
+	void StatusEffectEnemy(Enemy* enemy, std::unique_ptr<StatusEffect> statusEffect, int stack);
+
 
 private:
 	void PlayerStartMainTurn();

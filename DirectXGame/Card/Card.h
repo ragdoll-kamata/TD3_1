@@ -2,10 +2,11 @@
 #include <memory>
 #include <KamataEngine.h>
 #include "BattleManager.h"
-
+#include "Status.h"
 using namespace KamataEngine;
 class Enemy;
 class CardManager;
+
 enum class CardType {
 	Damage,
 	Shield,
@@ -64,9 +65,12 @@ public:
 
 	void SetCardManager(CardManager* cardManager) { cardManager_ = cardManager; }
 	void SetBattleManager(BattleManager* battleManager) { battleManager_ = battleManager; }
+	void SetPlayerStatus(Status* status) { playrStatus_ = status; }
 
 protected:
 	Enemy* targetEnemy = nullptr;
+
+	Status* playrStatus_ = nullptr;
 
 	CardManager* cardManager_ = nullptr;
 	BattleManager* battleManager_ = nullptr;

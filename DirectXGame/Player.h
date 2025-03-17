@@ -1,25 +1,17 @@
 #pragma once
+#include <memory>
 #include "NumberSprite.h"
+#include "Status.h"
 class Player {
 public:
 	void Initialize();
 
 	void Update();
 
-	void StartEnemyTurn();
 	void Draw();
 
-	void ClearShield();
-
-	void AddShield(int v);
-
-	void Damage(int damage);
+	Status* GetStatus() { return status_.get(); }
 
 private:
-	NumberSprite numberSprite;
-	NumberSprite numberSprite2;
-
-	int MaxHP = 90;
-	int HP;
-	int shield;
+	std::unique_ptr<Status> status_;
 };

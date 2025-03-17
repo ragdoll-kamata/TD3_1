@@ -1,15 +1,13 @@
 #include "Poison.h"
 #include "BattleManager.h"
 
+Poison::~Poison() {}
+
 void Poison::PeculiarInitialize() {
 	effectTiming_ = EffectTiming::EndOfTurn;
 	stackDecreaseTiming_ = StackDecreaseTiming::OnEffect;
 }
 
-void Poison::ApplyEffect() {
-	if (enemy_ != nullptr) {
-		battleManager_->DamageEnemy(stack_, enemy_);
-	} else {
-		battleManager_->DamagePlayer(stack_);
-	}
+void Poison::ApplyEffect() { 
+	status_->ApplyDirectDamage(stack_);
 }

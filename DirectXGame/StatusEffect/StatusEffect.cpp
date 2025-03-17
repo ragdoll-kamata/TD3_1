@@ -1,6 +1,12 @@
 #include "StatusEffect.h"
 
-inline void StatusEffect::Effect(EffectTiming effectTiming) {
+void StatusEffect::Initialize(int stack, Status* status) {
+	stack_ = stack;
+	status_ = status;
+	PeculiarInitialize();
+}
+
+void StatusEffect::Effect(EffectTiming effectTiming) {
 	if (effectTiming == effectTiming_) {
 		ApplyEffect();
 		if (stackDecreaseTiming_ == StackDecreaseTiming::OnEffect) {
@@ -9,7 +15,7 @@ inline void StatusEffect::Effect(EffectTiming effectTiming) {
 	}
 }
 
-inline void StatusEffect::DecreaseStack(StackDecreaseTiming timing) {
+void StatusEffect::DecreaseStack(StackDecreaseTiming timing) {
 	if (timing == stackDecreaseTiming_) {
 		stack_--;
 	}

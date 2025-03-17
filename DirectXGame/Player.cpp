@@ -1,43 +1,14 @@
 #include "Player.h"
-
+#include "StatusEffect.h"
 void Player::Initialize() {
-
-
-	HP = MaxHP;
-	numberSprite.Initialize({300.0f, 360.f}, 0.5f);
-	numberSprite2.Initialize({300.0f, 400.f}, 0.5f);
+	status_ = std::make_unique<Status>();
+	status_->Initialize({300.0f, 360.f}, {}, 90);
 }
 
 void Player::Update() {
-	numberSprite.SetNumber(HP);
-	numberSprite2.SetNumber(shield);
+	status_->Update();
 }
 
 void Player::Draw() {
-	numberSprite.Draw();
-	numberSprite2.Draw();
-}
-
-void Player::ClearShield() {
-	shield=0;
-}
-
-void Player::AddShield(int v) {
-	shield += v;
-}
-
-void Player::Damage(int damage) {
-	if (damage >= 0) {
-		if (shield > 0) {
-			shield -= damage;
-			if (shield < 0) {
-				HP += shield;
-				shield = 0;
-			}
-		} else {
-			HP -= damage;
-		}
-	}
-
-
+	status_->Draw();
 }

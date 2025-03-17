@@ -4,6 +4,8 @@
 #include "Enemy.h"
 #include <math/Vector2.h>
 #include "EnemyFactory.h"
+#include "EffectTiming.h"
+#include "StackDecreaseTiming.h"
 using namespace KamataEngine;
 
 class BattleManager;
@@ -39,11 +41,19 @@ public:
 
 	uint32_t IsOnCollision(Vector2 pos);
 
+	uint32_t GetRadomEnemy();
+
 	Enemy* GetEnemy(const uint32_t& EH);
 
 	void SetBattleManager(BattleManager* battleManager) { battleManager_ = battleManager; }
 
+	void Effect(EffectTiming effectTiming, StackDecreaseTiming stackDecreaseTiming);
+
 private:
+	// シャッフルのための乱数エンジンを用意
+	std::mt19937 g; // メルセンヌ・ツイスタ（高品質な乱数生成）
+
+
 	std::vector<std::unique_ptr<Enemy>> enemy;
 	std::unique_ptr<EnemyFactory> enmeyFactory_;
 	bool isEnemyTurn = false;

@@ -6,6 +6,8 @@
 #include "StandardShield.h"
 #include "Reverse.h"
 #include "DrawCard.h"
+#include "PoisonDagger.h"
+#include "Blow.h"
 #include "Player.h"
 using namespace MathUtility;
 void CardManager::Initialize(EnemyManager* enemy, Player* player) {
@@ -411,7 +413,8 @@ void CardManager::StartCreateSDeck() {
 	sDeck.push_back(std::make_unique<StandardAtack>());
 	sDeck.push_back(std::make_unique<StandardAtack>());
 	sDeck.push_back(std::make_unique<StandardAtack>());
-	sDeck.push_back(std::make_unique<StandardAtack>());
+	sDeck.push_back(std::make_unique<PoisonDagger>());
+	sDeck.push_back(std::make_unique<Blow>());
 	sDeck.push_back(std::make_unique<StandardShield>());
 	sDeck.push_back(std::make_unique<StandardShield>());
 	sDeck.push_back(std::make_unique<StandardShield>());
@@ -425,6 +428,7 @@ void CardManager::StartCreateSDeck() {
 		sDeck[i]->Initialize();
 		sDeck[i]->SetCardManager(this);
 		sDeck[i]->SetBattleManager(battleManager_);
+		sDeck[i]->SetPlayerStatus(player_->GetStatus());
 	}
 }
 

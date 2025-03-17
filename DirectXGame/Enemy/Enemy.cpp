@@ -2,34 +2,18 @@
 #include <algorithm>
 
 void Enemy::Update() { 
-	if (maxHP < HP) {
-		HP = maxHP;
-	}
-
-	switch (enemyTurn) {
-	case Enemy::EnemyTurn::Standby:
-		break;
-	case Enemy::EnemyTurn::Start:
-		enemyTurn = EnemyTurn::Main;
-		break;
-	case Enemy::EnemyTurn::Main:
-
-		enemyTurn = EnemyTurn::End;
-		break;
-	case Enemy::EnemyTurn::End:
-		PredictNextAction();
-		enemyTurn = EnemyTurn::Standby;
-		break;
-	}
-	numberSprite.SetNumber(HP);
+	status_->Update();
 }
 
 void Enemy::Draw() { 
 	sprite.Draw();
-	numberSprite.Draw();
+	status_->Draw();
 }
 
-bool Enemy::StartMainTurn() { return true; }
+bool Enemy::StartMainTurn() { 
+	status_->ClearShield();
+	return true;
+}
 
 bool Enemy::MainTurn() { 
 	if (!isReverse) {
@@ -63,4 +47,12 @@ bool Enemy::IsOnCollision(Vector2 pos) {
 		return true;
 	}
 	return false;
+}
+
+void Enemy::AddStatusEffect(std::unique_ptr<StatusEffect> statusEffect, int stack) {
+	status_->AddStatusEffect(std::move(statusEffect), stack);
+}
+
+void Enemy::Effect(EffectTiming effectTiming, StackDecreaseTiming stackDecreaseTiming) { 
+	status_->Effect(effectTiming, stackDecreaseTiming);
 }

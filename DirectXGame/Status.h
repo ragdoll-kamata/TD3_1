@@ -45,6 +45,8 @@ public:
 
 	void AddStatusEffect(std::unique_ptr<StatusEffect> statusEffect, int stack);
 
+	void ClearStatusEffect();
+
 	void Effect(EffectTiming effectTiming, StackDecreaseTiming stackDecreaseTiming);
 
 	void SetBonusDamage(int v) { BonusDamage = v; }

@@ -85,6 +85,11 @@ public:
 
 	void SetBattleManager(BattleManager* battleManager) { battleManager_ = battleManager; }
 
+	std::vector<std::unique_ptr<Card>> RewardCardGeneration();
+
+	void AddSDeck(std::unique_ptr<Card> c) { sDeck.push_back(std::move(c)); }
+
+
 private:
 	// シャッフルのための乱数エンジンを用意
 	std::mt19937 g;  // メルセンヌ・ツイスタ（高品質な乱数生成）
@@ -94,6 +99,8 @@ private:
 	std::vector<std::unique_ptr<Card>> cemetery;
 	std::vector<std::unique_ptr<Card>> handCard;
 	std::vector<std::unique_ptr<Card>> execution;
+	std::vector<std::unique_ptr<Card>> exclusion;
+
 
 	std::vector<int> nnnum;
 

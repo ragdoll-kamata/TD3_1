@@ -11,6 +11,8 @@ using namespace KamataEngine;
 #include "EnemyManager.h"
 #include "Player.h"
 #include "BattleManager.h"
+#include "RewardManager.h"
+#include "MapManager.h"
 /// <summary>
 /// ゲームシーン
 /// </summary>
@@ -62,6 +64,9 @@ private: // メンバ変数
 	std::unique_ptr<EnemyManager> enemyManager_ = nullptr;
 	std::unique_ptr<Player> player_ = nullptr;
 	std::unique_ptr<BattleManager> battleManager_ = nullptr;
+	std::unique_ptr<RewardManager> rewardManager_ = nullptr;
+
+	std::unique_ptr<MapManager> mapManager_ = nullptr;
 	// カメラ
 	Camera* camera_ = nullptr;
 	bool isClear;

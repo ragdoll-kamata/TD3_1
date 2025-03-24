@@ -6,6 +6,7 @@
 
 class EnemyManager;
 class CardManager;
+class RewardManager;
 class Player;
 class Enemy;
 
@@ -18,6 +19,7 @@ public:
 		EnemyStartMainTurn,
 		EnemyMainTurn,
 		EnemyEndMainTurn,
+		EndBattleTurn,
 	};
 	/// <summary>
 	/// 初期化
@@ -29,6 +31,10 @@ public:
 	/// </summary>
 	void Update();
 
+
+	void Draw();
+
+	void SetRewardManager(RewardManager* rewardManager) { rewardManager_ = rewardManager; }
 
 	void StartBattle();
 
@@ -55,6 +61,8 @@ private:
 	void EnemyMainTurn();
 	void EnemyEndMainTurn();
 
+	void EndBattleTurn();
+
 private:
 	BattlePhase turn = BattlePhase::PlayerStartMainTurn;
 
@@ -65,10 +73,14 @@ private:
 	    {BattlePhase::EnemyStartMainTurn,  [this]() { EnemyStartMainTurn(); } },
 	    {BattlePhase::EnemyMainTurn,       [this]() { EnemyMainTurn(); }      },
 	    {BattlePhase::EnemyEndMainTurn,    [this]() { EnemyEndMainTurn(); }   },
+	    {BattlePhase::EndBattleTurn,       [this]() { EndBattleTurn(); }      },
 	};
 
 	Player* player_ = nullptr;
 	CardManager* cardManager_ = nullptr;
 	EnemyManager* enemyManager_ = nullptr;
+	RewardManager* rewardManager_ = nullptr;
+
+	bool isReward = false;
 
 };

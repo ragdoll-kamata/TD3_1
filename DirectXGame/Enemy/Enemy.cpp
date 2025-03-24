@@ -3,6 +3,9 @@
 
 void Enemy::Update() { 
 	status_->Update();
+	if (status_->GetHP() <= 0) {
+		isDeath = true;
+	}
 }
 
 void Enemy::Draw() { 

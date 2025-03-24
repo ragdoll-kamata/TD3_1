@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <vector>
+#include <random>
 #include "Enemy.h"
 #include <math/Vector2.h>
 #include "EnemyFactory.h"
@@ -44,6 +45,8 @@ public:
 	uint32_t GetRadomEnemy();
 
 	Enemy* GetEnemy(const uint32_t& EH);
+
+	int GetEnemyCount() const { return static_cast<int>(enemy.size()); }
 
 	void SetBattleManager(BattleManager* battleManager) { battleManager_ = battleManager; }
 

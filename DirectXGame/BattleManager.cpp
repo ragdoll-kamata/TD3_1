@@ -4,6 +4,7 @@
 #include "EnemyManager.h"
 #include "CardManager.h"
 #include "StatusEffect.h"
+#include "RewardManager.h"
 
 void BattleManager::Initialize(Player* player, CardManager* cardManager, EnemyManager* enemyManager) {
 	player_ = player;
@@ -13,12 +14,43 @@ void BattleManager::Initialize(Player* player, CardManager* cardManager, EnemyMa
 
 void BattleManager::Update() {
 	cardManager_->BattleUpdata();
+	enemyManager_->Update();
+	player_->Update();
 	mBattlePhase[turn]();
+	if (enemyManager_->GetEnemyCount() <= 0) {
+		if (!isReward) {
+			EndBattle();
+		}
+	}
+}
+
+void BattleManager::Draw() {
+	enemyManager_->Draw();
+
+	player_->Draw();
+
+	cardManager_->DrawBattle();
+	if (turn == BattlePhase::EndBattleTurn) {
+		//cardManager_->DrawReward();
+	}
 }
 
 void BattleManager::StartBattle() {
 	enemyManager_->StartBattle();
 	cardManager_->StartBattle();
+	isReward = false;
+	turn = BattlePhase::EnemyEndMainTurn;
+}
+
+void BattleManager::EndBattle() {
+	cardManager_->EndBattle();
+	player_->EndBattle();
+	
+	rewardManager_->CreateBattleReward();
+
+	isReward = true;
+	turn = BattlePhase::EndBattleTurn;
+
 }
 
 void BattleManager::DamagePlayer(int num, Status* status) {
@@ -30,7 +62,7 @@ void BattleManager::ShieldPlayer(int num, Status* status) {
 }
 
 void BattleManager::StatusEffectPlayer(std::unique_ptr<StatusEffect> statusEffect, int stack) {
-		player_->GetStatus()->AddStatusEffect(std::move(statusEffect), stack);
+	player_->GetStatus()->AddStatusEffect(std::move(statusEffect), stack);
 }
 
 void BattleManager::DamageEnemy(int num, Enemy* enemy, Status* status) { 
@@ -83,4 +115,12 @@ void BattleManager::EnemyEndMainTurn() {
 		turn = BattlePhase::PlayerStartMainTurn;
 	}
 	enemyManager_->Effect(EffectTiming::EndOfTurn, StackDecreaseTiming::EndOfTurn);
+}
+
+void BattleManager::EndBattleTurn() {
+	
+	if (!rewardManager_->IsReward()) {
+		StartBattle();
+	}
+
 }

@@ -11,6 +11,7 @@ enum class CardType {
 	Damage,
 	Shield,
 	Skill,
+	Ability,
 	StateAnomaly,
 };
 enum class CardRange {
@@ -42,6 +43,7 @@ public:
 
 	virtual std::unique_ptr<Card> clone() const = 0;
 
+	CardType GetCardType() { return cardType; }
 	CardRange GetCardRange() { return cardRange; }
 
 	bool GetIsReverse() const { return isReverse; }
@@ -67,6 +69,9 @@ public:
 	void SetBattleManager(BattleManager* battleManager) { battleManager_ = battleManager; }
 	void SetPlayerStatus(Status* status) { playrStatus_ = status; }
 
+
+	void SetSize(float size) { size_ = size; }
+
 protected:
 	Enemy* targetEnemy = nullptr;
 
@@ -77,6 +82,7 @@ protected:
 
 	Sprite sprite;
 	uint32_t TH;
+	float size_ = 1.0f;
 
 
 	int value;

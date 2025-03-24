@@ -107,12 +107,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Blow.cpp" />
+    <ClCompile Include="CardFactory.cpp" />
+    <ClCompile Include="CardReward.cpp" />
     <ClCompile Include="Enemy\ActionFactory.cpp" />
     <ClCompile Include="Enemy\Action\DebuffAtackAction.cpp" />
     <ClCompile Include="Enemy\Action\AtackAction.cpp" />
     <ClCompile Include="BattleManager.cpp" />
     <ClCompile Include="Fragility.cpp" />
+    <ClCompile Include="MapManager.cpp" />
+    <ClCompile Include="Node.cpp" />
     <ClCompile Include="Regeneration.cpp" />
+    <ClCompile Include="Reward.cpp" />
+    <ClCompile Include="RewardManager.cpp" />
     <ClCompile Include="StatusEffectPair.cpp" />
     <ClCompile Include="StatusEffect\Buff.cpp" />
     <ClCompile Include="Button.cpp" />
@@ -143,6 +149,8 @@
     <ClCompile Include="Status.cpp" />
     <ClCompile Include="StatusEffect\StatusEffect.cpp" />
     <ClCompile Include="StatusEffect\StatusEffectFactory.cpp" />
+    <ClCompile Include="Strength.cpp" />
+    <ClCompile Include="StrengthUp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\TerrainPS.hlsl">
@@ -221,10 +229,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Blow.h" />
+    <ClInclude Include="CardFactory.h" />
+    <ClInclude Include="CardReward.h" />
     <ClInclude Include="Enemy\ActionFactory.h" />
     <ClInclude Include="Enemy\Action\DebuffAtackAction.h" />
     <ClInclude Include="Fragility.h" />
+    <ClInclude Include="MapManager.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="Regeneration.h" />
+    <ClInclude Include="Reward.h" />
+    <ClInclude Include="RewardManager.h" />
     <ClInclude Include="StatusEffectPair.h" />
     <ClInclude Include="StatusEffect\EffectTiming.h" />
     <ClInclude Include="Enemy\Action\AtackAction.h" />
@@ -259,6 +273,8 @@
     <ClInclude Include="Status.h" />
     <ClInclude Include="StatusEffect\StatusEffect.h" />
     <ClInclude Include="StatusEffect\StatusEffectFactory.h" />
+    <ClInclude Include="Strength.h" />
+    <ClInclude Include="StrengthUp.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectXGame.rc" />

@@ -4,6 +4,14 @@ namespace KamataEngine {
 
 namespace MathUtility {
 
+	Vector2 Vector2Lerp(Vector2 a, Vector2 b, float t) {
+		Vector2 c = {};
+		c.x = Lerp(a.x, b.x, t);
+		c.y = Lerp(a.y, b.y, t);
+
+		return c;
+	}
+
 	Vector3 Vector3Lerp(Vector3 a, Vector3 b, float t) {
 		Vector3 c = {};
 	    c.x = Lerp(a.x, b.x, t);

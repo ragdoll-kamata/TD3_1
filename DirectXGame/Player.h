@@ -10,6 +10,8 @@ public:
 
 	void Draw();
 
+	void EndBattle();
+
 	Status* GetStatus() { return status_.get(); }
 
 private:

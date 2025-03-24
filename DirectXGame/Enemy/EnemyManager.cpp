@@ -1,6 +1,6 @@
 #include "EnemyManager.h"
 #include "Dummy.h"
-#include <random>
+
 void EnemyManager::Initialize() {
 
 	enmeyFactory_ = std::make_unique<EnemyFactory>();
@@ -13,6 +13,10 @@ void EnemyManager::Update() {
 
 	for (int i = 0; i < enemy.size(); i++) {
 		enemy[i]->Update();
+		if (enemy[i]->IsDeath()) {
+			enemy[i].reset();
+			enemy.erase(enemy.begin() + i);
+		}
 	}
 }
 
@@ -68,7 +72,7 @@ uint32_t EnemyManager::IsOnCollision(Vector2 pos) {
 }
 
 uint32_t EnemyManager::GetRadomEnemy() { 
-	std::uniform_int_distribution<int> get_rand_uni_int(1, enemy.size());
+	std::uniform_int_distribution<int> get_rand_uni_int(1, static_cast<int>(enemy.size()));
 	return get_rand_uni_int(g);
 }
 

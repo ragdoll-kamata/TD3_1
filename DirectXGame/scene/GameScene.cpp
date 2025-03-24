@@ -35,17 +35,24 @@ void GameScene::Initialize2() {
 	enemyManager_->SetBattleManager(battleManager_.get());
 	cardManager_->SetBattleManager(battleManager_.get());
 
+	rewardManager_ = std::make_unique<RewardManager>();
+	rewardManager_->Initialize(cardManager_.get());
+	battleManager_->SetRewardManager(rewardManager_.get());
+
 	cardManager_->StartCreateSDeck();
 	
 
 	battleManager_->StartBattle();
+
+	mapManager_ = std::make_unique<MapManager>();
+	mapManager_->Initialize();
+	mapManager_->CreateMap();
 }
 
 void GameScene::Update() { 
-	battleManager_->Update();
-	cardManager_->BattleUpdata();
-	enemyManager_->Update();
-	player_->Update();
+	//battleManager_->Update();
+	//rewardManager_->Update();
+	mapManager_->Update();
 }
 
 
@@ -90,12 +97,10 @@ void GameScene::Draw() {
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>
 
-	enemyManager_->Draw();
+	//battleManager_->Draw();
+	//rewardManager_->Draw();
 
-	player_->Draw();
-
-	cardManager_->DrawBattle();
-
+	mapManager_->Draw();
 
 	// スプライト描画後処理
 	Sprite::PostDraw();

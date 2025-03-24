@@ -52,6 +52,8 @@ public:
 
 	Status* GetStatus() { return status_.get(); }
 
+	bool IsDeath() const { return isDeath; }
+
 protected:
 	BattleManager* battleManager_ = nullptr;
 
@@ -66,6 +68,7 @@ protected:
 	int index = 0;
 	int value;
 	bool isReverse = false;
+	bool isDeath = false;
 	EnemyTurn enemyTurn = EnemyTurn::End;
 
 	std::unique_ptr<Status> status_;

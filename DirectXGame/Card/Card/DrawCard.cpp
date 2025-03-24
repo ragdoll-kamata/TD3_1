@@ -19,6 +19,8 @@ bool DrawCard::Effect() {
 
 bool DrawCard::ReverseEffect() { 
 	int i = cardManager_->RandomHandDeath(2);
-	battleManager_->DamagePlayer(i * 3, playrStatus_);
+	for (int j = 0; j < i; j++) {
+		battleManager_->DamagePlayer(3, nullptr);
+	}
 	return true;
 }

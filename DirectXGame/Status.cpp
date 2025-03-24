@@ -31,13 +31,16 @@ void Status::ApplyDirectDamage(int damage) {
 }
 
 void Status::Damage(int damage, Status* status) {
-	status->Effect(EffectTiming::BonusDamage, StackDecreaseTiming::None);
-	if (status->GetBonusDamage() != 0) {
-		damage += status->GetBonusDamage();
-	}
-	damageRate_ = 1.0f;
+	if (status) {
+		status->SetBonusDamage(0);
+		status->Effect(EffectTiming::BonusDamage, StackDecreaseTiming::None);
+		if (status->GetBonusDamage() != 0) {
+			damage += status->GetBonusDamage();
+		}
+		damageRate_ = 1.0f;
 
-	status->Effect(EffectTiming::BeforeAttack, StackDecreaseTiming::None);
+		status->Effect(EffectTiming::BeforeAttack, StackDecreaseTiming::None);
+	}
 	Effect(EffectTiming::BeforeDefense, StackDecreaseTiming::None);
 
 	damage = static_cast<int>(damage * damageRate_);
@@ -49,13 +52,16 @@ void Status::Damage(int damage, Status* status) {
 }
 
 void Status::Heal(int heal, Status* status) {
-	status->Effect(EffectTiming::BonusDamage, StackDecreaseTiming::None);
-	if (status->GetBonusDamage() != 0) {
-		heal -= status->GetBonusDamage();
-	}
-	healRate_ = 1.0f;
+	if (status) {
+		status->SetBonusDamage(0);
+		status->Effect(EffectTiming::BonusDamage, StackDecreaseTiming::None);
+		if (status->GetBonusDamage() != 0) {
+			heal -= status->GetBonusDamage();
+		}
+		healRate_ = 1.0f;
 
-	status->Effect(EffectTiming::BeforeHeal, StackDecreaseTiming::None);
+		status->Effect(EffectTiming::BeforeHeal, StackDecreaseTiming::None);
+	}
 	Effect(EffectTiming::BeforeRecovery, StackDecreaseTiming::None);
 
 	if (heal < 0) {
@@ -75,7 +81,9 @@ void Status::DecisionDamage(int damage, Status* status) {
 		shield_ = 0;
 		HP_ -= damage;
 	}
-	status->Effect(EffectTiming::AfterAttack, StackDecreaseTiming::None);
+	if (status) {
+		status->Effect(EffectTiming::AfterAttack, StackDecreaseTiming::None);
+	}
 }
 
 void Status::DecisionHeal(int heal, Status* status) {
@@ -86,7 +94,9 @@ void Status::DecisionHeal(int heal, Status* status) {
 	if (HP_ > maxHP_) {
 		HP_ = maxHP_;
 	}
-	status->Effect(EffectTiming::AfterHeal, StackDecreaseTiming::None);
+	if (status) {
+		status->Effect(EffectTiming::AfterHeal, StackDecreaseTiming::None);
+	}
 }
 
 void Status::AddShield(int v, Status* status) { 
@@ -119,6 +129,10 @@ void Status::AddStatusEffect(std::unique_ptr<StatusEffect> statusEffect, int sta
 	}
 	statusEffect->Initialize(stack, this);
 	statusEffects.push_back(std::move(statusEffect));
+}
+
+void Status::ClearStatusEffect() {
+	statusEffects.clear();
 }
 
 void Status::Effect(EffectTiming effectTiming, StackDecreaseTiming stackDecreaseTiming) {

@@ -8,6 +8,7 @@
 #include "DrawCard.h"
 #include "PoisonDagger.h"
 #include "Blow.h"
+#include "StrengthUp.h"
 #include "Player.h"
 using namespace MathUtility;
 void CardManager::Initialize(EnemyManager* enemy, Player* player) {
@@ -255,8 +256,12 @@ void CardManager::EffectProcessing() {
 	}
 
 	if (is) {
-		cemetery.push_back(std::move(execution[0])); // ムーブ
-		execution.erase(execution.begin());          // 元のリストから削除
+		if (execution[0]->GetCardType() == CardType::Ability) {
+			execution.erase(execution.begin()); // 元のリストから削除
+		} else {
+			cemetery.push_back(std::move(execution[0])); // ムーブ
+			execution.erase(execution.begin());          // 元のリストから削除
+		}
 	}
 }
 
@@ -414,15 +419,18 @@ void CardManager::StartCreateSDeck() {
 	sDeck.push_back(std::make_unique<StandardAtack>());
 	sDeck.push_back(std::make_unique<StandardAtack>());
 	sDeck.push_back(std::make_unique<PoisonDagger>());
+
 	sDeck.push_back(std::make_unique<Blow>());
 	sDeck.push_back(std::make_unique<StandardShield>());
 	sDeck.push_back(std::make_unique<StandardShield>());
 	sDeck.push_back(std::make_unique<StandardShield>());
 	sDeck.push_back(std::make_unique<StandardShield>());
+
 	sDeck.push_back(std::make_unique<StandardShield>());
 	sDeck.push_back(std::make_unique<DrawCard>());
 	sDeck.push_back(std::make_unique<DrawCard>());
 	sDeck.push_back(std::make_unique<Reverse>());
+	sDeck.push_back(std::make_unique<StrengthUp>());
 
 	for (int i = 0; i < sDeck.size(); i++) {
 		sDeck[i]->Initialize();
@@ -431,4 +439,24 @@ void CardManager::StartCreateSDeck() {
 		sDeck[i]->SetPlayerStatus(player_->GetStatus());
 	}
 }
+
+std::vector<std::unique_ptr<Card>> CardManager::RewardCardGeneration() {
+
+	std::vector<std::unique_ptr<Card>> reward;
+	reward.push_back(std::make_unique<DrawCard>());
+	reward.push_back(std::make_unique<Blow>());
+	reward.push_back(std::make_unique<Reverse>());
+
+	for (int i = 0; i < reward.size(); i++) {
+		reward[i]->Initialize();
+		reward[i]->SetCardManager(this);
+		reward[i]->SetBattleManager(battleManager_);
+		reward[i]->SetPlayerStatus(player_->GetStatus());
+		reward[i]->SetSpritePos({640.0f - (200.0f * ((reward.size() - 1) / 2.0f - i)), 360.0f});
+		reward[i]->SetSize(1.5f);
+	}
+
+	return reward;
+}
+
 

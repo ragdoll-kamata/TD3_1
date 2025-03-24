@@ -16,6 +16,7 @@ void Card::Initialize() {
 void Card::Draw() { 
 	sprite.SetIsFlipX(isReverse);
 	sprite.SetIsFlipY(isReverse);
+	sprite.SetSize({120.0f * size_, 160.0f * size_});
 	sprite.Draw();
 }
 

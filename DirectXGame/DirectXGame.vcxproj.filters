@@ -186,7 +186,31 @@
     <ClCompile Include="StatusEffectPair.cpp">
       <Filter>ソース ファイル\StatusEffect</Filter>
     </ClCompile>
+    <ClCompile Include="Strength.cpp">
+      <Filter>ソース ファイル\StatusEffect\Buff</Filter>
+    </ClCompile>
     <ClCompile Include="Blow.cpp">
+      <Filter>ソース ファイル\Card\Card</Filter>
+    </ClCompile>
+    <ClCompile Include="StrengthUp.cpp">
+      <Filter>ソース ファイル\Card\Card</Filter>
+    </ClCompile>
+    <ClCompile Include="CardFactory.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="RewardManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Reward.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="CardReward.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="MapManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -355,6 +379,30 @@
       <Filter>ヘッダー ファイル\StatusEffect</Filter>
     </ClInclude>
     <ClInclude Include="Blow.h">
+      <Filter>ヘッダー ファイル\Card\Card</Filter>
+    </ClInclude>
+    <ClInclude Include="StrengthUp.h">
+      <Filter>ヘッダー ファイル\Card\Card</Filter>
+    </ClInclude>
+    <ClInclude Include="Strength.h">
+      <Filter>ヘッダー ファイル\StatusEffect\Buff</Filter>
+    </ClInclude>
+    <ClInclude Include="CardFactory.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="RewardManager.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Reward.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="CardReward.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="MapManager.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

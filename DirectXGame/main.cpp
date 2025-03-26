@@ -56,7 +56,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	SceneManager* sceneManager = SceneManager::GetInstance();
 	sceneManager->Initialize();
-	sceneManager->SetNextScene(SceneName::GameScene);
+	sceneManager->SetNextScene(SceneName::TitleScene);
 	// メインループ
 	while (true) {
 		// メッセージ処理

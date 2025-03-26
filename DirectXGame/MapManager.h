@@ -29,6 +29,9 @@ private:
 
 
 	NodeType GetRandomNodeType(int floor);
+	NodeType ReGetRandomNodeType(int floor, int x);
+
+	bool IsRandomNodeType(int& probability, int& i, const int plus, NodeType nodeType, const int& kProbability = 0);
 
 	// シャッフルのための乱数エンジンを用意
 	std::mt19937 g; // メルセンヌ・ツイスタ（高品質な乱数生成）
@@ -38,6 +41,13 @@ private:
 	int maxfloar;
 	int maxNode;
 	int root = 5;
-	int branchChance;
 	NodeType prevNodeType;
+
+	int eliteProbability = 0;
+	int restProbability = 0;
+	int treasureProbability = 0;
+	int evectProbability = 0;
+	int shopProbability = 0;
+
+	float scroll;
 };

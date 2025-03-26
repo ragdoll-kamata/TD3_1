@@ -10,6 +10,13 @@ void Node::Initialize() {
 }
 
 void Node::Updata() {
+	sPos = Vector2Lerp(sPos, kSPos + scroll, 0.5f);
+
+
+	sprite.SetPosition(GetSpritePos());
+}
+
+void Node::ScrollUpdata() {
 	senn.clear();
 
 	int tennCount = 10;
@@ -21,17 +28,16 @@ void Node::Updata() {
 			sp.SetTextureHandle(TH);
 			sp.SetAnchorPoint({0.5f, 0.5f});
 			sp.SetSize({5.0f, 5.0f});
+			sp.SetTextureRect({}, {64.0f, 64.0f});
 			sp.SetColor({0.0f, 0.0f, 0.0f, 1.0f});
 			Vector2 pos = GetSpritePos();
 			Vector2 nextPos = node->GetSpritePos();
 
-			
 			sp.SetPosition(Vector2Lerp(pos, nextPos, static_cast<float>(i) / static_cast<float>(tennCount)));
 
 			senn.push_back(sp);
 		}
 	}
-
 }
 
 void Node::Draw() {
@@ -39,6 +45,10 @@ void Node::Draw() {
 		sp.Draw();
 	}
 	sprite.Draw();
+}
+
+void Node::SetScroll(Vector2 s) {
+	scroll = s;
 }
 
 void Node::SetNodeType(NodeType nodeType) {
@@ -76,4 +86,6 @@ void Node::SetNodeType(NodeType nodeType) {
 	}
 
 }
+
+Vector2 Node::GetSpritePos() const { return sPos; }
 

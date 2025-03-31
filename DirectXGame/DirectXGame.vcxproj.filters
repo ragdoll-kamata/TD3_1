@@ -76,141 +76,162 @@
     <Filter Include="ヘッダー ファイル\StatusEffect\Buff">
       <UniqueIdentifier>{7f72ceea-f0b7-46ea-90ef-60dcd79b71da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Map">
+      <UniqueIdentifier>{7792d40c-7c9e-4ec8-8669-6db6d0395377}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Reward">
+      <UniqueIdentifier>{1463ce55-bba1-4870-bd63-7d61a9510333}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Map">
+      <UniqueIdentifier>{fa974815-a87e-4a12-8636-534597efda19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Reward">
+      <UniqueIdentifier>{23e17c5e-9ce7-493c-9c1d-fcfa761ea568}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy\Enemy.cpp">
+    <ClCompile Include="Class\Enemy\Enemy.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy\EnemyAction.cpp">
+    <ClCompile Include="Class\Enemy\EnemyAction.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="scene\Blackout.cpp">
+    <ClCompile Include="Class\Scene\Blackout.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="scene\Scene.cpp">
+    <ClCompile Include="Class\Scene\Scene.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="scene\SceneFactory.cpp">
+    <ClCompile Include="Class\Scene\SceneFactory.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="scene\SceneManager.cpp">
+    <ClCompile Include="Class\Scene\SceneManager.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Card\CardManager.cpp">
+    <ClCompile Include="Class\Card\CardManager.cpp">
       <Filter>ソース ファイル\Card</Filter>
     </ClCompile>
-    <ClCompile Include="scene\GameScene.cpp">
+    <ClCompile Include="Class\Scene\GameScene.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Card\Card\StandardAtack.cpp">
+    <ClCompile Include="Class\Card\Card\StandardAtack.cpp">
       <Filter>ソース ファイル\Card\Card</Filter>
     </ClCompile>
-    <ClCompile Include="Card\Card\StandardShield.cpp">
+    <ClCompile Include="Class\Card\Card\StandardShield.cpp">
       <Filter>ソース ファイル\Card\Card</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy\Enemy\Dummy.cpp">
+    <ClCompile Include="Class\Enemy\Enemy\Dummy.cpp">
       <Filter>ソース ファイル\Enemy\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="BattleManager.cpp">
+    <ClCompile Include="Class\BattleManager.cpp">
       <Filter>ソース ファイル\Other</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
+    <ClCompile Include="Class\Button.cpp">
       <Filter>ソース ファイル\Other</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy\EnemyManager.cpp">
+    <ClCompile Include="Class\Enemy\EnemyManager.cpp">
       <Filter>ソース ファイル\Other</Filter>
     </ClCompile>
     <ClCompile Include="MathUtilityEX.cpp">
       <Filter>ソース ファイル\Other</Filter>
     </ClCompile>
-    <ClCompile Include="NumberSprite.cpp">
+    <ClCompile Include="Class\NumberSprite.cpp">
       <Filter>ソース ファイル\Other</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="Class\Player.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy\Action\AtackAction.cpp">
+    <ClCompile Include="Class\Enemy\Action\AtackAction.cpp">
       <Filter>ソース ファイル\Enemy\Action</Filter>
     </ClCompile>
-    <ClCompile Include="Card\Card\DrawCard.cpp">
+    <ClCompile Include="Class\Card\Card\DrawCard.cpp">
       <Filter>ソース ファイル\Card\Card</Filter>
     </ClCompile>
-    <ClCompile Include="Card\Card\Reverse.cpp">
+    <ClCompile Include="Class\Card\Card\Reverse.cpp">
       <Filter>ソース ファイル\Card\Card</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy\EnemyFactory.cpp">
+    <ClCompile Include="Class\Enemy\EnemyFactory.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="StatusEffect\StatusEffect.cpp">
+    <ClCompile Include="Class\StatusEffect\StatusEffect.cpp">
       <Filter>ソース ファイル\StatusEffect</Filter>
     </ClCompile>
-    <ClCompile Include="StatusEffect\Buff.cpp">
+    <ClCompile Include="Class\StatusEffect\Buff.cpp">
       <Filter>ソース ファイル\StatusEffect</Filter>
     </ClCompile>
-    <ClCompile Include="StatusEffect\StatusEffectFactory.cpp">
+    <ClCompile Include="Class\StatusEffect\StatusEffectFactory.cpp">
       <Filter>ソース ファイル\StatusEffect</Filter>
     </ClCompile>
-    <ClCompile Include="Card\Card\PoisonDagger.cpp">
+    <ClCompile Include="Class\Card\Card\PoisonDagger.cpp">
       <Filter>ソース ファイル\Card\Card</Filter>
     </ClCompile>
-    <ClCompile Include="StatusEffect\Debuff\Poison.cpp">
+    <ClCompile Include="Class\StatusEffect\Debuff\Poison.cpp">
       <Filter>ソース ファイル\StatusEffect\Debuff</Filter>
     </ClCompile>
-    <ClCompile Include="Status.cpp">
+    <ClCompile Include="Class\Status.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy\ActionFactory.cpp">
+    <ClCompile Include="Class\Enemy\ActionFactory.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy\Action\ShieldAction.cpp">
+    <ClCompile Include="Class\Enemy\Action\ShieldAction.cpp">
       <Filter>ソース ファイル\Enemy\Action</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy\Action\DebuffAtackAction.cpp">
+    <ClCompile Include="Class\Enemy\Action\DebuffAtackAction.cpp">
       <Filter>ソース ファイル\Enemy\Action</Filter>
     </ClCompile>
-    <ClCompile Include="StatusEffect\Debuff.cpp">
+    <ClCompile Include="Class\StatusEffect\Debuff.cpp">
       <Filter>ソース ファイル\StatusEffect</Filter>
     </ClCompile>
-    <ClCompile Include="Regeneration.cpp">
+    <ClCompile Include="Class\StatusEffect\Buff\Regeneration.cpp">
       <Filter>ソース ファイル\StatusEffect\Buff</Filter>
     </ClCompile>
-    <ClCompile Include="Card\Card.cpp">
+    <ClCompile Include="Class\Card\Card.cpp">
       <Filter>ソース ファイル\Card\Card</Filter>
     </ClCompile>
-    <ClCompile Include="Fragility.cpp">
+    <ClCompile Include="Class\StatusEffect\Debuff\Fragility.cpp">
       <Filter>ソース ファイル\StatusEffect\Debuff</Filter>
     </ClCompile>
-    <ClCompile Include="StatusEffectPair.cpp">
+    <ClCompile Include="Class\StatusEffect\StatusEffectPair.cpp">
       <Filter>ソース ファイル\StatusEffect</Filter>
     </ClCompile>
-    <ClCompile Include="Strength.cpp">
+    <ClCompile Include="Class\Card\Card\Blow.cpp">
+      <Filter>ソース ファイル\Card\Card</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Card\Card\StrengthUp.cpp">
+      <Filter>ソース ファイル\Card\Card</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Scene\TitleScene.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Card\CardFactory.cpp">
+      <Filter>ソース ファイル\Card</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Map\MapManager.cpp">
+      <Filter>ソース ファイル\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Map\Node.cpp">
+      <Filter>ソース ファイル\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Reward\Reward.cpp">
+      <Filter>ソース ファイル\Reward</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Reward\RewardManager.cpp">
+      <Filter>ソース ファイル\Reward</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Reward\CardReward.cpp">
+      <Filter>ソース ファイル\Reward</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\StatusEffect\Buff\Strength.cpp">
       <Filter>ソース ファイル\StatusEffect\Buff</Filter>
     </ClCompile>
-    <ClCompile Include="Blow.cpp">
-      <Filter>ソース ファイル\Card\Card</Filter>
+    <ClCompile Include="Class\Easings.cpp">
+      <Filter>ソース ファイル\Other</Filter>
     </ClCompile>
-    <ClCompile Include="StrengthUp.cpp">
-      <Filter>ソース ファイル\Card\Card</Filter>
-    </ClCompile>
-    <ClCompile Include="CardFactory.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="RewardManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Reward.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="CardReward.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="MapManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Node.cpp">
+    <ClCompile Include="UIManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -264,145 +285,154 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BattleManager.h">
+    <ClInclude Include="Class\BattleManager.h">
       <Filter>ヘッダー ファイル\Other</Filter>
     </ClInclude>
-    <ClInclude Include="Button.h">
+    <ClInclude Include="Class\Button.h">
       <Filter>ヘッダー ファイル\Other</Filter>
     </ClInclude>
-    <ClInclude Include="Card\Card.h">
+    <ClInclude Include="Class\Card\Card.h">
       <Filter>ヘッダー ファイル\Card</Filter>
     </ClInclude>
-    <ClInclude Include="Card\CardManager.h">
+    <ClInclude Include="Class\Card\CardManager.h">
       <Filter>ヘッダー ファイル\Card</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy\Enemy.h">
+    <ClInclude Include="Class\Enemy\Enemy.h">
       <Filter>ヘッダー ファイル\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy\EnemyAction.h">
+    <ClInclude Include="Class\Enemy\EnemyAction.h">
       <Filter>ヘッダー ファイル\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="scene\Scene.h">
+    <ClInclude Include="Class\Scene\Scene.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="scene\SceneManager.h">
+    <ClInclude Include="Class\Scene\SceneManager.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="scene\SceneFactory.h">
+    <ClInclude Include="Class\Scene\SceneFactory.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="scene\SceneName.h">
+    <ClInclude Include="Class\Scene\SceneName.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="scene\GameScene.h">
+    <ClInclude Include="Class\Scene\GameScene.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy\EnemyManager.h">
+    <ClInclude Include="Class\Enemy\EnemyManager.h">
       <Filter>ヘッダー ファイル\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy\Enemy\Dummy.h">
+    <ClInclude Include="Class\Enemy\Enemy\Dummy.h">
       <Filter>ヘッダー ファイル\Enemy\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="scene\Blackout.h">
+    <ClInclude Include="Class\Scene\Blackout.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="NumberSprite.h">
+    <ClInclude Include="Class\NumberSprite.h">
       <Filter>ヘッダー ファイル\Other</Filter>
     </ClInclude>
-    <ClInclude Include="Card\Card\StandardAtack.h">
+    <ClInclude Include="Class\Card\Card\StandardAtack.h">
       <Filter>ヘッダー ファイル\Card\Card</Filter>
     </ClInclude>
-    <ClInclude Include="Card\Card\StandardShield.h">
+    <ClInclude Include="Class\Card\Card\StandardShield.h">
       <Filter>ヘッダー ファイル\Card\Card</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
+    <ClInclude Include="Class\Player.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy\Action\AtackAction.h">
+    <ClInclude Include="Class\Enemy\Action\AtackAction.h">
       <Filter>ヘッダー ファイル\Enemy\Action</Filter>
     </ClInclude>
-    <ClInclude Include="Card\Card\DrawCard.h">
+    <ClInclude Include="Class\Card\Card\DrawCard.h">
       <Filter>ヘッダー ファイル\Card\Card</Filter>
     </ClInclude>
-    <ClInclude Include="StatusEffect\StatusEffect.h">
+    <ClInclude Include="Class\StatusEffect\StatusEffect.h">
       <Filter>ヘッダー ファイル\StatusEffect</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy\EnemyFactory.h">
+    <ClInclude Include="Class\Enemy\EnemyFactory.h">
       <Filter>ヘッダー ファイル\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Card\Card\Reverse.h">
+    <ClInclude Include="Class\Card\Card\Reverse.h">
       <Filter>ヘッダー ファイル\Card\Card</Filter>
     </ClInclude>
-    <ClInclude Include="StatusEffect\Debuff.h">
+    <ClInclude Include="Class\StatusEffect\Debuff.h">
       <Filter>ヘッダー ファイル\StatusEffect</Filter>
     </ClInclude>
-    <ClInclude Include="StatusEffect\Buff.h">
+    <ClInclude Include="Class\StatusEffect\Buff.h">
       <Filter>ヘッダー ファイル\StatusEffect</Filter>
     </ClInclude>
-    <ClInclude Include="Card\Card\PoisonDagger.h">
+    <ClInclude Include="Class\Card\Card\PoisonDagger.h">
       <Filter>ヘッダー ファイル\Card\Card</Filter>
     </ClInclude>
-    <ClInclude Include="StatusEffect\StackDecreaseTiming.h">
+    <ClInclude Include="Class\StatusEffect\StackDecreaseTiming.h">
       <Filter>ヘッダー ファイル\StatusEffect</Filter>
     </ClInclude>
-    <ClInclude Include="StatusEffect\EffectTiming.h">
+    <ClInclude Include="Class\StatusEffect\EffectTiming.h">
       <Filter>ヘッダー ファイル\StatusEffect</Filter>
     </ClInclude>
-    <ClInclude Include="StatusEffect\Debuff\Poison.h">
+    <ClInclude Include="Class\StatusEffect\Debuff\Poison.h">
       <Filter>ヘッダー ファイル\StatusEffect\Debuff</Filter>
     </ClInclude>
-    <ClInclude Include="Status.h">
+    <ClInclude Include="Class\Status.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="StatusEffect\StatusEffectFactory.h">
+    <ClInclude Include="Class\StatusEffect\StatusEffectFactory.h">
       <Filter>ヘッダー ファイル\StatusEffect</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy\Action\ShieldAction.h">
+    <ClInclude Include="Class\Enemy\Action\ShieldAction.h">
       <Filter>ヘッダー ファイル\Enemy\Action</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy\ActionFactory.h">
+    <ClInclude Include="Class\Enemy\ActionFactory.h">
       <Filter>ヘッダー ファイル\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy\Action\DebuffAtackAction.h">
+    <ClInclude Include="Class\Enemy\Action\DebuffAtackAction.h">
       <Filter>ヘッダー ファイル\Enemy\Action</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>リソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Regeneration.h">
+    <ClInclude Include="Class\StatusEffect\Buff\Regeneration.h">
       <Filter>ヘッダー ファイル\StatusEffect\Buff</Filter>
     </ClInclude>
-    <ClInclude Include="Fragility.h">
+    <ClInclude Include="Class\StatusEffect\Debuff\Fragility.h">
       <Filter>ヘッダー ファイル\StatusEffect\Debuff</Filter>
     </ClInclude>
-    <ClInclude Include="StatusEffectPair.h">
+    <ClInclude Include="Class\StatusEffect\StatusEffectPair.h">
       <Filter>ヘッダー ファイル\StatusEffect</Filter>
     </ClInclude>
-    <ClInclude Include="Blow.h">
+    <ClInclude Include="Class\Card\Card\Blow.h">
       <Filter>ヘッダー ファイル\Card\Card</Filter>
     </ClInclude>
-    <ClInclude Include="StrengthUp.h">
+    <ClInclude Include="Class\Card\StrengthUp.h">
       <Filter>ヘッダー ファイル\Card\Card</Filter>
     </ClInclude>
-    <ClInclude Include="Strength.h">
+    <ClInclude Include="Class\Card\CardFactory.h">
+      <Filter>ヘッダー ファイル\Card</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Map\Node.h">
+      <Filter>ヘッダー ファイル\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Map\MapManager.h">
+      <Filter>ヘッダー ファイル\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Easings.h">
+      <Filter>ヘッダー ファイル\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Reward\Reward.h">
+      <Filter>ヘッダー ファイル\Reward</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Reward\CardReward.h">
+      <Filter>ヘッダー ファイル\Reward</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Reward\RewardManager.h">
+      <Filter>ヘッダー ファイル\Reward</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Scene\TitleScene.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\StatusEffect\Buff\Strength.h">
       <Filter>ヘッダー ファイル\StatusEffect\Buff</Filter>
     </ClInclude>
-    <ClInclude Include="CardFactory.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="RewardManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Reward.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="CardReward.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="MapManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Node.h">
+    <ClInclude Include="UIManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

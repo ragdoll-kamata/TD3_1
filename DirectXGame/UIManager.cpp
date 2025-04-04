@@ -30,10 +30,10 @@ void UIManager::Update() {
 			if (kDeck.IsOnCollision(mouse)) {
 				sCard = cardManager_->GetSDeck();
 				sPos.resize(sCard.size());
-				float a = ((sCard.size() - 1) / 5) / 2.0f;
+				float a = static_cast<float>((sCard.size() - 1) / 5);
 				for (int i = 0; i < sPos.size(); i++) {
-					sPos[i] = {640.0f - (160.0f * ((5 - 1) / 2.0f - (i % 5))), 380.0f - (175.0f * (a - (i / 5)))};
-					sCard[i]->SetSpritePos({640.0f - (160.0f * ((5 - 1) / 2.0f - (i % 5))), 380.0f - (175.0f * (a - (i / 5)) - 175.0f * a)});
+					sPos[i] = {640.0f - (160.0f * ((5 - 1) / 2.0f - (i % 5))), 380.0f + (175.0f * (a - (a - (i / 5)))) - 175.0f};
+					sCard[i]->SetSpritePos(sPos[i]);
 				}
 				isSDeckOpen = !isSDeckOpen;
 				mapManager_->SetIsMapOpen(false);
@@ -47,15 +47,15 @@ void UIManager::Update() {
 		}
 	}
 	if (isSDeckOpen) {
-		float a = ((sCard.size() - 1) / 5) / 2.0f;
+		float a = static_cast<float>((sCard.size() - 1) / 5);
 
-		scroll = std::clamp<float>(scroll, -175.0f * a, 175.0f * a);
+		float sc = std::clamp<float>(scroll, std::min<float>(-175.0f * (a - 2), 0), 0);
+		scroll = Lerp(scroll, sc, 0.4f);
 		for (int i = 0; i < sCard.size(); i++) {
 			sCard[i]->SetSpritePos(Vector2Lerp(sCard[i]->GetSpritePos(),{sPos[i].x, sPos[i].y + scroll},0.1f));
 		}
 	} else {
-		float a = ((sCard.size() - 1) / 5) / 2.0f;
-		scroll = 175.0f * a;
+		scroll = 0;
 	}
 }
 

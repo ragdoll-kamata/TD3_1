@@ -30,8 +30,13 @@ void Card::Draw() {
 	sprite.Draw();
 }
 
-void Card::SetIsReverse(bool is) {
-	isReverse = is;
+void Card::KSetIsReverse(bool is) {
+	if (is != prevIsReverse) {
+		isReverse = is;
+		prevIsReverse = isReverse;
+		nextRotate += PI;
+		rotate += PI;
+	}
 }
 
 bool Card::IsOnCollision(Vector2 pos) { 

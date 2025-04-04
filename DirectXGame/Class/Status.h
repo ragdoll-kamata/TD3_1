@@ -23,6 +23,7 @@ public:
 	void ClearShield() { shield_ = 0; }
 
 	void SetDamageRate(float rate) { damageRate_ = rate; }
+
 	float GetDamageRate() const { return damageRate_; }
 
 	void SetHealRate(float rate) { healRate_ = rate; }

@@ -2,7 +2,7 @@
 #include "CardManager.h"
 void Reverse::IndividualInitialize() {
 	luck = 0;
-	rverseLuck = 0;
+	rverseLuck = -2;
 	sprite.SetColor({1.0f, 0.0f, 1.0f, 1.0f});
 	cardType = CardType::Skill;
 	cardRange = CardRange::Card;

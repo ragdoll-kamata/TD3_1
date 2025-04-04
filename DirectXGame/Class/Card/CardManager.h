@@ -1,12 +1,13 @@
 #pragma once
 #include <memory>
 #include <vector>
-#include "Card.h"
-
 #include <random>
 #include <KamataEngine.h>
 #include <unordered_map>
 #include <functional>
+
+
+#include "Card.h"
 #include "Button.h"
 #include "numberSprite.h"
 
@@ -60,7 +61,7 @@ private:
 
 	bool CardConfirmation();
 
-	void HandCardSetSpritePos(int i, Vector2 pos);
+	void HandCardSetSpritePos(int i, Vector2 pos, float t = 0.11f);
 
 public:
 	/// <summary>
@@ -80,9 +81,9 @@ public:
 	/// 手札からカードの取得
 	/// </summary>
 	/// <param name="num">枚数</param>
-	/// <param name="isMax">枚数分選ぶ必要があるか</param>
+	/// <param name="isMaxSelect">枚数分選ぶ必要があるか</param>
 	/// <returns>選択カード</returns>
-	std::vector<Card*> SelectionHand(int num, bool isMax);
+	std::vector<Card*> SelectionHand(int num, bool isMaxSelect);
 
 	/// <summary>
 	/// 初期デッキ生成

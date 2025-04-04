@@ -20,7 +20,7 @@ void Status::Update() {
 
 void Status::Draw() {
 	hpS.Draw();
-	if (shield_ > 0) {
+	if (shield_ != 0) {
 		shieldS.Draw();
 	}
 }

@@ -2,6 +2,7 @@
 #include "Poison.h"
 #include "Regeneration.h"
 #include "Fragility.h"
+#include "AntiFragile.h"
 #include "Strength.h"
 std::unique_ptr<StatusEffect> StatusEffectFactory::CreateStatusEffect(std::string statusEffectName) { 
 
@@ -18,6 +19,11 @@ std::unique_ptr<StatusEffect> StatusEffectFactory::CreateStatusEffect(std::strin
 	if (statusEffectName == "Fragility") {
 		std::unique_ptr<StatusEffect> statusEffect = std::make_unique<Fragility>();
 		statusEffect->SetStatusEffectName("Fragility");
+		return std::move(statusEffect);
+	}
+	if (statusEffectName == "AntiFragile") {
+		std::unique_ptr<StatusEffect> statusEffect = std::make_unique<AntiFragile>();
+		statusEffect->SetStatusEffectName("AntiFragile");
 		return std::move(statusEffect);
 	}
 	if (statusEffectName == "Strength") {

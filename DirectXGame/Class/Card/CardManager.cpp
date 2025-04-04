@@ -248,7 +248,7 @@ bool CardManager::EndBattleTrue() {
 			Vector2 pos = {640.0f - (121.0f * ((handCard.size() - 1) / 2.0f - i)), 600.0f};
 
 			Vector2 pos2 = {0.0f, Lerp(0.0f, 300.0f, Easings::EaseOutQuart(t))};
-			handCard[i]->SetSpritePos(pos + pos2);
+			HandCardSetSpritePos(i, pos + pos2, 0.3f);
 		}
 		turnEndButton->SetPosition(Vector2Lerp(turnEndButtonPos, turnEndButtonStandbyPos, Easings::EaseOutQuart(t)));
 		deckButton->SetPosition(Vector2Lerp(deckButtonPos, deckButtonStandbyPos, Easings::EaseOutQuart(t)));
@@ -283,7 +283,7 @@ void CardManager::DeckShuffle() {
 	std::shuffle(deck.begin(), deck.end(), g);
 	std::uniform_int_distribution<int> get_rand_uni_int(0, 1);
 	for (int i = 0; i < deck.size(); i++) {
-		deck[i]->SetIsReverse(static_cast<bool>(get_rand_uni_int(g)));
+		deck[i]->KSetIsReverse(static_cast<bool>(get_rand_uni_int(g)));
 	}
 }
 
@@ -364,8 +364,8 @@ bool CardManager::CardConfirmation() {
 	return !isDeck && !isCemetery;
 }
 
-void CardManager::HandCardSetSpritePos(int i, Vector2 pos) {
-	handCard[i]->SetSpritePos(Vector2Lerp(handCard[i]->GetSpritePos(), pos, 0.11f));
+void CardManager::HandCardSetSpritePos(int i, Vector2 pos, float t) {
+	handCard[i]->SetSpritePos(Vector2Lerp(handCard[i]->GetSpritePos(), pos, t));
 }
 
 void CardManager::CardDraw(int num) {
@@ -378,7 +378,7 @@ void CardManager::CardDraw(int num) {
 		}
 
 		std::unique_ptr<Card> card = std::move(deck.back()); // 一番最後のカードを移動
-		deck.pop_back();                            // 移動後に元のデッキから削除
+		deck.pop_back();                                     // 移動後に元のデッキから削除
 
 		card->SetSpritePos(deckButtonPos);
 		handCard.push_back(std::move(card));

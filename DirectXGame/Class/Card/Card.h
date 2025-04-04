@@ -51,7 +51,9 @@ public:
 
 	bool GetIsReverse() const { return isReverse; }
 
-	void SetIsReverse(bool is);
+	void SetIsReverse(bool is) { isReverse = is; }
+
+	void KSetIsReverse(bool is);
 
 	int GetId() const { return id; }
 

@@ -56,6 +56,10 @@ void BattleManager::DamagePlayer(int num, Status* status) {
 	player_->GetStatus()->Damage(num, status);
 }
 
+void BattleManager::HealPlayer(int num, Status* status) {
+	player_->GetStatus()->Heal(num, status);
+}
+
 void BattleManager::ShieldPlayer(int num, Status* status) { 
 	player_->GetStatus()->AddShield(num, status);
 }
@@ -66,6 +70,10 @@ void BattleManager::StatusEffectPlayer(std::unique_ptr<StatusEffect> statusEffec
 
 void BattleManager::DamageEnemy(int num, Enemy* enemy, Status* status) { 
 	enemy->GetStatus()->Damage(num, status); 
+}
+
+void BattleManager::HealEnemy(int num, Enemy* enmey, Status* status) { 
+	enmey->GetStatus()->Heal(num, status);
 }
 
 void BattleManager::ShieldEnemy(int num, Enemy* enmey, Status* status) { 

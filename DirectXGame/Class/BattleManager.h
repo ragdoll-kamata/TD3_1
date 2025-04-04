@@ -46,11 +46,15 @@ public:
 
 	void DamagePlayer(int num, Status* status);
 
+	void HealPlayer(int num, Status* status);
+
 	void ShieldPlayer(int num, Status* status);
 
 	void StatusEffectPlayer(std::unique_ptr<StatusEffect> statusEffect, int stack);
 
 	void DamageEnemy(int num, Enemy* enmey, Status* status);
+
+	void HealEnemy(int num, Enemy* enmey, Status* status);
 
 	void ShieldEnemy(int num, Enemy* enmey, Status* status);
 

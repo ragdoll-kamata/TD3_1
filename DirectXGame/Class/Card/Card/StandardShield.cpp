@@ -16,6 +16,6 @@ bool StandardShield::Effect() {
 }
 
 bool StandardShield::ReverseEffect() { 
-	battleManager_->DamagePlayer(value, playrStatus_);
+	battleManager_->ShieldPlayer(-value, playrStatus_);
 	return true;
 }

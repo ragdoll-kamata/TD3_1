@@ -45,7 +45,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)..\External\DirectXTex\include;$(ProjectDir)..\External\imgui;$(ProjectDir)..\External\KamataEngine\include;$(ProjectDir);$(ProjectDir)/scene;$(ProjectDir)/Card;$(ProjectDir)/Card/Card;$(ProjectDir)/Enemy;$(ProjectDir)/Enemy/Enemy;$(ProjectDir)/Enemy/Action;$(ProjectDir)/StatusEffect;$(ProjectDir)/StatusEffect/Debuff;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\External\DirectXTex\include;$(ProjectDir)..\External\imgui;$(ProjectDir)..\External\KamataEngine\include;$(ProjectDir)/Class;$(ProjectDir)/Class/Scene;$(ProjectDir)/Class/Card;$(ProjectDir)/Class/Card/Card;$(ProjectDir)/Class/Enemy;$(ProjectDir)/Class/Enemy/Enemy;$(ProjectDir)/Class/Enemy/Action;$(ProjectDir)/Class/StatusEffect;$(ProjectDir)/Class/StatusEffect/Buff;$(ProjectDir)/Class/StatusEffect/Debuff;$(ProjectDir)/Class/Map;$(ProjectDir)/Class/Reward;$(ProjectDir);$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\External\KamataEngine\lib\$(Configuration);$(ProjectDir)..\External\DirectXTex\lib\$(Configuration);$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)..\Generated\Outputs\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)..\Generated\Obj\$(ProjectName)\$(Configuration)\</IntDir>

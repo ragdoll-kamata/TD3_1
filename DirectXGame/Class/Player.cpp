@@ -2,7 +2,7 @@
 #include "StatusEffect.h"
 void Player::Initialize() {
 	status_ = std::make_unique<Status>();
-	status_->Initialize({300.0f, 360.f}, {}, 90);
+	status_->Initialize({300.0f, 360.f}, {0.0f,0.0f}, 90);
 }
 
 void Player::Update() {

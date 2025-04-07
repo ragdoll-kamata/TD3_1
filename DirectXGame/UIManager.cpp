@@ -34,6 +34,7 @@ void UIManager::Update() {
 				for (int i = 0; i < sPos.size(); i++) {
 					sPos[i] = {640.0f - (160.0f * ((5 - 1) / 2.0f - (i % 5))), 380.0f + (175.0f * (a - (a - (i / 5)))) - 175.0f};
 					sCard[i]->SetSpritePos(sPos[i]);
+					sCard[i]->Updata();
 				}
 				isSDeckOpen = !isSDeckOpen;
 				mapManager_->SetIsMapOpen(false);

@@ -1,14 +1,21 @@
 #pragma once
+
 #include <vector>
 #include <memory>
 #include "EffectTiming.h"
 #include "StackDecreaseTiming.h"
 #include "NumberSprite.h"
+#include "HPGauge.h"
+
+#include <KamataEngine.h>
+
+using namespace KamataEngine;
+
 class StatusEffect;
 class Status {
 public:
 
-	void Initialize(Vector2 pos, Vector2 size, int maxHP);
+	void Initialize(Vector2 pos, Vector2 entitySize, int maxHP);
 	
 	void Update();
 
@@ -56,7 +63,6 @@ public:
 	void SetBonusShield(int v) { BonusShield = v; }
 	int GetBonusShield() const { return BonusShield; }
 
-
 private:
 	int HP_;
 	int maxHP_;
@@ -66,8 +72,10 @@ private:
 	float healRate_;
 
 	std::vector<std::unique_ptr<StatusEffect>> statusEffects;
-	NumberSprite hpS;
-	NumberSprite shieldS;
+	std::unique_ptr<NumberSprite> hpS;
+	std::unique_ptr<NumberSprite> shieldS;
+
+	std::unique_ptr<HPGauge> hpGauge;
 
 	int BonusDamage = 0;
 	int BonusShield = 0;

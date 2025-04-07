@@ -3,18 +3,12 @@
 #include <KamataEngine.h>
 using namespace KamataEngine;
 
-enum class Center {
-	Left,
-	Central,
-	Right,
-};
-
 class NumberSprite {
 public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize(Vector2 pos, float size = 1.0f, const Center centor = Center::Central);
+	void Initialize(Vector2 pos, float size = 1.0f, const Vector2 anchor = {0.5f, 0.5f});
 
 	/// <summary>
 	/// 描画
@@ -22,8 +16,18 @@ public:
 	void Draw();
 
 	void SetPosition(Vector2 pos);
+	Vector2 GetPosition() const { return pos_; }
 
 	void SetNumber(int num);
+
+	void SetRotate(float rotate) {
+		rotate_ = rotate;
+		for (Sprite s : sprite) {
+			s.SetRotation(rotate_);
+		}
+		SpritePos();
+	}
+	float GetRotate() const { return rotate_; }
 
 private:
 
@@ -31,14 +35,19 @@ private:
 
 	Sprite CreateSprite(int num);
 
-
+	void SpritePos();
 
 private:
-	Center centor_;
 	std::vector<Sprite> sprite;
 	uint32_t TH;
 
 	Vector2 pos_;
 	float size_;
 	const Vector2 cSize = {40.0f, 64.0f};
+
+	float rotate_;
+
+	Vector2 anchor_;
+
+	bool is;
 };

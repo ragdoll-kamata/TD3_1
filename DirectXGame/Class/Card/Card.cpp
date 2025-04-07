@@ -13,21 +13,60 @@ void Card::Initialize() {
 	sprite.SetTextureRect({}, {120.0f, 160.0f});
 
 	IndividualInitialize();
+
+	number.Initialize({}, 0.5f, {0.0f, 0.0f});
+	number.SetNumber(luck);
+	nextNumberRotate = 0.0f;
+
+	number2.Initialize({}, 0.5f, {0.0f, 0.0f});
+	number2.SetNumber(rverseLuck);
+	nextNumber2Rotate = PI;
+	number2.SetRotate(nextNumber2Rotate);
 }
 
 void Card::Updata() {
 	if (isReverse != prevIsReverse) {
 		prevIsReverse = isReverse;
 		nextRotate += PI;
+		nextNumberRotate += PI;
+		nextNumber2Rotate += PI;
 	}
 	sprite.SetSize({120.0f * size_, 160.0f * size_});
 	rotate = Lerp(rotate, nextRotate, 0.2f);
 	sprite.SetRotation(rotate);
+
+	Vector2 ppp = {
+	    -60.0f * size_,
+	    -80.0f * size_,
+	};
+	float r = Lerp(number.GetRotate(), nextNumberRotate, 0.2f);
+	Vector2 sss = {
+	    ppp.x * std::cos(r) - ppp.y * std::sin(r),
+	    ppp.x * std::sin(r) + ppp.y * std::cos(r),
+	};
+	number.SetPosition(sprite.GetPosition() + sss);
+	number.SetRotate(r);
+
+	ppp = {
+	    -60.0f * size_,
+	    -80.0f * size_,
+	};
+	r = Lerp(number2.GetRotate(), nextNumber2Rotate, 0.2f);
+	sss = {
+	    ppp.x * std::cos(r) - ppp.y * std::sin(r),
+	    ppp.x * std::sin(r) + ppp.y * std::cos(r),
+	};
+	number2.SetRotate(r);
+	number2.SetPosition(sprite.GetPosition() + sss);
+
+
 }
 
 void Card::Draw() { 
 	sprite.SetSize({120.0f * size_, 160.0f * size_});
 	sprite.Draw();
+	number.Draw();
+	number2.Draw();
 }
 
 void Card::KSetIsReverse(bool is) {
@@ -36,6 +75,10 @@ void Card::KSetIsReverse(bool is) {
 		prevIsReverse = isReverse;
 		nextRotate += PI;
 		rotate += PI;
+		nextNumberRotate += PI;
+		nextNumber2Rotate += PI;
+		number.SetRotate(nextNumberRotate);
+		number2.SetRotate(nextNumber2Rotate);
 	}
 }
 

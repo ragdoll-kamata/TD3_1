@@ -50,6 +50,8 @@ void GameScene::Initialize2() {
 
 	uiManager_ = std::make_unique<UIManager>();
 	uiManager_->Initialize(player_.get(), cardManager_.get(), mapManager_.get());
+
+
 }
 
 void GameScene::Update() {

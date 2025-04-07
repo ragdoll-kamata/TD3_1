@@ -135,6 +135,7 @@
     <ClCompile Include="Class\Enemy\EnemyAction.cpp" />
     <ClCompile Include="Class\Enemy\EnemyFactory.cpp" />
     <ClCompile Include="Class\Enemy\EnemyManager.cpp" />
+    <ClCompile Include="HPGauge.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MathUtilityEX.cpp" />
     <ClCompile Include="Class\NumberSprite.cpp" />
@@ -267,6 +268,7 @@
     <ClInclude Include="Class\Card\Card\Reverse.h" />
     <ClInclude Include="Class\StatusEffect\Debuff\Poison.h" />
     <ClInclude Include="Class\Card\Card\PoisonDagger.h" />
+    <ClInclude Include="HPGauge.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Class\Scene\Blackout.h" />
     <ClInclude Include="Class\Scene\GameScene.h" />

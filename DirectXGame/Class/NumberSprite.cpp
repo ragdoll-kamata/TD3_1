@@ -1,9 +1,9 @@
 #include "NumberSprite.h"
 using namespace MathUtility;
-void NumberSprite::Initialize(Vector2 pos, float size, const Center centor) {
+void NumberSprite::Initialize(Vector2 pos, float size, const Vector2 anchor) {
 	pos_ = pos;
 	size_ = size;
-	centor_ = centor;
+	anchor_ = anchor;
 }
 
 void NumberSprite::Draw() {
@@ -14,23 +14,11 @@ void NumberSprite::Draw() {
 
 void NumberSprite::SetPosition(Vector2 pos) { 
 	pos_ = pos;
-	switch (centor_) {
-	case Center::Left:
-
-		break;
-	case Center::Central:
-		for (int i = 0; i < sprite.size(); i++) {
-			Vector2 pos__ = {pos_.x - ((cSize.x * size_) * ((sprite.size() - 1) / 2.0f - i)), pos_.y};
-			sprite[i].SetPosition(pos__);
-		}
-		break;
-	case Center::Right:
-		break;
-	}
+	SpritePos();
 }
 
 void NumberSprite::SetNumber(int num) {
-	bool is = false;
+	is = false;
 	if (num < 0) {
 		is = true;
 	}
@@ -39,22 +27,8 @@ void NumberSprite::SetNumber(int num) {
 	int index = num <= 0 ? -num : num;
 
 	Number(index);
-	switch (centor_) {
-	case Center::Left:
+	SpritePos();
 
-		break;
-	case Center::Central:
-		for (int i = 0; i < sprite.size(); i++) {
-			Vector2 pos = {pos_.x - ((cSize.x * size_) * ((sprite.size() - 1) / 2.0f - i)), pos_.y};
-			sprite[i].SetPosition(pos);
-			if (is) {
-				sprite[i].SetColor({1.0f, 0.0f, 0.0f, 1.0f});
-			}
-		}
-		break;
-	case Center::Right:
-		break;
-	}
 	
 }
 
@@ -79,5 +53,26 @@ Sprite NumberSprite::CreateSprite(int num) {
 	s.SetAnchorPoint({0.5f, 0.5f});
 	s.SetSize(cSize * size_);
 	s.SetTextureRect({cSize.x * num, 0.0f}, cSize);
+	s.SetRotation(rotate_);
+	if (is) {
+		s.SetColor({0.9f, 0.1f, 0.1f, 1.0f});
+	} else {
+		s.SetColor({0.7f, 0.7f, 0.7f, 1.0f});
+	}
 	return s;
+}
+
+void NumberSprite::SpritePos() {
+	Vector2 sss;
+	for (int i = 0; i < sprite.size(); i++) {
+		sss = {((cSize.x * size_) * ((sprite.size() - 1) * anchor_.x - i)), 0.0f};
+		sss = {
+		    sss.x * std::cos(rotate_) - sss.y * std::sin(rotate_),
+		    sss.x * std::sin(rotate_) + sss.y * std::cos(rotate_),
+		};
+		Vector2 pos__ = {pos_.x - sss.x, pos_.y + sss.y};
+		sprite[i].SetAnchorPoint(anchor_);
+		sprite[i].SetPosition(pos__);
+		sprite[i].SetRotation(rotate_);
+	}
 }

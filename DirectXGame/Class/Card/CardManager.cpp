@@ -409,6 +409,9 @@ std::vector<Card*> CardManager::SelectionHand(int num, bool isMax) {
 	if (isMax) {
 		if (handCard.size() <= num) {
 			std::vector<Card*> cards;
+			if (handCard.size() <= 0) {
+				cards.push_back(nullptr);
+			}
 			for (int i = 0; i < handCard.size(); i++) {
 				cards.push_back(handCard[i].get());
 			}

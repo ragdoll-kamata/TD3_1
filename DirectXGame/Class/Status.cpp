@@ -2,26 +2,43 @@
 #include "StatusEffect.h"
 #include "math/MathUtility.h"
 #include "StatusEffectPair.h"
-using namespace KamataEngine;
+
 using namespace MathUtility;
-void Status::Initialize(Vector2 pos, Vector2 size, int maxHP) {
+void Status::Initialize(Vector2 pos, Vector2 entitySize, int maxHP) {
 	HP_ = maxHP;
 	maxHP_ = maxHP;
 	shield_ = 0;
 	damageRate_ = 1.0f;
-	hpS.Initialize(pos + Vector2{0.0f, size.y / 2.0f}, 0.5f, Center::Central);
-	shieldS.Initialize(pos + Vector2{0.0f, size.y / 2.0f + 40.0f}, 0.5f, Center::Central);
+	hpS = std::make_unique<NumberSprite>();
+	hpS->Initialize(pos + Vector2{0.0f, entitySize.y / 2.0f}, 0.3f);
+	shieldS = std::make_unique<NumberSprite>();
+	shieldS->Initialize(pos + Vector2{0.0f + 50.0f, entitySize.y / 2.0f}, 0.3f);
+	hpGauge = std::make_unique<HPGauge>();
+	hpGauge->Initialize(pos + Vector2{0.0f, entitySize.y / 2.0f}, maxHP_);
+
 }
 
 void Status::Update() {
-	hpS.SetNumber(HP_);
-	shieldS.SetNumber(shield_);
+	hpS->SetNumber(HP_);
+	shieldS->SetNumber(shield_);
+	hpGauge->SetHP(HP_);
+	hpGauge->Update();
+	int i = 0;
+	for (auto& effect : statusEffects) {
+		effect->SetSpritePos(hpS->GetPosition() + Vector2(-100.0f, 10.0f) + Vector2(30.0f * i, 0.0f));
+		i++;
+	}
+	statusEffects.erase(std::remove_if(statusEffects.begin(), statusEffects.end(), [](const std::unique_ptr<StatusEffect>& effect) { return effect->GetStack() <= 0; }), statusEffects.end());
 }
 
 void Status::Draw() {
-	hpS.Draw();
+	hpGauge->Draw();
+	hpS->Draw();
 	if (shield_ != 0) {
-		shieldS.Draw();
+		shieldS->Draw();
+	}
+	for (auto& effect : statusEffects) {
+		effect->Draw();
 	}
 }
 

@@ -3,6 +3,7 @@
 #include <KamataEngine.h>
 #include "BattleManager.h"
 #include "Status.h"
+#include "NumberSprite.h"
 using namespace KamataEngine;
 class Enemy;
 class CardManager;
@@ -87,6 +88,12 @@ protected:
 
 	Sprite sprite;
 	uint32_t TH;
+
+	NumberSprite number;
+	float nextNumberRotate;
+	NumberSprite number2;
+	float nextNumber2Rotate;
+
 	float size_ = 1.0f;
 
 	float rotate = 0.0f;

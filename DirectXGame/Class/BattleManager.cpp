@@ -17,9 +17,10 @@ void BattleManager::Initialize(Player* player, CardManager* cardManager, EnemyMa
 
 void BattleManager::Update() {
 	if (!mapManager_->GetIsMapOpen()) {
+		
+		mBattlePhase[turn]();
 		cardManager_->BattleUpdata();
 		player_->Update();
-		mBattlePhase[turn]();
 		if (enemyManager_->GetEnemyCount() <= 0) {
 			if (!isEnd) {
 				EndBattle();

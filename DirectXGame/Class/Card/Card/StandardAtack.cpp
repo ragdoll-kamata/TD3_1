@@ -2,7 +2,7 @@
 #include "Enemy.h"
 void StandardAtack::IndividualInitialize() { 
 	luck = 1;
-	rverseLuck = -1;
+	reverseLuck = -1;
 	cardType = CardType::Damage;
 	cardRange = CardRange::One;
 	id = 1;

@@ -3,10 +3,12 @@
 #include <vector>
 #include <random>
 #include "Enemy.h"
-#include <math/Vector2.h>
+#include "math/Vector2.h"
 #include "EnemyFactory.h"
 #include "EffectTiming.h"
 #include "StackDecreaseTiming.h"
+#include "BattleEnemyType.h"
+
 using namespace KamataEngine;
 
 class BattleManager;
@@ -34,11 +36,11 @@ public:
 
 	bool EndMainTurn();
 
-	void StartBattle();
+	void StartBattle(BattleEnemyType battleEnemyType);
 
 	bool GetIsEnemyTurn() const { return isEnemyTurn; }
 
-	void CreateEnemy();
+	void CreateEnemy(BattleEnemyType battleEnemyType);
 
 	uint32_t IsOnCollision(Vector2 pos);
 
@@ -53,6 +55,16 @@ public:
 	void Effect(EffectTiming effectTiming, StackDecreaseTiming stackDecreaseTiming);
 
 private:
+	void CreateNormalEnemy();
+	void CreateEliteEnemy();
+	void CreateBossEnemy();
+
+private:
+	std::unordered_map<BattleEnemyType, std::function<void()>> fCreateEnemy{
+	    {BattleEnemyType::Normal, std::bind(&EnemyManager::CreateNormalEnemy, this)},
+	    {BattleEnemyType::Elite,  std::bind(&EnemyManager::CreateEliteEnemy,  this)},
+	    {BattleEnemyType::Boss,   std::bind(&EnemyManager::CreateBossEnemy,   this)}
+	};
 	// シャッフルのための乱数エンジンを用意
 	std::mt19937 g; // メルセンヌ・ツイスタ（高品質な乱数生成）
 

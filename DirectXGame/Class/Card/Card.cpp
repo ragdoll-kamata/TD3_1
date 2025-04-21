@@ -19,7 +19,7 @@ void Card::Initialize() {
 	nextNumberRotate = 0.0f;
 
 	number2.Initialize({}, 0.5f, {0.0f, 0.0f});
-	number2.SetNumber(rverseLuck);
+	number2.SetNumber(reverseLuck);
 	nextNumber2Rotate = PI;
 	number2.SetRotate(nextNumber2Rotate);
 }

@@ -55,8 +55,8 @@ void RewardManager::Draw() {
 	}
 }
 
-void RewardManager::CreateBattleReward() {
-	rewards.push_back(std::make_unique<CardReward>());
+void RewardManager::CreateBattleReward(BattleEnemyType battleEnemyType) {
+	fCreateReward[battleEnemyType]();
 	for (int i = 0; i < rewards.size(); i++) {
 		rewards[i]->Initialize(cardManager_);
 	}
@@ -69,3 +69,11 @@ void RewardManager::ClearReward() {
 	rewards.clear();
 	isReward = false;
 }
+
+void RewardManager::CreateBattleNormalReward() {
+	rewards.push_back(std::make_unique<CardReward>());
+}
+
+void RewardManager::CreateBattleEliteReward() {}
+
+void RewardManager::CreateBattleBossReward() {}

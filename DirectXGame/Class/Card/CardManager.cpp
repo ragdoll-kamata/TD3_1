@@ -11,6 +11,9 @@
 #include "StrengthUp.h"
 #include "Player.h"
 #include "Easings.h"
+#include "RelicManager.h"
+#include "RelicEffectTiming.h"
+#include "AllReverse.h"
 using namespace MathUtility;
 void CardManager::Initialize(EnemyManager* enemy, Player* player) {
 	enemyManager = enemy;
@@ -119,13 +122,16 @@ bool CardManager::StartBattleTrue() {
 		return false;
 	}
 
+	drawNum = 5;
 	startTimer = 0;
+	relicManager_->RelicEffect(RelicEffectTiming::StartOfBattle);
 	return true;
 }
 
 bool CardManager::StartMainTurn() {
+	relicManager_->RelicEffect(RelicEffectTiming::StartOfTurn);
 	bool is = false;
-	if (drawIndex < 5) {
+	if (drawIndex < drawNum) {
 		drawTimer++;
 
 		if (drawTimer >= kDrawTimer) {
@@ -154,6 +160,7 @@ bool CardManager::StartMainTurn() {
 					isReverseButton = false;
 					is = true;
 					drawIndex = 0;
+					drawNum = 5;
 				}
 			}
 		}
@@ -305,12 +312,14 @@ void CardManager::EffectProcessing() {
 	}
 
 	if (is) {
+		executionCardType = execution[0]->GetCardType();
 		if (execution[0]->GetCardType() == CardType::Ability) {
 			execution.erase(execution.begin()); // 元のリストから削除
 		} else {
 			cemetery.push_back(std::move(execution[0])); // ムーブ
 			execution.erase(execution.begin());          // 元のリストから削除
 		}
+		relicManager_->RelicEffect(RelicEffectTiming::Play);
 	}
 }
 
@@ -324,6 +333,9 @@ void CardManager::AllHandLack() {
 
 bool CardManager::CardConfirmation() {
 	Vector2 mousePos = Input::GetInstance()->GetMousePosition();
+	float mouseWheel = static_cast<float>(Input::GetInstance()->GetWheel()) / 3.0f - prevWheel;
+	prevWheel = static_cast<float>(Input::GetInstance()->GetWheel()) / 3.0f;
+	scroll += mouseWheel;
 	if (Input::GetInstance()->IsTriggerMouse(0)) {
 		if (deckButton->IsOnCollision(mousePos)) {
 			if (!isDeck) {
@@ -334,12 +346,16 @@ bool CardManager::CardConfirmation() {
 					deckDisplay.push_back(deck[i].get());
 				}
 				std::sort(deckDisplay.begin(), deckDisplay.end(), [](const Card* a, const Card* b) { return a->GetId() < b->GetId(); });
-				for (int i = 0; i < deckDisplay.size(); i++) {
-					Vector2 pos = {640.0f - (160.0f * ((5 - 1) / 2.0f - (i % 5))), 175.0f * (i / 5) + 90.0f};
-					deckDisplay[i]->SetSpritePos(pos);
+				sPos.resize(deckDisplay.size());
+				float a = static_cast<float>((deckDisplay.size() - 1) / 5);
+				for (int i = 0; i < sPos.size(); i++) {
+					sPos[i] = {640.0f - (160.0f * ((5 - 1) / 2.0f - (i % 5))), 380.0f + (175.0f * (a - (a - (i / 5)))) - 175.0f};
+					deckDisplay[i]->SetSpritePos(sPos[i]);
+					deckDisplay[i]->Updata();
 				}
 			} else {
 				isDeck = false;
+				scroll = 0;
 			}
 		}
 
@@ -352,13 +368,38 @@ bool CardManager::CardConfirmation() {
 					executionDisplay.push_back(cemetery[i].get());
 				}
 				std::sort(executionDisplay.begin(), executionDisplay.end(), [](const Card* a, const Card* b) { return a->GetId() < b->GetId(); });
-				for (int i = 0; i < executionDisplay.size(); i++) {
-					Vector2 pos = {640.0f - (160.0f * ((5 - 1) / 2.0f - (i % 5))), 175.0f * (i / 5) + 90.0f};
-					executionDisplay[i]->SetSpritePos(pos);
+				sPos.resize(executionDisplay.size());
+				float a = static_cast<float>((executionDisplay.size() - 1) / 5);
+				for (int i = 0; i < sPos.size(); i++) {
+					sPos[i] = {640.0f - (160.0f * ((5 - 1) / 2.0f - (i % 5))), 380.0f + (175.0f * (a - (a - (i / 5)))) - 175.0f};
+					executionDisplay[i]->SetSpritePos(sPos[i]);
+					executionDisplay[i]->Updata();
 				}
 			} else {
 				isCemetery = false;
+				scroll = 0;
 			}
+		}
+	}
+	if (isDeck) {
+		float a = static_cast<float>((deckDisplay.size() - 1) / 5);
+
+		float sc = std::clamp<float>(scroll, std::min<float>(-175.0f * (a - 2), 0), 0);
+		scroll = Lerp(scroll, sc, 0.4f);
+		for (int i = 0; i < deckDisplay.size(); i++) {
+			deckDisplay[i]->SetSpritePos(Vector2Lerp(deckDisplay[i]->GetSpritePos(), {sPos[i].x, sPos[i].y + scroll}, 0.1f));
+			deckDisplay[i]->Updata();
+		}
+	}
+
+	if (isCemetery) {
+		float a = static_cast<float>((executionDisplay.size() - 1) / 5);
+
+		float sc = std::clamp<float>(scroll, std::min<float>(-175.0f * (a - 2), 0), 0);
+		scroll = Lerp(scroll, sc, 0.4f);
+		for (int i = 0; i < executionDisplay.size(); i++) {
+			executionDisplay[i]->SetSpritePos(Vector2Lerp(executionDisplay[i]->GetSpritePos(), {sPos[i].x, sPos[i].y + scroll}, 0.1f));
+			executionDisplay[i]->Updata();
 		}
 	}
 	return !isDeck && !isCemetery;
@@ -484,7 +525,7 @@ void CardManager::StartCreateSDeck() {
 
 	sDeck.push_back(std::make_unique<DrawCard>());
 	sDeck.push_back(std::make_unique<DrawCard>());
-	sDeck.push_back(std::make_unique<Reverse>());
+	sDeck.push_back(std::make_unique<AllReverse>());
 	sDeck.push_back(std::make_unique<StrengthUp>());
 	sDeck.push_back(std::make_unique<Blow>());
 
@@ -518,7 +559,6 @@ std::vector<std::unique_ptr<Card>> CardManager::RewardCardGeneration() {
 std::vector<Card*> CardManager::GetSDeck() {
 	std::vector<Card*> display;
 	for (int i = 0; i < sDeck.size(); i++) {
-
 		display.push_back(sDeck[i].get());
 	}
 	//std::sort(display.begin(), display.end(), [](const Card* a, const Card* b) { return a->GetId() < b->GetId(); });

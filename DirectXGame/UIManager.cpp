@@ -54,6 +54,7 @@ void UIManager::Update() {
 		scroll = Lerp(scroll, sc, 0.4f);
 		for (int i = 0; i < sCard.size(); i++) {
 			sCard[i]->SetSpritePos(Vector2Lerp(sCard[i]->GetSpritePos(),{sPos[i].x, sPos[i].y + scroll},0.1f));
+			sCard[i]->Updata();
 		}
 	} else {
 		scroll = 0;

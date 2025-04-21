@@ -10,7 +10,8 @@ void Player::Update() {
 }
 
 void Player::Draw() {
-	status_->Draw(); }
+	status_->Draw();
+}
 
 void Player::EndBattle() {
 	status_->ClearStatusEffect();

@@ -3,6 +3,7 @@
 #include <memory>
 #include <functional>
 #include "StatusEffect.h"
+#include "BattleEnemyType.h"
 
 class EnemyManager;
 class CardManager;
@@ -40,7 +41,7 @@ public:
 	void SetRewardManager(RewardManager* rewardManager) { rewardManager_ = rewardManager; }
 	void SetMapManager(MapManager* mapManager) { mapManager_ = mapManager; }
 
-	void StartBattle();
+	void StartBattle(BattleEnemyType battleEnemyType);
 
 	void EndBattle();
 
@@ -80,6 +81,7 @@ private:
 
 private:
 	BattlePhase turn = BattlePhase::PlayerStartMainTurn;
+	BattleEnemyType battleEnemyType_	;
 
 	std::unordered_map<BattlePhase, std::function<void()>> mBattlePhase{
 	    {BattlePhase::StartBattleTurn,     [this]() { StartBattleTurn(); }    },

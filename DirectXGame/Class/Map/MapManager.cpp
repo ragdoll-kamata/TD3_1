@@ -123,7 +123,7 @@ void MapManager::CollisionUpdata() {
 							switch (node->GetNodeType()) {
 							case NodeType::Enemy:
 								SetIsMapOpen(false);
-								battleManager_->StartBattle();
+								battleManager_->StartBattle(BattleEnemyType::Normal);
 								break;
 							case NodeType::Elite:
 								break;
@@ -364,7 +364,7 @@ NodeType MapManager::GetRandomNodeType(int floor) {
 		return NodeType::Shop;
 	}
 
-	if (IsRandomNodeType(evectProbability, i, 3, NodeType::Null, 15)) {
+	if (IsRandomNodeType(eventProbability, i, 3, NodeType::Null, 15)) {
 		return NodeType::Event;
 	}
 	
@@ -413,7 +413,7 @@ NodeType MapManager::ReGetRandomNodeType(int floor, int x) {
 		}
 	}
 
-	if (IsRandomNodeType(evectProbability, i, 3, NodeType::Null, 15)) {
+	if (IsRandomNodeType(eventProbability, i, 3, NodeType::Null, 15)) {
 		return NodeType::Event;
 	}
 

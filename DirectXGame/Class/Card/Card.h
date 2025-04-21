@@ -62,7 +62,7 @@ public:
 		if (!isReverse) {
 			return luck;
 		} else {
-			return rverseLuck;
+			return reverseLuck;
 		}
 	}
 
@@ -103,7 +103,7 @@ protected:
 	bool isReverse;
 	bool prevIsReverse;
 	int luck;
-	int rverseLuck;
+	int reverseLuck;
 	CardType cardType;
 	CardRange cardRange;
 	int id;

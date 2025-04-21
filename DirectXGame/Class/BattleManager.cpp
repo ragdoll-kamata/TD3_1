@@ -37,12 +37,13 @@ void BattleManager::Draw() {
 	cardManager_->DrawBattle();
 }
 
-void BattleManager::StartBattle() {
-	enemyManager_->StartBattle();
+void BattleManager::StartBattle(BattleEnemyType battleEnemyType) {
+	enemyManager_->StartBattle(battleEnemyType);
 	cardManager_->StartBattle();
 	mapManager_->SetIsMove(false);
 	isEnd = false;
 	turn = BattlePhase::StartBattleTurn;
+	battleEnemyType_ = battleEnemyType;
 }
 
 void BattleManager::EndBattle() {
@@ -139,7 +140,7 @@ void BattleManager::EnemyEndMainTurn() {
 
 void BattleManager::EndBattleTurn() {
 	if (cardManager_->EndBattleTrue()) {
-		rewardManager_->CreateBattleReward();
+		rewardManager_->CreateBattleReward(battleEnemyType_);
 		turn = BattlePhase::StandbyTurn;
 	}
 

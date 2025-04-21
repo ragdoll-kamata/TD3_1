@@ -47,19 +47,16 @@ bool EnemyManager::EndMainTurn() {
 	return true;
 }
 
-void EnemyManager::StartBattle() {
-	CreateEnemy();
+void EnemyManager::StartBattle(BattleEnemyType battleEnemyType) {
+	CreateEnemy(battleEnemyType);
 	for (int i = 0; i < enemy.size(); i++) {
 		enemy[i]->StartBattle();
 	}
 }
 
-void EnemyManager::CreateEnemy() {
-	std::unique_ptr<Enemy> e = std::move(enmeyFactory_->CreateEnemy("dummy"));
-	e->Initialize();
-	e->SetBattleManager(battleManager_);
-	
-	enemy.push_back(std::move(e));
+void EnemyManager::CreateEnemy(BattleEnemyType battleEnemyType) {
+	fCreateEnemy[battleEnemyType]();
+
 }
 
 uint32_t EnemyManager::IsOnCollision(Vector2 pos) {
@@ -88,3 +85,16 @@ void EnemyManager::Effect(EffectTiming effectTiming, StackDecreaseTiming stackDe
 		enemy[i]->Effect(effectTiming, stackDecreaseTiming);
 	}
 }
+
+void EnemyManager::CreateNormalEnemy() {
+	std::unique_ptr<Enemy> e = std::move(enmeyFactory_->CreateEnemy("dummy"));
+	e->Initialize();
+
+	e->SetBattleManager(battleManager_);
+
+	enemy.push_back(std::move(e));
+}
+
+void EnemyManager::CreateEliteEnemy() {}
+
+void EnemyManager::CreateBossEnemy() {}

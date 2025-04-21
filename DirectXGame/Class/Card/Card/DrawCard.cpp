@@ -4,7 +4,7 @@
 void DrawCard::IndividualInitialize() {
 
 	luck = 2;
-	rverseLuck = -4;
+	reverseLuck = -4;
 	cardType = CardType::Skill;
 	cardRange = CardRange::Self;
 	id = 3;

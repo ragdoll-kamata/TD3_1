@@ -106,6 +106,7 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AllReverse.cpp" />
     <ClCompile Include="AntiFragile.cpp" />
     <ClCompile Include="Class\Card\Card\Blow.cpp" />
     <ClCompile Include="Class\Card\CardFactory.cpp" />
@@ -135,7 +136,10 @@
     <ClCompile Include="Class\Enemy\EnemyAction.cpp" />
     <ClCompile Include="Class\Enemy\EnemyFactory.cpp" />
     <ClCompile Include="Class\Enemy\EnemyManager.cpp" />
+    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="HPGauge.cpp" />
+    <ClCompile Include="MagicPlayingCards.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MathUtilityEX.cpp" />
     <ClCompile Include="Class\NumberSprite.cpp" />
@@ -155,6 +159,10 @@
     <ClCompile Include="Class\StatusEffect\StatusEffect.cpp" />
     <ClCompile Include="Class\StatusEffect\StatusEffectFactory.cpp" />
     <ClCompile Include="Class\Card\Card\StrengthUp.cpp" />
+    <ClCompile Include="Relic.cpp" />
+    <ClCompile Include="RelicManager.cpp" />
+    <ClCompile Include="SakeCup.cpp" />
+    <ClCompile Include="TreasureEvent.cpp" />
     <ClCompile Include="UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -233,7 +241,9 @@
     <None Include="Resources\shaders\Sprite.hlsli" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AllReverse.h" />
     <ClInclude Include="AntiFragile.h" />
+    <ClInclude Include="BattleEnemyType.h" />
     <ClInclude Include="Class\Card\Card\Blow.h" />
     <ClInclude Include="Class\Card\CardFactory.h" />
     <ClInclude Include="Class\Reward\CardReward.h" />
@@ -268,7 +278,13 @@
     <ClInclude Include="Class\Card\Card\Reverse.h" />
     <ClInclude Include="Class\StatusEffect\Debuff\Poison.h" />
     <ClInclude Include="Class\Card\Card\PoisonDagger.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="EventManager.h" />
     <ClInclude Include="HPGauge.h" />
+    <ClInclude Include="MagicPlayingCards.h" />
+    <ClInclude Include="Relic.h" />
+    <ClInclude Include="RelicEffectTiming.h" />
+    <ClInclude Include="RelicManager.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Class\Scene\Blackout.h" />
     <ClInclude Include="Class\Scene\GameScene.h" />
@@ -284,6 +300,8 @@
     <ClInclude Include="Class\StatusEffect\StatusEffect.h" />
     <ClInclude Include="Class\StatusEffect\StatusEffectFactory.h" />
     <ClInclude Include="Class\Card\StrengthUp.h" />
+    <ClInclude Include="SakeCup.h" />
+    <ClInclude Include="TreasureEvent.h" />
     <ClInclude Include="UIManager.h" />
   </ItemGroup>
   <ItemGroup>

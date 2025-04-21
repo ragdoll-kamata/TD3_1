@@ -2,7 +2,9 @@
 #include "Reward.h"
 #include <memory>
 #include <vector>
+#include <functional>
 #include "Button.h"
+#include "BattleEnemyType.h"
 class CardManager;
 class MapManager;
 class RewardManager {
@@ -24,7 +26,7 @@ public:
 	void Draw();
 
 
-	void CreateBattleReward();
+	void CreateBattleReward(BattleEnemyType battleEnemyType);
 
 	bool IsReward() const { return isReward; }
 
@@ -37,6 +39,18 @@ public:
 	void SetMapManager(MapManager* mapManager) { mapManager_ = mapManager; }
 
 private:
+	void CreateBattleNormalReward();
+	void CreateBattleEliteReward();
+	void CreateBattleBossReward();
+
+private:
+	std::unordered_map<BattleEnemyType, std::function<void()>> fCreateReward{
+	    {BattleEnemyType::Normal, std::bind(&RewardManager::CreateBattleNormalReward, this)},
+	    {BattleEnemyType::Elite,  std::bind(&RewardManager::CreateBattleEliteReward,  this)},
+	    {BattleEnemyType::Boss,   std::bind(&RewardManager::CreateBattleBossReward,   this)}
+    };
+
+
 	Sprite back;
 	Button skip;
 	bool isReward = false;

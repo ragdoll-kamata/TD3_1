@@ -67,7 +67,7 @@ private:
 	int eliteProbability = 0;
 	int restProbability = 0;
 	int treasureProbability = 0;
-	int evectProbability = 0;
+	int eventProbability = 0;
 	int shopProbability = 0;
 
 	float scroll;

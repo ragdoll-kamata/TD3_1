@@ -81,6 +81,7 @@ void Status::Heal(int heal, Status* status) {
 	}
 	Effect(EffectTiming::BeforeRecovery, StackDecreaseTiming::None);
 
+	heal = static_cast<int>(heal * healRate_);
 	if (heal < 0) {
 		DecisionDamage(-heal, status);
 	} else {

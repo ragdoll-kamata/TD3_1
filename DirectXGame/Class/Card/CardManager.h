@@ -13,6 +13,7 @@
 
 class EnemyManager;
 class BattleManager;
+class RelicManager;
 class Player;
 
 using namespace KamataEngine;
@@ -86,11 +87,18 @@ public:
 	std::vector<Card*> SelectionHand(int num, bool isMaxSelect);
 
 	/// <summary>
+	/// 使用したカードのタイプを取得
+	/// </summary>
+	/// <returns>カードタイプ</returns>
+	CardType GetExecutionCardType() { return executionCardType; }
+
+	/// <summary>
 	/// 初期デッキ生成
 	/// </summary>
 	void StartCreateSDeck();
 
 	void SetBattleManager(BattleManager* battleManager) { battleManager_ = battleManager; }
+	void SetRelicManager(RelicManager* relicManager) { relicManager_ = relicManager; }
 
 	std::vector<std::unique_ptr<Card>> RewardCardGeneration();
 
@@ -98,6 +106,8 @@ public:
 
 
 	std::vector<Card*> GetSDeck();
+
+	void AddDrawNum(int num) { drawNum += num; }
 
 private:
 	// シャッフルのための乱数エンジンを用意
@@ -110,16 +120,22 @@ private:
 	std::vector<std::unique_ptr<Card>> execution;
 	std::vector<std::unique_ptr<Card>> exclusion;
 
+	CardType executionCardType;
 
 	std::vector<int> nnnum;
 
 	std::vector<Card*> deckDisplay;
 	std::vector<Card*> executionDisplay;
+	std::vector<Vector2> sPos;
+	float scroll;
+	float prevWheel;
+
 	int handLack;
 
 	int holdH;
 	bool isHold;
 
+	int drawNum = 5;
 	int drawIndex = 0;
 	int drawTimer = 0;
 	const int kDrawTimer = 10;
@@ -166,6 +182,8 @@ private:
 	BattleManager* battleManager_ = nullptr;
 
 	EnemyManager* enemyManager = nullptr;
+
+	RelicManager* relicManager_ = nullptr;
 
 	Player* player_ = nullptr;
 

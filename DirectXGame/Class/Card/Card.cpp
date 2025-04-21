@@ -69,6 +69,14 @@ void Card::Draw() {
 	number2.Draw();
 }
 
+bool Card::StartEffect() { 
+	if (isReverse) {
+		return ReverseEffect();
+	} else {
+		return Effect();
+	}
+}
+
 void Card::KSetIsReverse(bool is) {
 	if (is != prevIsReverse) {
 		isReverse = is;

@@ -64,6 +64,10 @@ private:
 
 	void HandCardSetSpritePos(int i, Vector2 pos, float t = 0.11f);
 
+	void CardLocationUpdate();
+
+	void CardLocationMove(std::unique_ptr<Card> card, CardLocation cardLocation);
+
 public:
 	/// <summary>
 	/// カードドロー
@@ -131,6 +135,7 @@ private:
 	float prevWheel;
 
 	int handLack;
+	int playerLack;
 
 	int holdH;
 	bool isHold;

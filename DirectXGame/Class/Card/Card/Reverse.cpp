@@ -10,7 +10,6 @@ void Reverse::IndividualInitialize() {
 }
 
 bool Reverse::Effect() { 
-	
 	std::vector<Card*> a = cardManager_->SelectionHand(2, false);
 
 	if (a.size() > 0) {

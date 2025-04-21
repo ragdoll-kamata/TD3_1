@@ -108,6 +108,7 @@
   <ItemGroup>
     <ClCompile Include="AllReverse.cpp" />
     <ClCompile Include="AntiFragile.cpp" />
+    <ClCompile Include="Bloodsucking.cpp" />
     <ClCompile Include="Class\Card\Card\Blow.cpp" />
     <ClCompile Include="Class\Card\CardFactory.cpp" />
     <ClCompile Include="Class\Reward\CardReward.cpp" />
@@ -164,6 +165,7 @@
     <ClCompile Include="SakeCup.cpp" />
     <ClCompile Include="TreasureEvent.cpp" />
     <ClCompile Include="UIManager.cpp" />
+    <ClCompile Include="VeryCareful.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\TerrainPS.hlsl">
@@ -244,6 +246,7 @@
     <ClInclude Include="AllReverse.h" />
     <ClInclude Include="AntiFragile.h" />
     <ClInclude Include="BattleEnemyType.h" />
+    <ClInclude Include="Bloodsucking.h" />
     <ClInclude Include="Class\Card\Card\Blow.h" />
     <ClInclude Include="Class\Card\CardFactory.h" />
     <ClInclude Include="Class\Reward\CardReward.h" />
@@ -303,6 +306,7 @@
     <ClInclude Include="SakeCup.h" />
     <ClInclude Include="TreasureEvent.h" />
     <ClInclude Include="UIManager.h" />
+    <ClInclude Include="VeryCareful.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectXGame.rc" />

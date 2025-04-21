@@ -23,6 +23,13 @@ enum class CardRange {
 	Self,
 	Card,
 };
+enum class CardLocation {
+	Deck,
+	Hand,
+	Cemetery,
+	Execution,
+};
+
 class Card {
 public:
 	virtual ~Card() = default;
@@ -30,6 +37,11 @@ public:
 
 protected:
 	virtual void IndividualInitialize() = 0;
+
+	virtual bool Effect() = 0;
+
+	virtual bool ReverseEffect() = 0;
+
 public:
 
 	
@@ -41,9 +53,8 @@ public:
 
 	void Draw();
 
-	virtual bool Effect() = 0;
+	bool StartEffect();
 
-	virtual bool ReverseEffect() = 0;
 
 	virtual std::unique_ptr<Card> clone() const = 0;
 
@@ -78,6 +89,11 @@ public:
 
 	void SetSize(float size) { size_ = size; }
 
+	bool GetIsPlay() const { return isPlay; }
+
+	CardLocation GetCardLocation() const { return cardLocation_; }
+	void SetCardLocation(CardLocation cardLocation) { cardLocation_ = cardLocation; }
+
 protected:
 	Enemy* targetEnemy = nullptr;
 
@@ -107,4 +123,8 @@ protected:
 	CardType cardType;
 	CardRange cardRange;
 	int id;
+
+	bool isPlay = true;
+
+	CardLocation cardLocation_ = CardLocation::Deck;
 };

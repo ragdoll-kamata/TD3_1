@@ -7,7 +7,7 @@ void AllReverse::IndividualInitialize() {
 	sprite.SetColor({0.0f, 0.0f, 0.0f, 1.0f});
 	cardType = CardType::Skill;
 	cardRange = CardRange::Card;
-	id = 100;
+	id = 1000;
 }
 
 bool AllReverse::Effect() {

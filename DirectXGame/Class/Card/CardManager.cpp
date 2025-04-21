@@ -14,6 +14,8 @@
 #include "RelicManager.h"
 #include "RelicEffectTiming.h"
 #include "AllReverse.h"
+#include"Bloodsucking.h"
+#include "VeryCareful.h"
 using namespace MathUtility;
 void CardManager::Initialize(EnemyManager* enemy, Player* player) {
 	enemyManager = enemy;
@@ -147,6 +149,7 @@ bool CardManager::StartMainTurn() {
 				if (allReverseYssButton->IsOnCollision(mousePos)) {
 					isReverseButton = false;
 					is = true;
+					drawNum = 5;
 					drawIndex = 0;
 					for (int i = 0; i < handCard.size(); i++) {
 						handCard[i]->SetIsReverse(!handCard[i]->GetIsReverse());
@@ -194,18 +197,20 @@ bool CardManager::MainTurn() {
 				if (Input::GetInstance()->IsPressMouse(0)) {
 					handCard[holdH]->SetSpritePos(mousePos);
 				} else {
-					if (handCard[holdH]->GetCardRange() == CardRange::One) {
-						uint32_t EH = enemyManager->IsOnCollision(mousePos);
+					if (handCard[holdH]->GetIsPlay()) {
+						if (handCard[holdH]->GetCardRange() == CardRange::One) {
+							uint32_t EH = enemyManager->IsOnCollision(mousePos);
 
-						if (EH > 0) {
-							handCard[holdH]->SetTargetEnemy(enemyManager->GetEnemy(EH)); // ターゲットエネミーのセット
-							execution.push_back(std::move(handCard[holdH]));             // ムーブ
-							handCard.erase(handCard.begin() + holdH);                    // 元のリストから削除
-						}
-					} else {
-						if (mousePos.y <= 360.0f) {
-							execution.push_back(std::move(handCard[holdH])); // ムーブ
-							handCard.erase(handCard.begin() + holdH);        // 元のリストから削除
+							if (EH > 0) {
+								handCard[holdH]->SetTargetEnemy(enemyManager->GetEnemy(EH)); // ターゲットエネミーのセット
+								CardLocationMove(std::move(handCard[holdH]), CardLocation::Execution); // ムーブ
+								handCard.erase(handCard.begin() + holdH);                    // 元のリストから削除
+							}
+						} else {
+							if (mousePos.y <= 360.0f) {
+								CardLocationMove(std::move(handCard[holdH]), CardLocation::Execution); // ムーブ
+								handCard.erase(handCard.begin() + holdH);        // 元のリストから削除
+							}
 						}
 					}
 
@@ -223,16 +228,18 @@ bool CardManager::MainTurn() {
 
 		}
 	}
+
 	if (execution.size()) {
 		EffectProcessing();
 	}
+	CardLocationUpdate();
 	return is;
 }
 
 bool CardManager::EndMainTurn() {
 	while (handCard.size() > 0) {
 		// handCard から cemetery にカードを移動
-		cemetery.push_back(std::move(handCard.back())); // 一番最後のカードを移動
+		CardLocationMove(std::move(handCard.back()), CardLocation::Cemetery);
 		handCard.pop_back();                            // 移動後に元のデッキから削除
 	}
 
@@ -297,7 +304,7 @@ void CardManager::DeckShuffle() {
 void CardManager::DeckRefresh() {
 	while (cemetery.size() > 0) {
 		// cemetery から deck にカードを移動
-		deck.push_back(std::move(cemetery.back())); // 一番最後のカードを移動
+		CardLocationMove(std::move(cemetery.back()), CardLocation::Deck); // ムーブ
 		cemetery.pop_back();                        // 移動後に元のデッキから削除
 	}
 	DeckShuffle();
@@ -305,18 +312,15 @@ void CardManager::DeckRefresh() {
 
 void CardManager::EffectProcessing() {
 	bool is = false;
-	if (!execution[0]->GetIsReverse()) {
-		is = execution[0]->Effect();
-	} else {
-		is = execution[0]->ReverseEffect();
-	}
+	
+	is = execution[0]->StartEffect();
 
 	if (is) {
 		executionCardType = execution[0]->GetCardType();
 		if (execution[0]->GetCardType() == CardType::Ability) {
 			execution.erase(execution.begin()); // 元のリストから削除
 		} else {
-			cemetery.push_back(std::move(execution[0])); // ムーブ
+			CardLocationMove(std::move(execution[0]), CardLocation::Cemetery); // ムーブ
 			execution.erase(execution.begin());          // 元のリストから削除
 		}
 		relicManager_->RelicEffect(RelicEffectTiming::Play);
@@ -405,8 +409,54 @@ bool CardManager::CardConfirmation() {
 	return !isDeck && !isCemetery;
 }
 
-void CardManager::HandCardSetSpritePos(int i, Vector2 pos, float t) {
-	handCard[i]->SetSpritePos(Vector2Lerp(handCard[i]->GetSpritePos(), pos, t));
+void CardManager::HandCardSetSpritePos(int i, Vector2 pos, float t) { handCard[i]->SetSpritePos(Vector2Lerp(handCard[i]->GetSpritePos(), pos, t)); }
+
+void CardManager::CardLocationUpdate() {
+	for (int i = 0; i < deck.size(); i++) {
+		if (deck[i]->GetCardLocation() != CardLocation::Deck) {
+			CardLocationMove(std::move(deck[i]), deck[i]->GetCardLocation());
+			deck.erase(deck.begin() + i); // 元のデッキから削除
+		}
+	}
+	for (int i = 0; i < handCard.size(); i++) {
+		if (handCard[i]->GetCardLocation() != CardLocation::Hand) {
+			CardLocationMove(std::move(handCard[i]), handCard[i]->GetCardLocation());
+			handCard.erase(handCard.begin() + i); // 元のデッキから削除
+		}
+	}
+	for (int i = 0; i < cemetery.size(); i++) {
+		if (cemetery[i]->GetCardLocation() != CardLocation::Cemetery) {
+			CardLocationMove(std::move(cemetery[i]), cemetery[i]->GetCardLocation());
+			cemetery.erase(cemetery.begin() + i); // 元のデッキから削除
+		}
+	}
+	for (int i = 0; i < execution.size(); i++) {
+		if (execution[i]->GetCardLocation() != CardLocation::Execution) {
+			CardLocationMove(std::move(execution[i]), execution[i]->GetCardLocation());
+			execution.erase(execution.begin() + i); // 元のデッキから削除
+		}
+	}
+}
+
+void CardManager::CardLocationMove(std::unique_ptr<Card> card, CardLocation cardLocation) { 
+	switch (cardLocation) {
+	case CardLocation::Deck:
+		card->SetCardLocation(CardLocation::Deck);
+		deck.push_back(std::move(card)); // ムーブ
+		break;
+	case CardLocation::Hand:
+		card->SetCardLocation(CardLocation::Hand);
+		handCard.push_back(std::move(card)); // ムーブ
+		break;
+	case CardLocation::Cemetery:
+		card->SetCardLocation(CardLocation::Cemetery);
+		cemetery.push_back(std::move(card)); // ムーブ
+		break;
+	case CardLocation::Execution:
+		card->SetCardLocation(CardLocation::Execution);
+		execution.push_back(std::move(card)); // ムーブ
+		break;
+	}
 }
 
 void CardManager::CardDraw(int num) {
@@ -422,7 +472,7 @@ void CardManager::CardDraw(int num) {
 		deck.pop_back();                                     // 移動後に元のデッキから削除
 
 		card->SetSpritePos(deckButtonPos);
-		handCard.push_back(std::move(card));
+		CardLocationMove(std::move(card), CardLocation::Hand); // 手札に移動
 
 		AllHandLack();
 	}
@@ -437,7 +487,7 @@ int CardManager::RandomHandDeath(int num) {
 		}
 		std::uniform_int_distribution<int> get_rand_uni_int(0, static_cast<int>(handCard.size()) - 1);
 		int a = get_rand_uni_int(g);
-		cemetery.push_back(std::move(handCard[a])); // ムーブ
+		CardLocationMove(std::move(handCard[a]), CardLocation::Cemetery); // 手札から墓地に移動
 		handCard.erase(handCard.begin() + a);       // 元のリストから削除
 	}
 	return 0;
@@ -515,7 +565,7 @@ void CardManager::StartCreateSDeck() {
 	sDeck.push_back(std::make_unique<StandardAtack>());
 	sDeck.push_back(std::make_unique<StandardAtack>());
 	sDeck.push_back(std::make_unique<StandardAtack>());
-	sDeck.push_back(std::make_unique<PoisonDagger>());
+	sDeck.push_back(std::make_unique<VeryCareful>());
 
 	sDeck.push_back(std::make_unique<StandardShield>());
 	sDeck.push_back(std::make_unique<StandardShield>());

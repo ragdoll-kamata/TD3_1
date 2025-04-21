@@ -6,7 +6,7 @@ void Blow::IndividualInitialize() {
 	sprite.SetColor({0.5f, 0.0f, 0.0f, 1.0f});
 	cardType = CardType::Damage;
 	cardRange = CardRange::One;
-	id = 5;
+	id = 6;
 	value = 8;
 }
 

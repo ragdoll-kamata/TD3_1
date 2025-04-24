@@ -31,6 +31,8 @@ public:
 
 	void SetPos(Vector2 pos);
 
+	void SetPlayerStatus(Status* player) { playerStatus_ = player; }
+
 protected:
 	virtual void PeculiarInitialize() = 0;
 
@@ -40,7 +42,7 @@ protected:
 	CardManager* cardManager_ = nullptr;
 	BattleManager* battleManager_ = nullptr;
 
-	Status* player = nullptr;
+	Status* playerStatus_ = nullptr;
 	RelicEffectTiming effectTiming_;
 
 	Sprite sprite;

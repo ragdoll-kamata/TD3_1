@@ -11,34 +11,58 @@ void AllReverse::IndividualInitialize() {
 }
 
 bool AllReverse::Effect() {
-	std::vector<Card*> a = cardManager_->SelectionHand(99, true);
-	battleManager_->DamagePlayer(5, nullptr);
+	std::vector<Card*> a = cardManager_->SelectionHand(1, true);
+
 	if (a.size() > 0) {
 		for (Card* s : a) {
 			if (s == nullptr) {
 				break;
 			}
-			s->SetIsReverse(!s->GetIsReverse());
+			s->SetCardLocation(CardLocation::Cemetery);
 		}
-		return true;
+
+		std::vector<Card*> b = cardManager_->SelectionHand(99, true);
+		battleManager_->DamagePlayer(5, nullptr);
+		if (b.size() > 0) {
+			for (Card* s : b) {
+				if (s == nullptr) {
+					break;
+				}
+				s->SetIsReverse(!s->GetIsReverse());
+			}
+			return true;
+		}
 	}
 	return false;
 }
 
 bool AllReverse::ReverseEffect() {
-	std::vector<Card*> a = cardManager_->SelectionHand(99, true);
+	std::vector<Card*> a = cardManager_->SelectionHand(1, true);
 
 	if (a.size() > 0) {
-		int i = 0;
 		for (Card* s : a) {
 			if (s == nullptr) {
 				break;
 			}
-			s->SetIsReverse(!s->GetIsReverse());
-			i += 5;
+			s->SetCardLocation(CardLocation::Cemetery);
 		}
-		battleManager_->DamagePlayer(i, nullptr);
-		return true;
+		std::vector<Card*> b = cardManager_->SelectionHand(99, true);
+
+		if (b.size() > 0) {
+			int i = 0;
+			for (Card* s : b) {
+				if (s == nullptr) {
+					break;
+				}
+				s->SetIsReverse(!s->GetIsReverse());
+				i += 5;
+			}
+			if (i > 0) {
+				i -= 5;
+			}
+			battleManager_->DamagePlayer(i, nullptr);
+			return true;
+		}
 	}
 	return false;
 }

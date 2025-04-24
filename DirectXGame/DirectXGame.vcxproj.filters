@@ -189,9 +189,6 @@
     <ClCompile Include="Class\Status.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Class\Enemy\ActionFactory.cpp">
-      <Filter>ソース ファイル\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="Class\Enemy\Action\ShieldAction.cpp">
       <Filter>ソース ファイル\Enemy\Action</Filter>
     </ClCompile>
@@ -234,7 +231,7 @@
     <ClCompile Include="Class\Reward\CardReward.cpp">
       <Filter>ソース ファイル\Reward</Filter>
     </ClCompile>
-    <ClCompile Include="Class\StatusEffect\Buff\Strength.cpp">
+    <ClCompile Include="Class\StatusEffect\Buff\AurOfDeath.cpp">
       <Filter>ソース ファイル\StatusEffect\Buff</Filter>
     </ClCompile>
     <ClCompile Include="Class\Easings.cpp">
@@ -299,6 +296,39 @@
     </ClCompile>
     <ClCompile Include="AllReverse.cpp">
       <Filter>ソース ファイル\Card\Card\Rare</Filter>
+    </ClCompile>
+    <ClCompile Include="PsychoAxe.cpp">
+      <Filter>ソース ファイル\Enemy\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="ContinuousAttackAction.cpp">
+      <Filter>ソース ファイル\Enemy\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="BuffAction.cpp">
+      <Filter>ソース ファイル\Enemy\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Enemy\ActionFactory.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="ContinuousHealAction.cpp">
+      <Filter>ソース ファイル\Enemy\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniHeal.cpp">
+      <Filter>ソース ファイル\Card\Card\UnCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="AuraOfLife.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="RelicFactory.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="DisposableShield.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ClusterGrenade.cpp">
+      <Filter>ソース ファイル\Card\Card\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="AmplifierShield.cpp">
+      <Filter>ソース ファイル\Card\Card\Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -471,7 +501,7 @@
     <ClInclude Include="Class\Scene\TitleScene.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Class\StatusEffect\Buff\Strength.h">
+    <ClInclude Include="Class\StatusEffect\Buff\AurOfDeath.h">
       <Filter>ヘッダー ファイル\StatusEffect\Buff</Filter>
     </ClInclude>
     <ClInclude Include="UIManager.h">
@@ -542,6 +572,36 @@
     </ClInclude>
     <ClInclude Include="Class\Card\Card.h">
       <Filter>ヘッダー ファイル\Card\Card</Filter>
+    </ClInclude>
+    <ClInclude Include="PsychoAxe.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ContinuousAttackAction.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="BuffAction.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ContinuousHealAction.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniHeal.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="AuraOfLife.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="RelicFactory.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="DisposableShield.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ClusterGrenade.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="AmplifierShield.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -92,7 +92,10 @@ public:
 	bool GetIsPlay() const { return isPlay; }
 
 	CardLocation GetCardLocation() const { return cardLocation_; }
-	void SetCardLocation(CardLocation cardLocation) { cardLocation_ = cardLocation; }
+	void SetCardLocation(CardLocation cardLocation) { 
+		preCardLocation_ = cardLocation_;
+		cardLocation_ = cardLocation;
+	}
 
 protected:
 	Enemy* targetEnemy = nullptr;
@@ -127,4 +130,5 @@ protected:
 	bool isPlay = true;
 
 	CardLocation cardLocation_ = CardLocation::Deck;
+	CardLocation preCardLocation_ = CardLocation::Deck;
 };

@@ -9,6 +9,8 @@ std::unordered_map<std::string, std::string> m = {
     {"Regeneration", "Poison"      },
     {"AntiFragile",  "Fragility"   },
     {"Fragility",    "AntiFragile" },
+    {"AurOfDeath",   "AurOfLife"   },
+    {"AurOfLife",    "AurOfDeath"  },
 };
 
 std::string StatusEffectPair::GetStatusEffectType(std::string name) {

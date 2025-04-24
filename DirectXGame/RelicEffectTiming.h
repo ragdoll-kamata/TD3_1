@@ -1,5 +1,6 @@
 #pragma once
 enum class RelicEffectTiming {
+	Acquisition,    // 獲得時
 	StartOfBattle,  // 戦闘開始時
 	EndOfBattle,    // 戦闘終了時
 	StartOfTurn,    // ターン開始時

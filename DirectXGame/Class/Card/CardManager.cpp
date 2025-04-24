@@ -2,6 +2,13 @@
 #include <algorithm>
 #include <iostream>
 #include "EnemyManager.h"
+
+
+#include "Player.h"
+#include "Easings.h"
+#include "RelicManager.h"
+#include "RelicEffectTiming.h"
+
 #include "StandardAtack.h"
 #include "StandardShield.h"
 #include "Reverse.h"
@@ -9,13 +16,11 @@
 #include "PoisonDagger.h"
 #include "Blow.h"
 #include "StrengthUp.h"
-#include "Player.h"
-#include "Easings.h"
-#include "RelicManager.h"
-#include "RelicEffectTiming.h"
 #include "AllReverse.h"
-#include"Bloodsucking.h"
+#include "Bloodsucking.h"
 #include "VeryCareful.h"
+#include "MiniHeal.h"
+
 using namespace MathUtility;
 void CardManager::Initialize(EnemyManager* enemy, Player* player) {
 	enemyManager = enemy;
@@ -131,7 +136,10 @@ bool CardManager::StartBattleTrue() {
 }
 
 bool CardManager::StartMainTurn() {
-	relicManager_->RelicEffect(RelicEffectTiming::StartOfTurn);
+	if (!isStartRelic) {
+		relicManager_->RelicEffect(RelicEffectTiming::StartOfTurn);
+		isStartRelic = true;
+	}
 	bool is = false;
 	if (drawIndex < drawNum) {
 		drawTimer++;
@@ -157,6 +165,7 @@ bool CardManager::StartMainTurn() {
 					for (const auto& card : deck) {
 						card->SetIsReverse(!card->GetIsReverse());
 					}
+					isStartRelic = false;
 				}
 
 				if (allReverseNoButton->IsOnCollision(mousePos)) {
@@ -164,6 +173,7 @@ bool CardManager::StartMainTurn() {
 					is = true;
 					drawIndex = 0;
 					drawNum = 5;
+					isStartRelic = false;
 				}
 			}
 		}
@@ -567,7 +577,7 @@ void CardManager::StartCreateSDeck() {
 	sDeck.push_back(std::make_unique<StandardAtack>());
 	sDeck.push_back(std::make_unique<VeryCareful>());
 
-	sDeck.push_back(std::make_unique<StandardShield>());
+	sDeck.push_back(std::make_unique<MiniHeal>());
 	sDeck.push_back(std::make_unique<StandardShield>());
 	sDeck.push_back(std::make_unique<StandardShield>());
 	sDeck.push_back(std::make_unique<StandardShield>());

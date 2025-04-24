@@ -87,7 +87,7 @@ void EnemyManager::Effect(EffectTiming effectTiming, StackDecreaseTiming stackDe
 }
 
 void EnemyManager::CreateNormalEnemy() {
-	std::unique_ptr<Enemy> e = std::move(enmeyFactory_->CreateEnemy("dummy"));
+	std::unique_ptr<Enemy> e = std::move(enmeyFactory_->CreateEnemy("PsychoAxe"));
 	e->Initialize();
 
 	e->SetBattleManager(battleManager_);

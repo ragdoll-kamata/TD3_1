@@ -108,7 +108,9 @@
   <ItemGroup>
     <ClCompile Include="AllReverse.cpp" />
     <ClCompile Include="AntiFragile.cpp" />
+    <ClCompile Include="AuraOfLife.cpp" />
     <ClCompile Include="Bloodsucking.cpp" />
+    <ClCompile Include="BuffAction.cpp" />
     <ClCompile Include="Class\Card\Card\Blow.cpp" />
     <ClCompile Include="Class\Card\CardFactory.cpp" />
     <ClCompile Include="Class\Reward\CardReward.cpp" />
@@ -129,7 +131,7 @@
     <ClCompile Include="Class\Button.cpp" />
     <ClCompile Include="Class\Card\Card.cpp" />
     <ClCompile Include="Class\Card\CardManager.cpp" />
-    <ClCompile Include="Class\StatusEffect\Buff\Strength.cpp" />
+    <ClCompile Include="Class\StatusEffect\Buff\AurOfDeath.cpp" />
     <ClCompile Include="Class\StatusEffect\Debuff.cpp" />
     <ClCompile Include="Class\Card\Card\DrawCard.cpp" />
     <ClCompile Include="Class\Enemy\Enemy\Dummy.cpp" />
@@ -137,6 +139,10 @@
     <ClCompile Include="Class\Enemy\EnemyAction.cpp" />
     <ClCompile Include="Class\Enemy\EnemyFactory.cpp" />
     <ClCompile Include="Class\Enemy\EnemyManager.cpp" />
+    <ClCompile Include="ClusterGrenade.cpp" />
+    <ClCompile Include="ContinuousAttackAction.cpp" />
+    <ClCompile Include="ContinuousHealAction.cpp" />
+    <ClCompile Include="DisposableShield.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="HPGauge.cpp" />
@@ -160,11 +166,15 @@
     <ClCompile Include="Class\StatusEffect\StatusEffect.cpp" />
     <ClCompile Include="Class\StatusEffect\StatusEffectFactory.cpp" />
     <ClCompile Include="Class\Card\Card\StrengthUp.cpp" />
+    <ClCompile Include="MiniHeal.cpp" />
+    <ClCompile Include="PsychoAxe.cpp" />
     <ClCompile Include="Relic.cpp" />
+    <ClCompile Include="RelicFactory.cpp" />
     <ClCompile Include="RelicManager.cpp" />
     <ClCompile Include="SakeCup.cpp" />
     <ClCompile Include="TreasureEvent.cpp" />
     <ClCompile Include="UIManager.cpp" />
+    <ClCompile Include="AmplifierShield.cpp" />
     <ClCompile Include="VeryCareful.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -245,8 +255,10 @@
   <ItemGroup>
     <ClInclude Include="AllReverse.h" />
     <ClInclude Include="AntiFragile.h" />
+    <ClInclude Include="AuraOfLife.h" />
     <ClInclude Include="BattleEnemyType.h" />
     <ClInclude Include="Bloodsucking.h" />
+    <ClInclude Include="BuffAction.h" />
     <ClInclude Include="Class\Card\Card\Blow.h" />
     <ClInclude Include="Class\Card\CardFactory.h" />
     <ClInclude Include="Class\Reward\CardReward.h" />
@@ -261,7 +273,7 @@
     <ClInclude Include="Class\Reward\RewardManager.h" />
     <ClInclude Include="Class\Scene\TitleScene.h" />
     <ClInclude Include="Class\StatusEffect\StatusEffectPair.h" />
-    <ClInclude Include="Class\StatusEffect\Buff\Strength.h" />
+    <ClInclude Include="Class\StatusEffect\Buff\AurOfDeath.h" />
     <ClInclude Include="Class\StatusEffect\EffectTiming.h" />
     <ClInclude Include="Class\Enemy\Action\AtackAction.h" />
     <ClInclude Include="Class\BattleManager.h" />
@@ -281,12 +293,19 @@
     <ClInclude Include="Class\Card\Card\Reverse.h" />
     <ClInclude Include="Class\StatusEffect\Debuff\Poison.h" />
     <ClInclude Include="Class\Card\Card\PoisonDagger.h" />
+    <ClInclude Include="ClusterGrenade.h" />
+    <ClInclude Include="ContinuousAttackAction.h" />
+    <ClInclude Include="ContinuousHealAction.h" />
+    <ClInclude Include="DisposableShield.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="HPGauge.h" />
     <ClInclude Include="MagicPlayingCards.h" />
+    <ClInclude Include="MiniHeal.h" />
+    <ClInclude Include="PsychoAxe.h" />
     <ClInclude Include="Relic.h" />
     <ClInclude Include="RelicEffectTiming.h" />
+    <ClInclude Include="RelicFactory.h" />
     <ClInclude Include="RelicManager.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Class\Scene\Blackout.h" />
@@ -306,6 +325,7 @@
     <ClInclude Include="SakeCup.h" />
     <ClInclude Include="TreasureEvent.h" />
     <ClInclude Include="UIManager.h" />
+    <ClInclude Include="AmplifierShield.h" />
     <ClInclude Include="VeryCareful.h" />
   </ItemGroup>
   <ItemGroup>

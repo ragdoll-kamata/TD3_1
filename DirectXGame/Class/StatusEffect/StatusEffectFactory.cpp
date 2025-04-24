@@ -3,7 +3,8 @@
 #include "Regeneration.h"
 #include "Fragility.h"
 #include "AntiFragile.h"
-#include "Strength.h"
+#include "AurOfDeath.h"
+#include "AuraOfLife.h"
 std::unique_ptr<StatusEffect> StatusEffectFactory::CreateStatusEffect(std::string statusEffectName) { 
 	uint32_t th = 0;
 	if (statusEffectName == "Poison") {
@@ -34,10 +35,17 @@ std::unique_ptr<StatusEffect> StatusEffectFactory::CreateStatusEffect(std::strin
 		statusEffect->SetSpriteTextureHandle(th);
 		return std::move(statusEffect);
 	}
-	if (statusEffectName == "Strength") {
+	if (statusEffectName == "AurOfDeath") {
 		th = TextureManager::GetInstance()->Load("UI/damageIncrease.png");
-		std::unique_ptr<StatusEffect> statusEffect = std::make_unique<Strength>();
-		statusEffect->SetStatusEffectName("Strength");
+		std::unique_ptr<StatusEffect> statusEffect = std::make_unique<AurOfDeath>();
+		statusEffect->SetStatusEffectName("AurOfDeath");
+		statusEffect->SetSpriteTextureHandle(th);
+		return std::move(statusEffect);
+	}
+	if (statusEffectName == "AuraOfLife") {
+		th = TextureManager::GetInstance()->Load("UI/auraOfLife.png");
+		std::unique_ptr<StatusEffect> statusEffect = std::make_unique<AuraOfLife>();
+		statusEffect->SetStatusEffectName("AuraOfLife");
 		statusEffect->SetSpriteTextureHandle(th);
 		return std::move(statusEffect);
 	}

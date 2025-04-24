@@ -52,7 +52,7 @@ void GameScene::Initialize2() {
 	uiManager_->Initialize(player_.get(), cardManager_.get(), mapManager_.get());
 
 	relicManager_ = std::make_unique<RelicManager>();
-	relicManager_->Initialize(cardManager_.get(), battleManager_.get());
+	relicManager_->Initialize(cardManager_.get(), battleManager_.get(), player_.get());
 	cardManager_->SetRelicManager(relicManager_.get());
 }
 

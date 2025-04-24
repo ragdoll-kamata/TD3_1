@@ -50,7 +50,7 @@ Sprite NumberSprite::CreateSprite(int num) {
 
 	TH = TextureManager::GetInstance()->Load("number.png");
 	s.SetTextureHandle(TH);
-	s.SetAnchorPoint({0.5f, 0.5f});
+	s.SetAnchorPoint(anchor_);
 	s.SetSize(cSize * size_);
 	s.SetTextureRect({cSize.x * num, 0.0f}, cSize);
 	s.SetRotation(rotate_);
@@ -65,12 +65,12 @@ Sprite NumberSprite::CreateSprite(int num) {
 void NumberSprite::SpritePos() {
 	Vector2 sss;
 	for (int i = 0; i < sprite.size(); i++) {
-		sss = {((cSize.x * size_) * ((sprite.size() - 1) * anchor_.x - i)), 0.0f};
+		sss = {-((cSize.x * size_) * ((sprite.size() - 1) * anchor_.x - i)), 0.0f};
 		sss = {
 		    sss.x * std::cos(rotate_) - sss.y * std::sin(rotate_),
 		    sss.x * std::sin(rotate_) + sss.y * std::cos(rotate_),
 		};
-		Vector2 pos__ = {pos_.x - sss.x, pos_.y + sss.y};
+		Vector2 pos__ = {pos_.x + sss.x, pos_.y + sss.y};
 		sprite[i].SetAnchorPoint(anchor_);
 		sprite[i].SetPosition(pos__);
 		sprite[i].SetRotation(rotate_);

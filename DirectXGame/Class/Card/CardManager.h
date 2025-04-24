@@ -207,4 +207,5 @@ private:
 	const int kEndTimer = 20;
 	int endTimer;
 
+	bool isStartRelic = false;
 };

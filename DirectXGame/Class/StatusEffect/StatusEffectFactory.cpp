@@ -35,7 +35,7 @@ std::unique_ptr<StatusEffect> StatusEffectFactory::CreateStatusEffect(std::strin
 		statusEffect->SetSpriteTextureHandle(th);
 		return std::move(statusEffect);
 	}
-	if (statusEffectName == "AurOfDeath") {
+	if (statusEffectName == "AuraOfDeath") {
 		th = TextureManager::GetInstance()->Load("UI/damageIncrease.png");
 		std::unique_ptr<StatusEffect> statusEffect = std::make_unique<AurOfDeath>();
 		statusEffect->SetStatusEffectName("AurOfDeath");

@@ -1,13 +1,12 @@
 #pragma once
-#include "Event.h"
-#include <memory>
-#include "Button.h" 
-class TreasureEvent : public Event {
+#include "Reward.h"
+class Relic;
+class TreasureReward : public Reward {
 public:
 	/// <summary>
 	/// イベント初期化
 	/// </summary>
-	void Initialize(RewardManager* rewardManager) override;
+	void Initialize(CardManager* cardManager, RelicManager* relicManager) override;
 	/// <summary>
 	/// イベント更新
 	/// </summary>
@@ -18,6 +17,6 @@ public:
 	void Draw() override;
 
 private:
-	std::unique_ptr<Button> treasureButton;
-
+	RelicManager* relicManager_ = nullptr;
+	std::unique_ptr<Relic> relic;
 };

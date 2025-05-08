@@ -315,9 +315,6 @@
     <ClCompile Include="MiniHeal.cpp">
       <Filter>ソース ファイル\Card\Card\UnCommon</Filter>
     </ClCompile>
-    <ClCompile Include="AuraOfLife.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="RelicFactory.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -329,6 +326,12 @@
     </ClCompile>
     <ClCompile Include="AmplifierShield.cpp">
       <Filter>ソース ファイル\Card\Card\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="AuraOfLife.cpp">
+      <Filter>ソース ファイル\StatusEffect\Buff</Filter>
+    </ClCompile>
+    <ClCompile Include="TreasureReward.cpp">
+      <Filter>ソース ファイル\Reward</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -601,6 +604,9 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="AmplifierShield.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="TreasureReward.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

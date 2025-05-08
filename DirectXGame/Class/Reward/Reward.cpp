@@ -1,8 +1,9 @@
 #include "Reward.h"
 #include <algorithm>
 
-void Reward::Initialize(CardManager* cardManager) {
+void Reward::Initialize(CardManager* cardManager, RelicManager* relicManager) {
 	cardManager;
+	relicManager;
 	sp.Initialize();
 	sp.SetSize({160.0f, 40.0f});
 	sp.SetAnchorPoint({0.5f, 0.5f});

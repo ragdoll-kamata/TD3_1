@@ -35,8 +35,12 @@ void GameScene::Initialize2() {
 	enemyManager_->SetBattleManager(battleManager_.get());
 	cardManager_->SetBattleManager(battleManager_.get());
 
+	relicManager_ = std::make_unique<RelicManager>();
+	relicManager_->Initialize(cardManager_.get(), battleManager_.get(), player_.get());
+	cardManager_->SetRelicManager(relicManager_.get());
+
 	rewardManager_ = std::make_unique<RewardManager>();
-	rewardManager_->Initialize(cardManager_.get());
+	rewardManager_->Initialize(cardManager_.get(), relicManager_.get());
 	battleManager_->SetRewardManager(rewardManager_.get());
 
 	cardManager_->StartCreateSDeck();
@@ -51,9 +55,7 @@ void GameScene::Initialize2() {
 	uiManager_ = std::make_unique<UIManager>();
 	uiManager_->Initialize(player_.get(), cardManager_.get(), mapManager_.get());
 
-	relicManager_ = std::make_unique<RelicManager>();
-	relicManager_->Initialize(cardManager_.get(), battleManager_.get(), player_.get());
-	cardManager_->SetRelicManager(relicManager_.get());
+
 }
 
 void GameScene::Update() {

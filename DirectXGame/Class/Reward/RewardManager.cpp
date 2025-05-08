@@ -1,8 +1,9 @@
 #include "RewardManager.h"
 #include "CardReward.h"
 #include "MapManager.h"
-void RewardManager::Initialize(CardManager* cardManager) {
+void RewardManager::Initialize(CardManager* cardManager, RelicManager* relicManager) {
 	cardManager_=cardManager;
+	relicManager_ = relicManager;
 	back.Initialize();
 	back.SetSize({1280.0f, 720.0f});
 	back.SetColor({0.0f, 0.0f, 0.0f, 0.9f});
@@ -63,6 +64,10 @@ void RewardManager::CreateBattleReward(BattleEnemyType battleEnemyType) {
 
 	isReward = true;
 	isSkip = false;
+}
+
+void RewardManager::CreateTreasureReward() {
+
 }
 
 void RewardManager::ClearReward() {

@@ -6,6 +6,7 @@
 #include "Button.h"
 #include "BattleEnemyType.h"
 class CardManager;
+class RelicManager;
 class MapManager;
 class RewardManager {
 public:
@@ -13,7 +14,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize(CardManager* cardManager);
+	void Initialize(CardManager* cardManager, RelicManager* relicManager);
 
 	/// <summary>
 	/// 毎フレーム処理
@@ -27,6 +28,8 @@ public:
 
 
 	void CreateBattleReward(BattleEnemyType battleEnemyType);
+
+	void CreateTreasureReward();
 
 	bool IsReward() const { return isReward; }
 
@@ -57,6 +60,7 @@ private:
 	bool isSkip = false;
 	bool is_ = false;
 	CardManager* cardManager_ = nullptr;
+	RelicManager* relicManager_ = nullptr;
 	std::vector<std::unique_ptr<Reward>> rewards;
 
 	MapManager* mapManager_ = nullptr;

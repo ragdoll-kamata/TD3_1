@@ -173,6 +173,7 @@
     <ClCompile Include="RelicManager.cpp" />
     <ClCompile Include="SakeCup.cpp" />
     <ClCompile Include="TreasureEvent.cpp" />
+    <ClCompile Include="TreasureReward.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="AmplifierShield.cpp" />
     <ClCompile Include="VeryCareful.cpp" />
@@ -324,6 +325,7 @@
     <ClInclude Include="Class\Card\StrengthUp.h" />
     <ClInclude Include="SakeCup.h" />
     <ClInclude Include="TreasureEvent.h" />
+    <ClInclude Include="TreasureReward.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="AmplifierShield.h" />
     <ClInclude Include="VeryCareful.h" />

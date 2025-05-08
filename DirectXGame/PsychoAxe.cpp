@@ -37,7 +37,7 @@ void PsychoAxe::PredictNextAction() {
 		enemyAction = ActionFactory::CreateAction("Buff");
 		enemyAction->Initialize(status_.get(), 2, 0, this);
 		enemyAction->SetBattleManager(battleManager_);
-		enemyAction->SetStatusEffectName("AurOfDeath");
+		enemyAction->SetStatusEffectName("AuraOfDeath");
 		enemyAction->SetStack(2);
 		index = 0;
 	}

@@ -1,8 +1,9 @@
 #include "CardReward.h"
 #include "CardManager.h"
-void CardReward::Initialize(CardManager* cardManager) {
-	Reward::Initialize(cardManager);
+void CardReward::Initialize(CardManager* cardManager, RelicManager* relicManager) {
+	Reward::Initialize(cardManager, relicManager);
 	cardManager_ = cardManager;
+	relicManager;
 	reward = cardManager->RewardCardGeneration();
 	button.Initialize({640.0f, 550.0f}, {200.0f,50.0f}, "white1x1.png", {1.0f, 1.0f, 1.0f, 1.0f});
 }

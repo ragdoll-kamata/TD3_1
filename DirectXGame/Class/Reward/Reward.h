@@ -2,13 +2,14 @@
 #include <KamataEngine.h>
 using namespace KamataEngine;
 class CardManager;
+class RelicManager;
 class Reward {
 public:
 
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	virtual void Initialize(CardManager* cardManager);
+	virtual void Initialize(CardManager* cardManager, RelicManager* relicManager);
 
 	/// <summary>
 	/// 毎フレーム処理

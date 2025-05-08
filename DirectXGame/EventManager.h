@@ -1,4 +1,7 @@
 #pragma once
+#include <memory>
+
+#include "Event.h"
 class EventManager {
 public:
 	/// <summary>
@@ -19,4 +22,7 @@ public:
 	void CreateRestEvent();
 
 	void CreateTreasureEvent();
+
+private:
+	std::unique_ptr<Event> event;
 };

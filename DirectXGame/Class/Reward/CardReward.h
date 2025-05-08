@@ -9,7 +9,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize(CardManager* cardManager) override;
+	void Initialize(CardManager* cardManager, RelicManager* relicManager) override;
 
 	/// <summary>
 	/// 毎フレーム処理

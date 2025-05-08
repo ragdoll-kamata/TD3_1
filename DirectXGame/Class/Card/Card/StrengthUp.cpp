@@ -11,7 +11,7 @@ void StrengthUp::IndividualInitialize() {
 }
 
 bool StrengthUp::Effect() {
-	battleManager_->StatusEffectPlayer(StatusEffectFactory::CreateStatusEffect("AurOfDeath"), value);
+	battleManager_->StatusEffectPlayer(StatusEffectFactory::CreateStatusEffect("AuraOfDeath"), value);
 	return true;
 }
 

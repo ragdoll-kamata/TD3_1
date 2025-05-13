@@ -4,6 +4,7 @@
 #include "Button.h" 
 class TreasureEvent : public Event {
 public:
+	~TreasureEvent() override;
 	/// <summary>
 	/// イベント初期化
 	/// </summary>
@@ -19,5 +20,4 @@ public:
 
 private:
 	std::unique_ptr<Button> treasureButton;
-
 };

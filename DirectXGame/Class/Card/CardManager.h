@@ -10,6 +10,7 @@
 #include "Card.h"
 #include "Button.h"
 #include "numberSprite.h"
+#include "CardFactory.h"
 
 class EnemyManager;
 class BattleManager;
@@ -68,6 +69,8 @@ private:
 
 	void CardLocationMove(std::unique_ptr<Card> card, CardLocation cardLocation);
 
+	void CardDrawMove();
+
 public:
 	/// <summary>
 	/// カードドロー
@@ -112,8 +115,11 @@ public:
 	std::vector<Card*> GetSDeck();
 
 	void AddDrawNum(int num) { drawNum += num; }
+	std::unique_ptr<Card> CardLottery();
 
 private:
+	std::unique_ptr<CardFactory> cardFactory_ = nullptr;
+
 	// シャッフルのための乱数エンジンを用意
 	std::mt19937 g;  // メルセンヌ・ツイスタ（高品質な乱数生成）
 
@@ -142,8 +148,6 @@ private:
 
 	int drawNum = 5;
 	int drawIndex = 0;
-	int drawTimer = 0;
-	const int kDrawTimer = 10;
 
 	const Vector2 turnEndButtonPos = {1100.0f, 500.0f};
 	const Vector2 turnEndButtonStandbyPos = {1400.0f, 500.0f};
@@ -208,4 +212,25 @@ private:
 	int endTimer;
 
 	bool isStartRelic = false;
+
+	uint32_t cardDrawSH = 0;
+	uint32_t cardShuffleSH = 0;
+
+
+	uint32_t cardDrawNum = 0;
+
+	const int kCardDrawTimer = 10;
+	int cardDrawTimer = 0;
+
+	const int kCardShuffleTimer = 60;
+	int cardShuffleTimer = 0;
+
+
+	const int kUncommonChanceValue = 37;
+	const int kStartRareChanceValue = -5;
+	const int kUpRareChanceValue = 1;
+
+	int rareChanceValue = kStartRareChanceValue;
+
+
 };

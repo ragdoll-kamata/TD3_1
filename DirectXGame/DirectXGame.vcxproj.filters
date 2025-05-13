@@ -118,6 +118,9 @@
     <Filter Include="ヘッダー ファイル\Relic">
       <UniqueIdentifier>{c5d74ad3-491f-44c5-b283-133f08775543}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Manager">
+      <UniqueIdentifier>{64bc1fc4-1242-44f3-bb94-11d09fdbfb52}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -138,25 +141,13 @@
     <ClCompile Include="Class\Scene\SceneFactory.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Class\Scene\SceneManager.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Class\Card\CardManager.cpp">
-      <Filter>ソース ファイル\Card</Filter>
-    </ClCompile>
     <ClCompile Include="Class\Scene\GameScene.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Class\Enemy\Enemy\Dummy.cpp">
       <Filter>ソース ファイル\Enemy\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Class\BattleManager.cpp">
-      <Filter>ソース ファイル\Other</Filter>
-    </ClCompile>
     <ClCompile Include="Class\Button.cpp">
-      <Filter>ソース ファイル\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="Class\Enemy\EnemyManager.cpp">
       <Filter>ソース ファイル\Other</Filter>
     </ClCompile>
     <ClCompile Include="MathUtilityEX.cpp">
@@ -216,16 +207,10 @@
     <ClCompile Include="Class\Card\CardFactory.cpp">
       <Filter>ソース ファイル\Card</Filter>
     </ClCompile>
-    <ClCompile Include="Class\Map\MapManager.cpp">
-      <Filter>ソース ファイル\Map</Filter>
-    </ClCompile>
     <ClCompile Include="Class\Map\Node.cpp">
       <Filter>ソース ファイル\Map</Filter>
     </ClCompile>
     <ClCompile Include="Class\Reward\Reward.cpp">
-      <Filter>ソース ファイル\Reward</Filter>
-    </ClCompile>
-    <ClCompile Include="Class\Reward\RewardManager.cpp">
       <Filter>ソース ファイル\Reward</Filter>
     </ClCompile>
     <ClCompile Include="Class\Reward\CardReward.cpp">
@@ -240,13 +225,10 @@
     <ClCompile Include="UIManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="AntiFragile.cpp">
+    <ClCompile Include="Class\StatusEffect\Buff\AntiFragile.cpp">
       <Filter>ソース ファイル\StatusEffect\Buff</Filter>
     </ClCompile>
     <ClCompile Include="HPGauge.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="EventManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Event.cpp">
@@ -256,9 +238,6 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="SakeCup.cpp">
-      <Filter>ソース ファイル\Relic</Filter>
-    </ClCompile>
-    <ClCompile Include="RelicManager.cpp">
       <Filter>ソース ファイル\Relic</Filter>
     </ClCompile>
     <ClCompile Include="Relic.cpp">
@@ -288,32 +267,29 @@
     <ClCompile Include="Class\Card\Card\StrengthUp.cpp">
       <Filter>ソース ファイル\Card\Card\UnCommon</Filter>
     </ClCompile>
-    <ClCompile Include="VeryCareful.cpp">
+    <ClCompile Include="Class\Card\Card\VeryCareful.cpp">
       <Filter>ソース ファイル\Card\Card\UnCommon</Filter>
     </ClCompile>
-    <ClCompile Include="Bloodsucking.cpp">
+    <ClCompile Include="Class\Card\Card\Bloodsucking.cpp">
       <Filter>ソース ファイル\Card\Card\UnCommon</Filter>
     </ClCompile>
-    <ClCompile Include="AllReverse.cpp">
+    <ClCompile Include="Class\Card\Card\AllReverse.cpp">
       <Filter>ソース ファイル\Card\Card\Rare</Filter>
     </ClCompile>
-    <ClCompile Include="PsychoAxe.cpp">
+    <ClCompile Include="Class\Enemy\Enemy\PsychoAxe.cpp">
       <Filter>ソース ファイル\Enemy\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="ContinuousAttackAction.cpp">
+    <ClCompile Include="Class\Enemy\Action\ContinuousAttackAction.cpp">
       <Filter>ソース ファイル\Enemy\Action</Filter>
     </ClCompile>
-    <ClCompile Include="BuffAction.cpp">
+    <ClCompile Include="Class\Enemy\Action\BuffAction.cpp">
       <Filter>ソース ファイル\Enemy\Action</Filter>
     </ClCompile>
     <ClCompile Include="Class\Enemy\ActionFactory.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="ContinuousHealAction.cpp">
+    <ClCompile Include="Class\Enemy\Action\ContinuousHealAction.cpp">
       <Filter>ソース ファイル\Enemy\Action</Filter>
-    </ClCompile>
-    <ClCompile Include="MiniHeal.cpp">
-      <Filter>ソース ファイル\Card\Card\UnCommon</Filter>
     </ClCompile>
     <ClCompile Include="RelicFactory.cpp">
       <Filter>ソース ファイル</Filter>
@@ -321,17 +297,53 @@
     <ClCompile Include="DisposableShield.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ClusterGrenade.cpp">
+    <ClCompile Include="Class\Card\Card\AmplifierShield.cpp">
       <Filter>ソース ファイル\Card\Card\Common</Filter>
     </ClCompile>
-    <ClCompile Include="AmplifierShield.cpp">
-      <Filter>ソース ファイル\Card\Card\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="AuraOfLife.cpp">
+    <ClCompile Include="Class\StatusEffect\Buff\AuraOfLife.cpp">
       <Filter>ソース ファイル\StatusEffect\Buff</Filter>
     </ClCompile>
     <ClCompile Include="TreasureReward.cpp">
       <Filter>ソース ファイル\Reward</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Map\MapManager.cpp">
+      <Filter>ソース ファイル\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Card\CardManager.cpp">
+      <Filter>ソース ファイル\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="RelicManager.cpp">
+      <Filter>ソース ファイル\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\BattleManager.cpp">
+      <Filter>ソース ファイル\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Enemy\EnemyManager.cpp">
+      <Filter>ソース ファイル\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Scene\SceneManager.cpp">
+      <Filter>ソース ファイル\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="EventManager.cpp">
+      <Filter>ソース ファイル\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Reward\RewardManager.cpp">
+      <Filter>ソース ファイル\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="BlankRelic.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Card\Card\MiniHeal.cpp">
+      <Filter>ソース ファイル\Card\Card\Rare</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Card\Card\ClusterGrenade.cpp">
+      <Filter>ソース ファイル\Card\Card\UnCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="StandardReverse.cpp">
+      <Filter>ソース ファイル\Card\Card\Standerd</Filter>
+    </ClCompile>
+    <ClCompile Include="StandardRiskyAttack.cpp">
+      <Filter>ソース ファイル\Card\Card\Standerd</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -510,7 +522,7 @@
     <ClInclude Include="UIManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="AntiFragile.h">
+    <ClInclude Include="Class\StatusEffect\Buff\AntiFragile.h">
       <Filter>ヘッダー ファイル\StatusEffect\Buff</Filter>
     </ClInclude>
     <ClInclude Include="HPGauge.h">
@@ -564,34 +576,34 @@
     <ClInclude Include="MagicPlayingCards.h">
       <Filter>ヘッダー ファイル\Relic</Filter>
     </ClInclude>
-    <ClInclude Include="AllReverse.h">
+    <ClInclude Include="Class\Card\Card\AllReverse.h">
       <Filter>ヘッダー ファイル\Card\Card\Rare</Filter>
     </ClInclude>
-    <ClInclude Include="Bloodsucking.h">
+    <ClInclude Include="Class\Card\Card\Bloodsucking.h">
       <Filter>ヘッダー ファイル\Card\Card\UnCommon</Filter>
     </ClInclude>
-    <ClInclude Include="VeryCareful.h">
+    <ClInclude Include="Class\Card\Card\VeryCareful.h">
       <Filter>ヘッダー ファイル\Card\Card\UnCommon</Filter>
     </ClInclude>
     <ClInclude Include="Class\Card\Card.h">
       <Filter>ヘッダー ファイル\Card\Card</Filter>
     </ClInclude>
-    <ClInclude Include="PsychoAxe.h">
+    <ClInclude Include="Class\Enemy\Enemy\PsychoAxe.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="ContinuousAttackAction.h">
+    <ClInclude Include="Class\Enemy\Action\ContinuousAttackAction.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="BuffAction.h">
+    <ClInclude Include="Class\Enemy\Action\BuffAction.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="ContinuousHealAction.h">
+    <ClInclude Include="Class\Enemy\Action\ContinuousHealAction.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="MiniHeal.h">
+    <ClInclude Include="Class\Card\Card\MiniHeal.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="AuraOfLife.h">
+    <ClInclude Include="Class\StatusEffect\Buff\AuraOfLife.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="RelicFactory.h">
@@ -600,13 +612,22 @@
     <ClInclude Include="DisposableShield.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="ClusterGrenade.h">
+    <ClInclude Include="Class\Card\Card\ClusterGrenade.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="AmplifierShield.h">
+    <ClInclude Include="Class\Card\Card\AmplifierShield.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="TreasureReward.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="BlankRelic.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="StandardReverse.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="StandardRiskyAttack.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

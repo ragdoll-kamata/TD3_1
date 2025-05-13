@@ -5,7 +5,7 @@ void StandardAtack::IndividualInitialize() {
 	reverseLuck = -1;
 	cardType = CardType::Damage;
 	cardRange = CardRange::One;
-	id = 1;
+	id = 0;
 	value = 5;
 }
 

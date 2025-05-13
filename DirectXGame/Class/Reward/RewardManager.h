@@ -41,6 +41,10 @@ public:
 
 	void SetMapManager(MapManager* mapManager) { mapManager_ = mapManager; }
 
+	bool GetSelect() const { return isSelect; }
+
+	void SelectTrue() { isSelect = true; }
+
 private:
 	void CreateBattleNormalReward();
 	void CreateBattleEliteReward();
@@ -58,6 +62,8 @@ private:
 	Button skip;
 	bool isReward = false;
 	bool isSkip = false;
+	bool isSelect = true;
+	bool isSkipForSelect = false;
 	bool is_ = false;
 	CardManager* cardManager_ = nullptr;
 	RelicManager* relicManager_ = nullptr;

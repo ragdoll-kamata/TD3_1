@@ -7,9 +7,7 @@ void AmplifierShield::IndividualInitialize() {
 	cardType = CardType::Shield;
 	cardRange = CardRange::Self;
 	id = 100;
-	value = 16;
-	// Set the sprite for the card
-	//sprite.SetTexture("VampShield.png");
+	value = 10;
 }
 
 bool AmplifierShield::Effect() {

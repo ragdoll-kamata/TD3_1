@@ -7,7 +7,7 @@ void MiniHeal::IndividualInitialize() {
 	cardType = CardType::Skill;
 	cardRange = CardRange::Self;
 	id = 6;
-	value = 10;
+	value = 1001;
 }
 
 bool MiniHeal::Effect() { 

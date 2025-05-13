@@ -1,6 +1,7 @@
 #include "RewardManager.h"
 #include "CardReward.h"
 #include "MapManager.h"
+#include "TreasureReward.h"
 void RewardManager::Initialize(CardManager* cardManager, RelicManager* relicManager) {
 	cardManager_=cardManager;
 	relicManager_ = relicManager;
@@ -11,7 +12,7 @@ void RewardManager::Initialize(CardManager* cardManager, RelicManager* relicMana
 }
 
 void RewardManager::Update() {
-	if (isReward) {
+	if (isReward && isSelect) {
 		is_ = false;
 		for (int i = 0; i < rewards.size(); i++) {
 			rewards[i]->SetIsU(false);
@@ -32,9 +33,10 @@ void RewardManager::Update() {
 		std::erase_if(rewards, [](const auto& asd) { return asd->IsDelete(); });
 		if (Input::GetInstance()->IsTriggerMouse(0)) {
  			if (skip.IsOnCollision(Input::GetInstance()->GetMousePosition())) {
-				mapManager_->SetIsMapOpen(true);
-				mapManager_->SetIsMove(true);
 				isSkip = true;
+				if (isSkipForSelect) {
+					isSelect = false;
+				}
 			}
 		}
 	} 
@@ -42,7 +44,7 @@ void RewardManager::Update() {
 }
 
 void RewardManager::Draw() {
-	if (IsReward()) {
+	if (IsReward() && isSelect) {
 		skip.Draw();
 		for (int i = 0; i < rewards.size(); i++) {
 			rewards[i]->Draw();
@@ -59,20 +61,31 @@ void RewardManager::Draw() {
 void RewardManager::CreateBattleReward(BattleEnemyType battleEnemyType) {
 	fCreateReward[battleEnemyType]();
 	for (int i = 0; i < rewards.size(); i++) {
-		rewards[i]->Initialize(cardManager_);
+		rewards[i]->Initialize(cardManager_, relicManager_);
 	}
 
 	isReward = true;
 	isSkip = false;
+	isSkipForSelect = false;
+	isSelect = true;
 }
 
 void RewardManager::CreateTreasureReward() {
-
+	rewards.push_back(std::make_unique<TreasureReward>());
+	for (int i = 0; i < rewards.size(); i++) {
+		rewards[i]->Initialize(cardManager_, relicManager_);
+	}
+	isSkipForSelect = true;
+	isReward = true;
+	isSkip = false;
+	isSelect = true;
 }
 
 void RewardManager::ClearReward() {
 	rewards.clear();
 	isReward = false;
+	isSkip = false;
+	isSelect = true;
 }
 
 void RewardManager::CreateBattleNormalReward() {

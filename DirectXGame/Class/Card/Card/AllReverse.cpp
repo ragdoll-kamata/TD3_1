@@ -21,7 +21,7 @@ bool AllReverse::Effect() {
 			s->SetCardLocation(CardLocation::Cemetery);
 		}
 
-		std::vector<Card*> b = cardManager_->SelectionHand(99, true);
+		std::vector<Card*> b = cardManager_->SelectionHand(1000, true);
 		battleManager_->DamagePlayer(5, nullptr);
 		if (b.size() > 0) {
 			for (Card* s : b) {
@@ -46,7 +46,7 @@ bool AllReverse::ReverseEffect() {
 			}
 			s->SetCardLocation(CardLocation::Cemetery);
 		}
-		std::vector<Card*> b = cardManager_->SelectionHand(99, true);
+		std::vector<Card*> b = cardManager_->SelectionHand(1000, true);
 
 		if (b.size() > 0) {
 			int i = 0;

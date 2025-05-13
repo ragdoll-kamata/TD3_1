@@ -18,7 +18,7 @@ bool Bloodsucking::Effect() {
 	i -= targetEnemy->GetStatus()->GetHP();
 
 	if (i > 0) {
-		battleManager_->HealPlayer(i, playrStatus_);
+		battleManager_->HealPlayer(i / 2, playrStatus_);
 	}
 
 	return true; 

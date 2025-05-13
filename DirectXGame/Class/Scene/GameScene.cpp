@@ -55,7 +55,10 @@ void GameScene::Initialize2() {
 	uiManager_ = std::make_unique<UIManager>();
 	uiManager_->Initialize(player_.get(), cardManager_.get(), mapManager_.get());
 
-
+	eventManager_ = std::make_unique<EventManager>();
+	eventManager_->Initialize(rewardManager_.get());
+	eventManager_->SetMapManager(mapManager_.get());
+	mapManager_->SetEventManager(eventManager_.get());
 }
 
 void GameScene::Update() {
@@ -70,6 +73,7 @@ void GameScene::Update() {
 	}
 	enemyManager_->Update();
 	relicManager_->Update();
+	eventManager_->Update();
 }
 
 
@@ -91,7 +95,10 @@ void GameScene::Draw() {
 
 	relicManager_->Draw();
 
+	eventManager_->Draw();
+
 	mapManager_->Draw();
+
 
 	uiManager_->Draw();
 

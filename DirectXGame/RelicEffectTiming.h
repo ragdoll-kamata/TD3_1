@@ -19,4 +19,5 @@ enum class RelicEffectTiming {
 	Play,           // カードをプレイした時
 	HandDeath,      // 手札を捨てた時
 	DeckShuffle,    // デッキをシャッフルした時
+	None,           // 効果なし
 };

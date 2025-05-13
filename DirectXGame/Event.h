@@ -2,6 +2,7 @@
 #include "RewardManager.h"
 class Event {
 public:
+	virtual ~Event() = default;
 	/// <summary>
 	/// イベント初期化
 	/// </summary>

@@ -6,6 +6,7 @@
 
 #include "MagicPlayingCards.h"
 #include "SakeCup.h"
+#include "BlankRelic.h"
 
 void RelicManager::Initialize(CardManager* cardManager, BattleManager* battleManager, Player* player) {
 	this->cardManager_ = cardManager;
@@ -50,4 +51,10 @@ std::unique_ptr<Relic> RelicManager::CreateRandomRelic() {
 	rareProbability = std::max<int>(rareMinProbability, rareProbability + 5);
 
 	return std::move(Relic); // ムーブ
+}
+
+std::unique_ptr<Relic> RelicManager::CreateBlankRelic() {
+	std::unique_ptr<Relic> relic = std::make_unique<BlankRelic>();
+	relic->Initialize(cardManager_, battleManager_);
+	return std::move(relic);
 }

@@ -24,6 +24,12 @@ void Card::Initialize() {
 	number2.SetRotate(nextNumber2Rotate);
 }
 
+void Card::SetSpritePos(const Vector2& pos) {
+	sprite.SetPosition(pos);
+	number.SetPosition(pos);
+	number2.SetPosition(pos);
+}
+
 void Card::Updata() {
 	if (isReverse != prevIsReverse) {
 		prevIsReverse = isReverse;

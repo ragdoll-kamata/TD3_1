@@ -106,11 +106,12 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AllReverse.cpp" />
-    <ClCompile Include="AntiFragile.cpp" />
-    <ClCompile Include="AuraOfLife.cpp" />
-    <ClCompile Include="Bloodsucking.cpp" />
-    <ClCompile Include="BuffAction.cpp" />
+    <ClCompile Include="BlankRelic.cpp" />
+    <ClCompile Include="Class\Card\Card\AllReverse.cpp" />
+    <ClCompile Include="Class\StatusEffect\Buff\AntiFragile.cpp" />
+    <ClCompile Include="Class\StatusEffect\Buff\AuraOfLife.cpp" />
+    <ClCompile Include="Class\Card\Card\Bloodsucking.cpp" />
+    <ClCompile Include="Class\Enemy\Action\BuffAction.cpp" />
     <ClCompile Include="Class\Card\Card\Blow.cpp" />
     <ClCompile Include="Class\Card\CardFactory.cpp" />
     <ClCompile Include="Class\Reward\CardReward.cpp" />
@@ -139,9 +140,9 @@
     <ClCompile Include="Class\Enemy\EnemyAction.cpp" />
     <ClCompile Include="Class\Enemy\EnemyFactory.cpp" />
     <ClCompile Include="Class\Enemy\EnemyManager.cpp" />
-    <ClCompile Include="ClusterGrenade.cpp" />
-    <ClCompile Include="ContinuousAttackAction.cpp" />
-    <ClCompile Include="ContinuousHealAction.cpp" />
+    <ClCompile Include="Class\Card\Card\ClusterGrenade.cpp" />
+    <ClCompile Include="Class\Enemy\Action\ContinuousAttackAction.cpp" />
+    <ClCompile Include="Class\Enemy\Action\ContinuousHealAction.cpp" />
     <ClCompile Include="DisposableShield.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventManager.cpp" />
@@ -166,17 +167,19 @@
     <ClCompile Include="Class\StatusEffect\StatusEffect.cpp" />
     <ClCompile Include="Class\StatusEffect\StatusEffectFactory.cpp" />
     <ClCompile Include="Class\Card\Card\StrengthUp.cpp" />
-    <ClCompile Include="MiniHeal.cpp" />
-    <ClCompile Include="PsychoAxe.cpp" />
+    <ClCompile Include="Class\Card\Card\MiniHeal.cpp" />
+    <ClCompile Include="Class\Enemy\Enemy\PsychoAxe.cpp" />
     <ClCompile Include="Relic.cpp" />
     <ClCompile Include="RelicFactory.cpp" />
     <ClCompile Include="RelicManager.cpp" />
     <ClCompile Include="SakeCup.cpp" />
+    <ClCompile Include="StandardReverse.cpp" />
+    <ClCompile Include="StandardRiskyAttack.cpp" />
     <ClCompile Include="TreasureEvent.cpp" />
     <ClCompile Include="TreasureReward.cpp" />
     <ClCompile Include="UIManager.cpp" />
-    <ClCompile Include="AmplifierShield.cpp" />
-    <ClCompile Include="VeryCareful.cpp" />
+    <ClCompile Include="Class\Card\Card\AmplifierShield.cpp" />
+    <ClCompile Include="Class\Card\Card\VeryCareful.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\TerrainPS.hlsl">
@@ -254,12 +257,13 @@
     <None Include="Resources\shaders\Sprite.hlsli" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AllReverse.h" />
-    <ClInclude Include="AntiFragile.h" />
-    <ClInclude Include="AuraOfLife.h" />
+    <ClInclude Include="BlankRelic.h" />
+    <ClInclude Include="Class\Card\Card\AllReverse.h" />
+    <ClInclude Include="Class\StatusEffect\Buff\AntiFragile.h" />
+    <ClInclude Include="Class\StatusEffect\Buff\AuraOfLife.h" />
     <ClInclude Include="BattleEnemyType.h" />
-    <ClInclude Include="Bloodsucking.h" />
-    <ClInclude Include="BuffAction.h" />
+    <ClInclude Include="Class\Card\Card\Bloodsucking.h" />
+    <ClInclude Include="Class\Enemy\Action\BuffAction.h" />
     <ClInclude Include="Class\Card\Card\Blow.h" />
     <ClInclude Include="Class\Card\CardFactory.h" />
     <ClInclude Include="Class\Reward\CardReward.h" />
@@ -294,16 +298,16 @@
     <ClInclude Include="Class\Card\Card\Reverse.h" />
     <ClInclude Include="Class\StatusEffect\Debuff\Poison.h" />
     <ClInclude Include="Class\Card\Card\PoisonDagger.h" />
-    <ClInclude Include="ClusterGrenade.h" />
-    <ClInclude Include="ContinuousAttackAction.h" />
-    <ClInclude Include="ContinuousHealAction.h" />
+    <ClInclude Include="Class\Card\Card\ClusterGrenade.h" />
+    <ClInclude Include="Class\Enemy\Action\ContinuousAttackAction.h" />
+    <ClInclude Include="Class\Enemy\Action\ContinuousHealAction.h" />
     <ClInclude Include="DisposableShield.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="HPGauge.h" />
     <ClInclude Include="MagicPlayingCards.h" />
-    <ClInclude Include="MiniHeal.h" />
-    <ClInclude Include="PsychoAxe.h" />
+    <ClInclude Include="Class\Card\Card\MiniHeal.h" />
+    <ClInclude Include="Class\Enemy\Enemy\PsychoAxe.h" />
     <ClInclude Include="Relic.h" />
     <ClInclude Include="RelicEffectTiming.h" />
     <ClInclude Include="RelicFactory.h" />
@@ -324,11 +328,13 @@
     <ClInclude Include="Class\StatusEffect\StatusEffectFactory.h" />
     <ClInclude Include="Class\Card\StrengthUp.h" />
     <ClInclude Include="SakeCup.h" />
+    <ClInclude Include="StandardReverse.h" />
+    <ClInclude Include="StandardRiskyAttack.h" />
     <ClInclude Include="TreasureEvent.h" />
     <ClInclude Include="TreasureReward.h" />
     <ClInclude Include="UIManager.h" />
-    <ClInclude Include="AmplifierShield.h" />
-    <ClInclude Include="VeryCareful.h" />
+    <ClInclude Include="Class\Card\Card\AmplifierShield.h" />
+    <ClInclude Include="Class\Card\Card\VeryCareful.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectXGame.rc" />

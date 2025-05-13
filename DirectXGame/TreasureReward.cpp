@@ -1,9 +1,10 @@
 #include "TreasureReward.h"
 #include "RelicManager.h"
+#include "Relic.h"
 void TreasureReward::Initialize(CardManager* cardManager, RelicManager* relicManager) {
 	Reward::Initialize(cardManager, relicManager);
 	relicManager_ = relicManager;
-	relic = relicManager_->CreateRandomRelic();
+	relic = std::move(relicManager_->CreateBlankRelic());
 }
 
 void TreasureReward::Update() {
@@ -14,4 +15,6 @@ void TreasureReward::Update() {
 		isD = true;
 	}
 }
+
+void TreasureReward::Draw() {}
 

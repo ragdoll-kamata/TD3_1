@@ -2,6 +2,7 @@
 #include <random>
 
 #include "SakeCup.h"
+#include "BlankRelic.h"
 
 std::unique_ptr<Relic> RelicFactory::CreateRandomRelic(int& unCommon, int& rare) {
 	// 乱数生成器の初期化
@@ -19,6 +20,7 @@ std::unique_ptr<Relic> RelicFactory::CreateRandomRelic(int& unCommon, int& rare)
 		return CreateUnCommonRelic();
 	}
 
+	isRare = false;
 	return CreateCommonRelic();
 }
 
@@ -34,4 +36,17 @@ std::unique_ptr<Relic> RelicFactory::CreateRareRelic() {
 
 
 	return CreateUnCommonRelic();
+}
+
+std::unique_ptr<Relic> RelicFactory::ReCreateRandomRelic() {
+	if (isCommon) {
+		return CreateCommonRelic();
+	}
+	if (isUnCommon) {
+		return CreateUnCommonRelic();
+	}
+	if (isRare) {
+		return CreateRareRelic();
+	}
+	return std::unique_ptr<BlankRelic>();
 }

@@ -46,7 +46,7 @@ public:
 
 	
 
-	void SetSpritePos(const Vector2& pos) { sprite.SetPosition(pos); }
+	void SetSpritePos(const Vector2& pos);
 	Vector2 GetSpritePos() const { return sprite.GetPosition(); }
 
 	void Updata();

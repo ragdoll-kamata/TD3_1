@@ -6,6 +6,7 @@
 
 class BattleManager;
 class RewardManager;
+class EventManager;
 
 class MapManager {
 public:
@@ -37,9 +38,13 @@ public:
 
 	bool IsStartDirection() const { return startblankTimer > 0; }
 
+
+	void SetEventManager(EventManager* eventManager) { eventManager_ = eventManager; }
+
 private:
 	BattleManager* battleManager_ = nullptr;
 	RewardManager* rewardManager_ = nullptr;
+	EventManager* eventManager_ = nullptr;
 	Sprite back; 
 
 	Vector2 mapBackPos;

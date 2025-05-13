@@ -1,25 +1,17 @@
 #include "CardManager.h"
+#include "EnemyManager.h"
 #include <algorithm>
 #include <iostream>
-#include "EnemyManager.h"
 
-
-#include "Player.h"
 #include "Easings.h"
-#include "RelicManager.h"
+#include "Player.h"
 #include "RelicEffectTiming.h"
+#include "RelicManager.h"
 
 #include "StandardAtack.h"
+#include "StandardReverse.h"
+#include "StandardRiskyAttack.h"
 #include "StandardShield.h"
-#include "Reverse.h"
-#include "DrawCard.h"
-#include "PoisonDagger.h"
-#include "Blow.h"
-#include "StrengthUp.h"
-#include "AllReverse.h"
-#include "Bloodsucking.h"
-#include "VeryCareful.h"
-#include "MiniHeal.h"
 
 using namespace MathUtility;
 void CardManager::Initialize(EnemyManager* enemy, Player* player) {
@@ -31,7 +23,6 @@ void CardManager::Initialize(EnemyManager* enemy, Player* player) {
 
 	turnEndButton = std::make_unique<Button>();
 	turnEndButton->Initialize(turnEndButtonStandbyPos, turnEndButtonSize, "white1x1.png", {1.0f, 0.0f, 0.0f, 1.0f});
-
 
 	allReverseYssButton = std::make_unique<Button>();
 	allReverseYssButton->Initialize(allReverseYssButtonPos, allReverseButtonSize, "white1x1.png", {0.0f, 1.0f, 0.0f, 1.0f});
@@ -50,13 +41,18 @@ void CardManager::Initialize(EnemyManager* enemy, Player* player) {
 
 	number.Initialize(numberStandbyPos);
 	number.SetNumber(0);
-	
+
 	TH = TextureManager::GetInstance()->Load("white1x1.png");
 
 	sprite.Initialize();
 	sprite.SetTextureHandle(TH);
 	sprite.SetSize({1280.0f, 720.0f});
 	sprite.SetColor({0.0f, 0.0f, 0.0f, 0.5f});
+
+	cardDrawSH = Audio::GetInstance()->LoadWave("SE/cardDraw.mp3");
+	cardShuffleSH = Audio::GetInstance()->LoadWave("SE/cardShuffle.mp3");
+
+	cardFactory_ = std::make_unique<CardFactory>();
 }
 
 void CardManager::BattleUpdata() {
@@ -66,6 +62,8 @@ void CardManager::BattleUpdata() {
 	for (const auto& card : handCard) {
 		card->Updata();
 	}
+	CardDrawMove();
+	CardLocationUpdate();
 }
 
 void CardManager::DrawBattle() {
@@ -73,7 +71,6 @@ void CardManager::DrawBattle() {
 		allReverseYssButton->Draw();
 		allReverseNoButton->Draw();
 	}
-
 
 	turnEndButton->Draw();
 	number.Draw();
@@ -88,23 +85,20 @@ void CardManager::DrawBattle() {
 			handCard[i]->Draw();
 		}
 	}
-	if (isDeck) {
+	if (isDeck || isCemetery || isSelectionHand) {
 		sprite.Draw();
+	}
+	if (isDeck) {
 		for (int i = 0; i < deckDisplay.size(); i++) {
 			deckDisplay[i]->Draw();
 		}
 		deckButton->Draw();
-	}
-
-	if (isCemetery) {
-		sprite.Draw();
+	} else if (isCemetery) {
 		for (int i = 0; i < executionDisplay.size(); i++) {
 			executionDisplay[i]->Draw();
 		}
 		cemeteryButton->Draw();
-	}
-	if (isSelectionHand) {
-		sprite.Draw();
+	} else if (isSelectionHand) {
 		for (int i = 0; i < handCard.size(); i++) {
 			handCard[i]->Draw();
 		}
@@ -113,7 +107,6 @@ void CardManager::DrawBattle() {
 		}
 	}
 }
-
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -142,35 +135,29 @@ bool CardManager::StartMainTurn() {
 	}
 	bool is = false;
 	if (drawIndex < drawNum) {
-		drawTimer++;
-
-		if (drawTimer >= kDrawTimer) {
-			drawTimer = 0;
-			drawIndex++;
-			CardDraw(1);
-		}
-	} else {
+		drawIndex += drawNum;
+		CardDraw(drawNum);
+	}
+	if (cardDrawNum <= 0) {
 		isReverseButton = true;
 		if (CardConfirmation()) {
 			Vector2 mousePos = Input::GetInstance()->GetMousePosition();
 			if (Input::GetInstance()->IsTriggerMouse(0)) {
 				if (allReverseYssButton->IsOnCollision(mousePos)) {
-					isReverseButton = false;
 					is = true;
-					drawNum = 5;
-					drawIndex = 0;
 					for (int i = 0; i < handCard.size(); i++) {
 						handCard[i]->SetIsReverse(!handCard[i]->GetIsReverse());
 					}
 					for (const auto& card : deck) {
 						card->SetIsReverse(!card->GetIsReverse());
 					}
-					isStartRelic = false;
 				}
 
 				if (allReverseNoButton->IsOnCollision(mousePos)) {
-					isReverseButton = false;
 					is = true;
+				}
+				if (is) {
+					isReverseButton = false;
 					drawIndex = 0;
 					drawNum = 5;
 					isStartRelic = false;
@@ -212,14 +199,14 @@ bool CardManager::MainTurn() {
 							uint32_t EH = enemyManager->IsOnCollision(mousePos);
 
 							if (EH > 0) {
-								handCard[holdH]->SetTargetEnemy(enemyManager->GetEnemy(EH)); // ターゲットエネミーのセット
+								handCard[holdH]->SetTargetEnemy(enemyManager->GetEnemy(EH));           // ターゲットエネミーのセット
 								CardLocationMove(std::move(handCard[holdH]), CardLocation::Execution); // ムーブ
-								handCard.erase(handCard.begin() + holdH);                    // 元のリストから削除
+								handCard.erase(handCard.begin() + holdH);                              // 元のリストから削除
 							}
 						} else {
 							if (mousePos.y <= 360.0f) {
 								CardLocationMove(std::move(handCard[holdH]), CardLocation::Execution); // ムーブ
-								handCard.erase(handCard.begin() + holdH);        // 元のリストから削除
+								handCard.erase(handCard.begin() + holdH);                              // 元のリストから削除
 							}
 						}
 					}
@@ -235,7 +222,6 @@ bool CardManager::MainTurn() {
 					}
 				}
 			}
-
 		}
 	}
 
@@ -250,7 +236,7 @@ bool CardManager::EndMainTurn() {
 	while (handCard.size() > 0) {
 		// handCard から cemetery にカードを移動
 		CardLocationMove(std::move(handCard.back()), CardLocation::Cemetery);
-		handCard.pop_back();                            // 移動後に元のデッキから削除
+		handCard.pop_back(); // 移動後に元のデッキから削除
 	}
 
 	return true;
@@ -258,7 +244,7 @@ bool CardManager::EndMainTurn() {
 
 void CardManager::StartBattle() {
 	number.SetNumber(0);
-	//デッキ生成
+	// デッキ生成
 	for (const auto& card : sDeck) {
 		deck.push_back(card->clone()); // クローンを作る
 	}
@@ -296,9 +282,7 @@ void CardManager::EndBattle() {
 	while (cemetery.size() > 0) {
 		cemetery.pop_back();
 	}
-
 }
-
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -309,20 +293,21 @@ void CardManager::DeckShuffle() {
 	for (int i = 0; i < deck.size(); i++) {
 		deck[i]->KSetIsReverse(static_cast<bool>(get_rand_uni_int(g)));
 	}
+	Audio::GetInstance()->PlayWave(cardShuffleSH);
 }
 
 void CardManager::DeckRefresh() {
 	while (cemetery.size() > 0) {
 		// cemetery から deck にカードを移動
 		CardLocationMove(std::move(cemetery.back()), CardLocation::Deck); // ムーブ
-		cemetery.pop_back();                        // 移動後に元のデッキから削除
+		cemetery.pop_back();                                              // 移動後に元のデッキから削除
 	}
 	DeckShuffle();
 }
 
 void CardManager::EffectProcessing() {
 	bool is = false;
-	
+
 	is = execution[0]->StartEffect();
 
 	if (is) {
@@ -331,7 +316,7 @@ void CardManager::EffectProcessing() {
 			execution.erase(execution.begin()); // 元のリストから削除
 		} else {
 			CardLocationMove(std::move(execution[0]), CardLocation::Cemetery); // ムーブ
-			execution.erase(execution.begin());          // 元のリストから削除
+			execution.erase(execution.begin());                                // 元のリストから削除
 		}
 		relicManager_->RelicEffect(RelicEffectTiming::Play);
 	}
@@ -355,9 +340,8 @@ bool CardManager::CardConfirmation() {
 			if (!isDeck) {
 				isDeck = true;
 				deckDisplay.clear();
-				for (int i = 0; i < deck.size(); i++) {
-
-					deckDisplay.push_back(deck[i].get());
+				for (const auto& card : deck) {
+					deckDisplay.push_back(card.get());
 				}
 				std::sort(deckDisplay.begin(), deckDisplay.end(), [](const Card* a, const Card* b) { return a->GetId() < b->GetId(); });
 				sPos.resize(deckDisplay.size());
@@ -448,7 +432,7 @@ void CardManager::CardLocationUpdate() {
 	}
 }
 
-void CardManager::CardLocationMove(std::unique_ptr<Card> card, CardLocation cardLocation) { 
+void CardManager::CardLocationMove(std::unique_ptr<Card> card, CardLocation cardLocation) {
 	switch (cardLocation) {
 	case CardLocation::Deck:
 		card->SetCardLocation(CardLocation::Deck);
@@ -469,24 +453,46 @@ void CardManager::CardLocationMove(std::unique_ptr<Card> card, CardLocation card
 	}
 }
 
-void CardManager::CardDraw(int num) {
-	for (int j = 0; j < num; j++) {
-		if (deck.size() <= 0) {
-			if (cemetery.size() <= 0) {
-				return;
+void CardManager::CardDrawMove() {
+	if (cardDrawTimer < kCardDrawTimer) {
+		cardDrawTimer++;
+	}
+	if (cardShuffleTimer < kCardShuffleTimer) {
+		cardShuffleTimer++;
+	}
+	if (cardDrawNum > 0) {
+
+		if (cardShuffleTimer >= kCardShuffleTimer) {
+
+			if (cardDrawTimer >= kCardDrawTimer) {
+				if (deck.size() <= 0) {
+					if (cemetery.size() <= 0) {
+						return;
+					}
+					cardShuffleTimer = 0;
+					DeckRefresh();
+				} else {
+					if (handCard.size() < 8) {
+						Audio::GetInstance()->PlayWave(cardDrawSH, false, 0.5f);
+						std::unique_ptr<Card> card = std::move(deck.back()); // 一番最後のカードを移動
+						deck.pop_back();                                     // 移動後に元のデッキから削除
+
+						card->SetSpritePos(deckButtonPos);
+						CardLocationMove(std::move(card), CardLocation::Hand); // 手札に移動
+
+						AllHandLack();
+						cardDrawTimer = 0;
+						cardDrawNum--;
+					} else {
+						cardDrawNum = 0;
+					}
+				}
 			}
-			DeckRefresh();
 		}
-
-		std::unique_ptr<Card> card = std::move(deck.back()); // 一番最後のカードを移動
-		deck.pop_back();                                     // 移動後に元のデッキから削除
-
-		card->SetSpritePos(deckButtonPos);
-		CardLocationMove(std::move(card), CardLocation::Hand); // 手札に移動
-
-		AllHandLack();
 	}
 }
+
+void CardManager::CardDraw(int num) { cardDrawNum += num; }
 
 int CardManager::RandomHandDeath(int num) {
 
@@ -498,7 +504,7 @@ int CardManager::RandomHandDeath(int num) {
 		std::uniform_int_distribution<int> get_rand_uni_int(0, static_cast<int>(handCard.size()) - 1);
 		int a = get_rand_uni_int(g);
 		CardLocationMove(std::move(handCard[a]), CardLocation::Cemetery); // 手札から墓地に移動
-		handCard.erase(handCard.begin() + a);       // 元のリストから削除
+		handCard.erase(handCard.begin() + a);                             // 元のリストから削除
 	}
 	return 0;
 }
@@ -575,19 +581,13 @@ void CardManager::StartCreateSDeck() {
 	sDeck.push_back(std::make_unique<StandardAtack>());
 	sDeck.push_back(std::make_unique<StandardAtack>());
 	sDeck.push_back(std::make_unique<StandardAtack>());
-	sDeck.push_back(std::make_unique<VeryCareful>());
+	sDeck.push_back(std::make_unique<StandardRiskyAttack>());
 
-	sDeck.push_back(std::make_unique<MiniHeal>());
 	sDeck.push_back(std::make_unique<StandardShield>());
 	sDeck.push_back(std::make_unique<StandardShield>());
 	sDeck.push_back(std::make_unique<StandardShield>());
 	sDeck.push_back(std::make_unique<StandardShield>());
-
-	sDeck.push_back(std::make_unique<DrawCard>());
-	sDeck.push_back(std::make_unique<DrawCard>());
-	sDeck.push_back(std::make_unique<AllReverse>());
-	sDeck.push_back(std::make_unique<StrengthUp>());
-	sDeck.push_back(std::make_unique<Blow>());
+	sDeck.push_back(std::make_unique<StandardReverse>());
 
 	for (int i = 0; i < sDeck.size(); i++) {
 		sDeck[i]->Initialize();
@@ -600,9 +600,19 @@ void CardManager::StartCreateSDeck() {
 std::vector<std::unique_ptr<Card>> CardManager::RewardCardGeneration() {
 
 	std::vector<std::unique_ptr<Card>> reward;
-	reward.push_back(std::make_unique<DrawCard>());
-	reward.push_back(std::make_unique<Blow>());
-	reward.push_back(std::make_unique<Reverse>());
+	std::unique_ptr<Card> card = CardLottery();
+	cardFactory_->AddUnGenerationCard(card.get());
+	reward.push_back(std::move(card));
+
+	card = CardLottery();
+	cardFactory_->AddUnGenerationCard(card.get());
+	reward.push_back(std::move(card));
+
+	card = CardLottery();
+	cardFactory_->AddUnGenerationCard(card.get());
+	reward.push_back(std::move(card));
+
+	cardFactory_->ClearUnGenerationCard();
 
 	for (int i = 0; i < reward.size(); i++) {
 		reward[i]->Initialize();
@@ -611,6 +621,9 @@ std::vector<std::unique_ptr<Card>> CardManager::RewardCardGeneration() {
 		reward[i]->SetPlayerStatus(player_->GetStatus());
 		reward[i]->SetSpritePos({640.0f - (200.0f * ((reward.size() - 1) / 2.0f - i)), 360.0f});
 		reward[i]->SetSize(1.2f);
+		for (int j = 0; j < 5; j++) {
+			reward[i]->Updata();
+		}
 	}
 
 	return reward;
@@ -621,7 +634,7 @@ std::vector<Card*> CardManager::GetSDeck() {
 	for (int i = 0; i < sDeck.size(); i++) {
 		display.push_back(sDeck[i].get());
 	}
-	//std::sort(display.begin(), display.end(), [](const Card* a, const Card* b) { return a->GetId() < b->GetId(); });
+	// std::sort(display.begin(), display.end(), [](const Card* a, const Card* b) { return a->GetId() < b->GetId(); });
 	for (int i = 0; i < display.size(); i++) {
 		Vector2 pos = {640.0f - (160.0f * ((5 - 1) / 2.0f - (i % 5))), 380.0f - (175.0f * (((display.size() - 1) / 5) / 2.0f - (i / 5)))};
 		display[i]->SetSpritePos(pos);
@@ -630,4 +643,18 @@ std::vector<Card*> CardManager::GetSDeck() {
 	return display;
 }
 
-
+std::unique_ptr<Card> CardManager::CardLottery() {
+	std::uniform_int_distribution<int> probability(1, 100);
+	int i = probability(g);
+	if (i <= kUncommonChanceValue) {
+		return cardFactory_->UnCommonCardCreate(g);
+	}
+	i -= kUncommonChanceValue;
+	if (i <= rareChanceValue) {
+		rareChanceValue = kStartRareChanceValue;
+		return cardFactory_->RareCardCreate(g);
+	}
+	i -= rareChanceValue;
+	rareChanceValue += kUpRareChanceValue;
+	return cardFactory_->CommonCardCreate(g);
+}

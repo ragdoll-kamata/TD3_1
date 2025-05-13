@@ -6,7 +6,7 @@ void StandardShield::IndividualInitialize() {
 	sprite.SetColor({0.0f, 1.0f, 1.0f, 1.0f});
 	cardType = CardType::Shield;
 	cardRange = CardRange::Self;
-	id = 3;
+	id = 2;
 	value = 5;
 }
 

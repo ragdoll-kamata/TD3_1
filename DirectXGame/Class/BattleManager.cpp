@@ -139,11 +139,17 @@ void BattleManager::EnemyEndMainTurn() {
 
 
 void BattleManager::EndBattleTurn() {
-	if (cardManager_->EndBattleTrue()) {
-		rewardManager_->CreateBattleReward(battleEnemyType_);
-		turn = BattlePhase::StandbyTurn;
+	if (!rewardManager_->IsReward()) {
+		if (cardManager_->EndBattleTrue()) {
+			rewardManager_->CreateBattleReward(battleEnemyType_);
+		}
+	} else {
+		if (rewardManager_->IsSkip()) {
+			mapManager_->SetIsMapOpen(true);
+			mapManager_->SetIsMove(true);
+			turn = BattlePhase::StandbyTurn;
+		}
 	}
-
 }
 
 

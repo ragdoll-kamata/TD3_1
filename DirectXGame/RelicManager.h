@@ -28,6 +28,7 @@ public:
 	void AddRelic(std::unique_ptr<Relic> relic) { relics.push_back(std::move(relic)); }
 
 	std::unique_ptr<Relic> CreateRandomRelic();
+	std::unique_ptr<Relic> CreateBlankRelic();
 
 private:
 	CardManager* cardManager_ = nullptr;

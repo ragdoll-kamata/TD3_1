@@ -14,6 +14,11 @@ public:
 
 	std::unique_ptr<Relic> CreateRareRelic();
 
+	std::unique_ptr<Relic> ReCreateRandomRelic();
+
 private:
 	std::unordered_map<std::string, std::string> electedRelic;
+	bool isCommon = true;
+	bool isUnCommon = true;
+	bool isRare = true;
 };

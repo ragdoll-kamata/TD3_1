@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include "BattleManager.h"
 #include "RewardManager.h"
+#include "EventManager.h"
 #include "Easings.h"
 using namespace MathUtility;
 void MapManager::Initialize(BattleManager* battleManager, RewardManager* rewardManager) {
@@ -119,7 +120,8 @@ void MapManager::CollisionUpdata() {
 									node2->SetIsSelect(false);
 								}
 							}
-
+							eventManager_->ClearEvent();
+							rewardManager_->ClearReward();
 							switch (node->GetNodeType()) {
 							case NodeType::Enemy:
 								SetIsMapOpen(false);
@@ -130,6 +132,8 @@ void MapManager::CollisionUpdata() {
 							case NodeType::Rest:
 								break;
 							case NodeType::Treasure:
+								SetIsMapOpen(false);
+								eventManager_->CreateTreasureEvent();
 								break;
 							case NodeType::Shop:
 								break;
@@ -138,7 +142,7 @@ void MapManager::CollisionUpdata() {
 							case NodeType::Boss:
 								break;
 							}
-							rewardManager_->ClearReward();
+							
 							displayOpenMapTimer = 0;
 							if (selectfloar < maxfloar - 1) {
 								selectfloar++;

@@ -5,7 +5,7 @@ class CardManager;
 class RelicManager;
 class Reward {
 public:
-
+	virtual ~Reward() = default;
 	/// <summary>
 	/// 初期化
 	/// </summary>

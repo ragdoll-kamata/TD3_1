@@ -1,6 +1,6 @@
 #pragma once
 #include "Reward.h"
-class Relic;
+#include "Relic.h"
 class TreasureReward : public Reward {
 public:
 	/// <summary>

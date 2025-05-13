@@ -10,7 +10,7 @@ void ClusterGrenade::IndividualInitialize() {
 }
 
 bool ClusterGrenade::Effect() {
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 4; i++) {
 		battleManager_->DamageEnemy(3, targetEnemy, playrStatus_);
 	}
 	battleManager_->DamagePlayer(3, playrStatus_);

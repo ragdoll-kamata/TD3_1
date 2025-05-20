@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <memory>
+#include <random>
 #include <KamataEngine.h>
 
 #include "EnemyAction.h"
@@ -22,7 +23,7 @@ public:
 		End,
 	};
 
-	virtual void Initialize() = 0;
+	virtual void Initialize();
 
 	void Update();
 
@@ -72,4 +73,5 @@ protected:
 	EnemyTurn enemyTurn = EnemyTurn::End;
 
 	std::unique_ptr<Status> status_;
+	std::uniform_int_distribution<int> dist;
 };

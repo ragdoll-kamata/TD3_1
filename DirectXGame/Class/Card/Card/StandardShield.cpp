@@ -11,11 +11,11 @@ void StandardShield::IndividualInitialize() {
 }
 
 bool StandardShield::Effect() { 
-	battleManager_->ShieldPlayer(value, playrStatus_);
+	battleManager_->ShieldPlayer(value, playerStatus_);
 	return true; 
 }
 
 bool StandardShield::ReverseEffect() { 
-	battleManager_->ShieldPlayer(-value, playrStatus_);
+	battleManager_->ShieldPlayer(-value, playerStatus_);
 	return true;
 }

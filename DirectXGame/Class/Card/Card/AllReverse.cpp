@@ -1,6 +1,7 @@
 #include "AllReverse.h"
-#include "CardManager.h"
 #include "BattleManager.h"
+#include "CardManager.h"
+#include "StatusEffectFactory.h"
 void AllReverse::IndividualInitialize() {
 	luck = 0;
 	reverseLuck = -10;
@@ -11,58 +12,43 @@ void AllReverse::IndividualInitialize() {
 }
 
 bool AllReverse::Effect() {
-	std::vector<Card*> a = cardManager_->SelectionHand(1, true);
 
-	if (a.size() > 0) {
-		for (Card* s : a) {
+	std::vector<Card*> b = cardManager_->SelectionHand(1000, true);
+	
+	if (b.size() > 0) {
+		for (Card* s : b) {
 			if (s == nullptr) {
 				break;
 			}
-			s->SetCardLocation(CardLocation::Cemetery);
+			s->SetIsReverse(!s->GetIsReverse());
 		}
-
-		std::vector<Card*> b = cardManager_->SelectionHand(1000, true);
-		battleManager_->DamagePlayer(5, nullptr);
-		if (b.size() > 0) {
-			for (Card* s : b) {
-				if (s == nullptr) {
-					break;
-				}
-				s->SetIsReverse(!s->GetIsReverse());
-			}
-			return true;
-		}
+		battleManager_->StatusEffectPlayer(StatusEffectFactory::CreateStatusEffect("NoDraw"), 1);
+		return true;
 	}
+
 	return false;
 }
 
 bool AllReverse::ReverseEffect() {
-	std::vector<Card*> a = cardManager_->SelectionHand(1, true);
 
-	if (a.size() > 0) {
-		for (Card* s : a) {
+	std::vector<Card*> b = cardManager_->SelectionHand(1000, true);
+
+	if (b.size() > 0) {
+		int i = 0;
+		for (Card* s : b) {
 			if (s == nullptr) {
 				break;
 			}
-			s->SetCardLocation(CardLocation::Cemetery);
+			s->SetIsReverse(!s->GetIsReverse());
+			i += 5;
 		}
-		std::vector<Card*> b = cardManager_->SelectionHand(1000, true);
-
-		if (b.size() > 0) {
-			int i = 0;
-			for (Card* s : b) {
-				if (s == nullptr) {
-					break;
-				}
-				s->SetIsReverse(!s->GetIsReverse());
-				i += 5;
-			}
-			if (i > 0) {
-				i -= 5;
-			}
-			battleManager_->DamagePlayer(i, nullptr);
-			return true;
+		if (i > 0) {
+			i -= 5;
 		}
+		battleManager_->DamagePlayer(i, nullptr);
+		battleManager_->StatusEffectPlayer(StatusEffectFactory::CreateStatusEffect("NoDraw"), 1);
+		return true;
 	}
+
 	return false;
 }

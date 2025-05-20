@@ -84,7 +84,7 @@ public:
 
 	void SetCardManager(CardManager* cardManager) { cardManager_ = cardManager; }
 	void SetBattleManager(BattleManager* battleManager) { battleManager_ = battleManager; }
-	void SetPlayerStatus(Status* status) { playrStatus_ = status; }
+	void SetPlayerStatus(Status* status) { playerStatus_ = status; }
 
 
 	void SetSize(float size) { size_ = size; }
@@ -100,7 +100,7 @@ public:
 protected:
 	Enemy* targetEnemy = nullptr;
 
-	Status* playrStatus_ = nullptr;
+	Status* playerStatus_ = nullptr;
 
 	CardManager* cardManager_ = nullptr;
 	BattleManager* battleManager_ = nullptr;

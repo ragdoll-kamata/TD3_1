@@ -45,14 +45,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)..\External\DirectXTex\include;$(ProjectDir)..\External\imgui;$(ProjectDir)..\External\KamataEngine\include;$(ProjectDir)/Class;$(ProjectDir)/Class/Scene;$(ProjectDir)/Class/Card;$(ProjectDir)/Class/Card/Card;$(ProjectDir)/Class/Enemy;$(ProjectDir)/Class/Enemy/Enemy;$(ProjectDir)/Class/Enemy/Action;$(ProjectDir)/Class/StatusEffect;$(ProjectDir)/Class/StatusEffect/Buff;$(ProjectDir)/Class/StatusEffect/Debuff;$(ProjectDir)/Class/Map;$(ProjectDir)/Class/Reward;$(ProjectDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\External\DirectXTex\include;$(ProjectDir)..\External\imgui;$(ProjectDir)..\External\KamataEngine\include;$(ProjectDir)/Class;$(ProjectDir)/Class/Scene;$(ProjectDir)/Class/Card;$(ProjectDir)/Class/Card/Card;$(ProjectDir)/Class/Enemy;$(ProjectDir)/Class/Enemy/Enemy;$(ProjectDir)/Class/Enemy/Action;$(ProjectDir)/Class/StatusEffect;$(ProjectDir)/Class/StatusEffect/Buff;$(ProjectDir)/Class/StatusEffect/Debuff;$(ProjectDir)/Class/Map;$(ProjectDir)/Class/Reward;$(ProjectDir)/Class/Relic;$(ProjectDir)/Class/Relic/Relic;$(ProjectDir)/Class/Event;$(ProjectDir);$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\External\KamataEngine\lib\$(Configuration);$(ProjectDir)..\External\DirectXTex\lib\$(Configuration);$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)..\Generated\Outputs\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)..\Generated\Obj\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)..\External\DirectXTex\include;$(ProjectDir)..\External\imgui;$(ProjectDir)..\External\KamataEngine\include;$(ProjectDir)/Class;$(ProjectDir)/Class/Scene;$(ProjectDir)/Class/Card;$(ProjectDir)/Class/Card/Card;$(ProjectDir)/Class/Enemy;$(ProjectDir)/Class/Enemy/Enemy;$(ProjectDir)/Class/Enemy/Action;$(ProjectDir)/Class/StatusEffect;$(ProjectDir)/Class/StatusEffect/Buff;$(ProjectDir)/Class/StatusEffect/Debuff;$(ProjectDir)/Class/Map;$(ProjectDir)/Class/Reward;$(ProjectDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\External\DirectXTex\include;$(ProjectDir)..\External\imgui;$(ProjectDir)..\External\KamataEngine\include;$(ProjectDir)/Class;$(ProjectDir)/Class/Scene;$(ProjectDir)/Class/Card;$(ProjectDir)/Class/Card/Card;$(ProjectDir)/Class/Enemy;$(ProjectDir)/Class/Enemy/Enemy;$(ProjectDir)/Class/Enemy/Action;$(ProjectDir)/Class/StatusEffect;$(ProjectDir)/Class/StatusEffect/Buff;$(ProjectDir)/Class/StatusEffect/Debuff;$(ProjectDir)/Class/Map;$(ProjectDir)/Class/Reward;$(ProjectDir)/Class/Relic;$(ProjectDir)/Class/Relic/Relic;$(ProjectDir)/Class/Event;$(ProjectDir);$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)..\External\KamataEngine\lib\$(Configuration);$(ProjectDir)..\External\DirectXTex\lib\$(Configuration);$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)..\Generated\Outputs\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)..\Generated\Obj\$(ProjectName)\$(Configuration)\</IntDir>
@@ -106,7 +106,7 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BlankRelic.cpp" />
+    <ClCompile Include="Class\Relic\Relic\BlankRelic.cpp" />
     <ClCompile Include="Class\Card\Card\AllReverse.cpp" />
     <ClCompile Include="Class\StatusEffect\Buff\AntiFragile.cpp" />
     <ClCompile Include="Class\StatusEffect\Buff\AuraOfLife.cpp" />
@@ -143,11 +143,13 @@
     <ClCompile Include="Class\Card\Card\ClusterGrenade.cpp" />
     <ClCompile Include="Class\Enemy\Action\ContinuousAttackAction.cpp" />
     <ClCompile Include="Class\Enemy\Action\ContinuousHealAction.cpp" />
-    <ClCompile Include="DisposableShield.cpp" />
-    <ClCompile Include="Event.cpp" />
-    <ClCompile Include="EventManager.cpp" />
-    <ClCompile Include="HPGauge.cpp" />
-    <ClCompile Include="MagicPlayingCards.cpp" />
+    <ClCompile Include="Class\Card\Card\DesperateAttack.cpp" />
+    <ClCompile Include="Class\Card\Card\DisposableShield.cpp" />
+    <ClCompile Include="Class\Card\Card\DrawAttack.cpp" />
+    <ClCompile Include="Class\Event\Event.cpp" />
+    <ClCompile Include="Class\Event\EventManager.cpp" />
+    <ClCompile Include="Class\HPGauge.cpp" />
+    <ClCompile Include="Class\Relic\Relic\MagicPlayingCards.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MathUtilityEX.cpp" />
     <ClCompile Include="Class\NumberSprite.cpp" />
@@ -169,17 +171,20 @@
     <ClCompile Include="Class\Card\Card\StrengthUp.cpp" />
     <ClCompile Include="Class\Card\Card\MiniHeal.cpp" />
     <ClCompile Include="Class\Enemy\Enemy\PsychoAxe.cpp" />
-    <ClCompile Include="Relic.cpp" />
-    <ClCompile Include="RelicFactory.cpp" />
-    <ClCompile Include="RelicManager.cpp" />
-    <ClCompile Include="SakeCup.cpp" />
-    <ClCompile Include="StandardReverse.cpp" />
-    <ClCompile Include="StandardRiskyAttack.cpp" />
-    <ClCompile Include="TreasureEvent.cpp" />
-    <ClCompile Include="TreasureReward.cpp" />
-    <ClCompile Include="UIManager.cpp" />
+    <ClCompile Include="Class\StatusEffect\Debuff\NoDraw.cpp" />
+    <ClCompile Include="Class\Relic\Relic.cpp" />
+    <ClCompile Include="Class\Relic\RelicFactory.cpp" />
+    <ClCompile Include="Class\Relic\RelicManager.cpp" />
+    <ClCompile Include="Class\Relic\Relic\SakeCup.cpp" />
+    <ClCompile Include="Class\Card\Card\StandardReverse.cpp" />
+    <ClCompile Include="Class\Card\Card\StandardRiskyAttack.cpp" />
+    <ClCompile Include="Class\StatusEffect\Buff\Strongening.cpp" />
+    <ClCompile Include="Class\Event\TreasureEvent.cpp" />
+    <ClCompile Include="Class\Reward\TreasureReward.cpp" />
+    <ClCompile Include="Class\UIManager.cpp" />
     <ClCompile Include="Class\Card\Card\AmplifierShield.cpp" />
     <ClCompile Include="Class\Card\Card\VeryCareful.cpp" />
+    <ClCompile Include="Class\StatusEffect\Debuff\Weakening.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\TerrainPS.hlsl">
@@ -257,11 +262,11 @@
     <None Include="Resources\shaders\Sprite.hlsli" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BlankRelic.h" />
+    <ClInclude Include="Class\Relic\Relic\BlankRelic.h" />
     <ClInclude Include="Class\Card\Card\AllReverse.h" />
     <ClInclude Include="Class\StatusEffect\Buff\AntiFragile.h" />
     <ClInclude Include="Class\StatusEffect\Buff\AuraOfLife.h" />
-    <ClInclude Include="BattleEnemyType.h" />
+    <ClInclude Include="Class\Enemy\BattleEnemyType.h" />
     <ClInclude Include="Class\Card\Card\Bloodsucking.h" />
     <ClInclude Include="Class\Enemy\Action\BuffAction.h" />
     <ClInclude Include="Class\Card\Card\Blow.h" />
@@ -301,17 +306,20 @@
     <ClInclude Include="Class\Card\Card\ClusterGrenade.h" />
     <ClInclude Include="Class\Enemy\Action\ContinuousAttackAction.h" />
     <ClInclude Include="Class\Enemy\Action\ContinuousHealAction.h" />
-    <ClInclude Include="DisposableShield.h" />
-    <ClInclude Include="Event.h" />
-    <ClInclude Include="EventManager.h" />
-    <ClInclude Include="HPGauge.h" />
-    <ClInclude Include="MagicPlayingCards.h" />
+    <ClInclude Include="Class\Card\Card\DesperateAttack.h" />
+    <ClInclude Include="Class\Card\Card\DisposableShield.h" />
+    <ClInclude Include="Class\Card\Card\DrawAttack.h" />
+    <ClInclude Include="Class\Event\Event.h" />
+    <ClInclude Include="Class\Event\EventManager.h" />
+    <ClInclude Include="Class\HPGauge.h" />
+    <ClInclude Include="Class\Relic\Relic\MagicPlayingCards.h" />
     <ClInclude Include="Class\Card\Card\MiniHeal.h" />
     <ClInclude Include="Class\Enemy\Enemy\PsychoAxe.h" />
-    <ClInclude Include="Relic.h" />
-    <ClInclude Include="RelicEffectTiming.h" />
-    <ClInclude Include="RelicFactory.h" />
-    <ClInclude Include="RelicManager.h" />
+    <ClInclude Include="Class\StatusEffect\Debuff\NoDraw.h" />
+    <ClInclude Include="Class\Relic\Relic.h" />
+    <ClInclude Include="Class\Relic\RelicEffectTiming.h" />
+    <ClInclude Include="Class\Relic\RelicFactory.h" />
+    <ClInclude Include="Class\Relic\RelicManager.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Class\Scene\Blackout.h" />
     <ClInclude Include="Class\Scene\GameScene.h" />
@@ -327,14 +335,16 @@
     <ClInclude Include="Class\StatusEffect\StatusEffect.h" />
     <ClInclude Include="Class\StatusEffect\StatusEffectFactory.h" />
     <ClInclude Include="Class\Card\StrengthUp.h" />
-    <ClInclude Include="SakeCup.h" />
-    <ClInclude Include="StandardReverse.h" />
-    <ClInclude Include="StandardRiskyAttack.h" />
-    <ClInclude Include="TreasureEvent.h" />
-    <ClInclude Include="TreasureReward.h" />
-    <ClInclude Include="UIManager.h" />
+    <ClInclude Include="Class\Relic\Relic\SakeCup.h" />
+    <ClInclude Include="Class\Card\Card\StandardReverse.h" />
+    <ClInclude Include="Class\Card\Card\StandardRiskyAttack.h" />
+    <ClInclude Include="Class\StatusEffect\Buff\Strongening.h" />
+    <ClInclude Include="Class\Event\TreasureEvent.h" />
+    <ClInclude Include="Class\TreasureReward.h" />
+    <ClInclude Include="Class\UIManager.h" />
     <ClInclude Include="Class\Card\Card\AmplifierShield.h" />
     <ClInclude Include="Class\Card\Card\VeryCareful.h" />
+    <ClInclude Include="Class\StatusEffect\Debuff\Weakening.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectXGame.rc" />

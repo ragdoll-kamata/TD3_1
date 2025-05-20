@@ -43,6 +43,7 @@ void BattleManager::StartBattle(BattleEnemyType battleEnemyType) {
 	mapManager_->SetIsMove(false);
 	isEnd = false;
 	turn = BattlePhase::StartBattleTurn;
+	player_->GetStatus()->ClearShield();
 	battleEnemyType_ = battleEnemyType;
 }
 
@@ -67,7 +68,7 @@ void BattleManager::ShieldPlayer(int num, Status* status) {
 }
 
 void BattleManager::StatusEffectPlayer(std::unique_ptr<StatusEffect> statusEffect, int stack) {
-	player_->GetStatus()->AddStatusEffect(std::move(statusEffect), stack);
+	player_->GetStatus()->AddStatusEffect(std::move(statusEffect), stack,cardManager_);
 }
 
 void BattleManager::DamageEnemy(int num, Enemy* enemy, Status* status) { 
@@ -82,7 +83,7 @@ void BattleManager::ShieldEnemy(int num, Enemy* enmey, Status* status) {
 	enmey->GetStatus()->AddShield(num, status); }
 
 void BattleManager::StatusEffectEnemy(Enemy* enemy, std::unique_ptr<StatusEffect> statusEffect, int stack) {
-	enemy->AddStatusEffect(std::move(statusEffect), stack);
+	enemy->GetStatus()->AddStatusEffect(std::move(statusEffect), stack, cardManager_);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -97,10 +98,11 @@ void BattleManager::StartBattleTurn() {
 
 void BattleManager::PlayerStartMainTurn() { 
 	if (cardManager_->StartMainTurn()) {
+		player_->GetStatus()->Effect(EffectTiming::StartOfTurn, StackDecreaseTiming::StartOfTurn);
 		turn = BattlePhase::PlayerMainTurn;
 	}
 	player_->GetStatus()->ClearShield();
-	player_->GetStatus()->Effect(EffectTiming::StartOfTurn, StackDecreaseTiming::StartOfTurn);
+	
 }
 
 void BattleManager::PlayerMainTurn() { 
@@ -118,9 +120,10 @@ void BattleManager::PlayerEndMainTurn() {
 
 void BattleManager::EnemyStartMainTurn() {
 	if (enemyManager_->StartMainTurn()) {
+		enemyManager_->Effect(EffectTiming::StartOfTurn, StackDecreaseTiming::StartOfTurn);
 		turn = BattlePhase::EnemyMainTurn;
 	}
-	enemyManager_->Effect(EffectTiming::StartOfTurn, StackDecreaseTiming::StartOfTurn);
+
 }
 
 void BattleManager::EnemyMainTurn() {

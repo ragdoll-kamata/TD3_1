@@ -14,11 +14,11 @@ void Bloodsucking::IndividualInitialize() {
 
 bool Bloodsucking::Effect() { 
 	int i = targetEnemy->GetStatus()->GetHP();
-	battleManager_->DamageEnemy(value, targetEnemy, playrStatus_);
+	battleManager_->DamageEnemy(value, targetEnemy, playerStatus_);
 	i -= targetEnemy->GetStatus()->GetHP();
 
 	if (i > 0) {
-		battleManager_->HealPlayer(i / 2, playrStatus_);
+		battleManager_->HealPlayer(i / 2, playerStatus_);
 	}
 
 	return true; 
@@ -26,11 +26,11 @@ bool Bloodsucking::Effect() {
 
 bool Bloodsucking::ReverseEffect() { 
 	int i = targetEnemy->GetStatus()->GetHP();
-	battleManager_->HealEnemy(value, targetEnemy, playrStatus_);
+	battleManager_->HealEnemy(value, targetEnemy, playerStatus_);
 	i -= targetEnemy->GetStatus()->GetHP();
 
 	if (i < 0) {
-		battleManager_->DamagePlayer(-i, playrStatus_);
+		battleManager_->DamagePlayer(-i, playerStatus_);
 	}
 
 	return true;

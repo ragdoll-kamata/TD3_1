@@ -115,6 +115,7 @@ public:
 	std::vector<Card*> GetSDeck();
 
 	void AddDrawNum(int num) { drawNum += num; }
+	void SetCardDrawNum(int num) { cardDrawNum = num; }
 	std::unique_ptr<Card> CardLottery();
 
 private:

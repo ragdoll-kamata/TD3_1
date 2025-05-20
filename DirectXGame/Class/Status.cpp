@@ -55,12 +55,13 @@ void Status::Damage(int damage, Status* status) {
 			damage += status->GetBonusDamage();
 		}
 		damageRate_ = 1.0f;
+		status->SetDamageRate(1.0f);
 
 		status->Effect(EffectTiming::BeforeAttack, StackDecreaseTiming::None);
 	}
 	Effect(EffectTiming::BeforeDefense, StackDecreaseTiming::None);
 
-	damage = static_cast<int>(damage * damageRate_);
+	damage = static_cast<int>(damage * damageRate_ * status->GetDamageRate());
 	if (damage < 0) {
 		DecisionHeal(-damage, status);
 	} else {
@@ -125,7 +126,7 @@ void Status::AddShield(int v, Status* status) {
 	shield_ += v;
 }
 
-void Status::AddStatusEffect(std::unique_ptr<StatusEffect> statusEffect, int stack) {
+void Status::AddStatusEffect(std::unique_ptr<StatusEffect> statusEffect, int stack, CardManager* cardManager) {
 	for (int i = 0; i < statusEffects.size(); i++) {
 		if (statusEffects[i]->GetStatusEffectName() == statusEffect->GetStatusEffectName()) {
 			statusEffects[i]->AddStack(stack);
@@ -140,12 +141,14 @@ void Status::AddStatusEffect(std::unique_ptr<StatusEffect> statusEffect, int sta
 				statusEffects.erase(statusEffects.begin() + i);
 
 				statusEffect->Initialize(stack, this);
+				statusEffect->SetCardManager(cardManager);
 				statusEffects.insert(statusEffects.begin() + i, std::move(statusEffect));
 				return;
 			}
 		}
 	}
 	statusEffect->Initialize(stack, this);
+	statusEffect->SetCardManager(cardManager);
 	statusEffects.push_back(std::move(statusEffect));
 }
 

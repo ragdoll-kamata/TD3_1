@@ -12,7 +12,7 @@ void PoisonDagger::IndividualInitialize() {
 }
 
 bool PoisonDagger::Effect() {
-	battleManager_->DamageEnemy(value, targetEnemy, playrStatus_);
+	battleManager_->DamageEnemy(value, targetEnemy, playerStatus_);
 	battleManager_->StatusEffectEnemy(targetEnemy, std::move(StatusEffectFactory::CreateStatusEffect("Poison")), 5);
 
 
@@ -20,7 +20,7 @@ bool PoisonDagger::Effect() {
 }
 
 bool PoisonDagger::ReverseEffect() {
-	battleManager_->DamageEnemy(-value, targetEnemy, playrStatus_);
+	battleManager_->DamageEnemy(-value, targetEnemy, playerStatus_);
 	battleManager_->StatusEffectEnemy(targetEnemy, std::move(StatusEffectFactory::CreateStatusEffect("Regeneration")), 5);
 	return true;
 }

@@ -12,6 +12,7 @@
 using namespace KamataEngine;
 
 class StatusEffect;
+class CardManager;
 class Status {
 public:
 
@@ -51,7 +52,7 @@ public:
 
 	void AddShield(int v, Status* status);
 
-	void AddStatusEffect(std::unique_ptr<StatusEffect> statusEffect, int stack);
+	void AddStatusEffect(std::unique_ptr<StatusEffect> statusEffect, int stack, CardManager* cardManager);
 
 	void ClearStatusEffect();
 

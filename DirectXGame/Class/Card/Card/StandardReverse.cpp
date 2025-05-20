@@ -21,10 +21,6 @@ bool StandardReverse::Effect() {
 			i++;
 			s->SetIsReverse(!s->GetIsReverse());
 		}
-		i -= 1;
-		if (i < 0) {
-			cardManager_->CardDraw(-i);
-		}
 		return true;
 	}
 

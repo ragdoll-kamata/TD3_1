@@ -20,10 +20,6 @@ bool Reverse::Effect() {
 			i++;
 			s->SetIsReverse(!s->GetIsReverse());
 		}
-		i -= 2;
-		if (i < 0) {
-			cardManager_->CardDraw(-i);
-		}
 		return true;
 	} 
 

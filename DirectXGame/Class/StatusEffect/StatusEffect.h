@@ -8,6 +8,7 @@
 #include <memory>
 
 class BattleManager;
+class CardManager;
 
 class StatusEffect {
 public:
@@ -37,9 +38,12 @@ public:
 
 	void SetSpriteTextureHandle(uint32_t th) { sprite_.SetTextureHandle(th); }
 
+	void SetCardManager(CardManager* cardManager) { cardManager_ = cardManager; }
+
 protected:
 	int stack_;
 	BattleManager* battleManager_;
+	CardManager* cardManager_;
 	Status* status_;
 	EffectTiming effectTiming_;
 	StackDecreaseTiming stackDecreaseTiming_;

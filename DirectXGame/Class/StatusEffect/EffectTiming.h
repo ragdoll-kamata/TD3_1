@@ -13,5 +13,6 @@ enum class EffectTiming {
 	OnDefense,      // 防御しきれた時
 	OnDamage,       // ダメージを受けた時
 	OnHeal,         // 回復した時
-	OnDeath         // 死亡時
+	OnDeath,        // 死亡時
+	OnDraw,         // ドロー時
 };

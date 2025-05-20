@@ -11,13 +11,15 @@ void AmplifierShield::IndividualInitialize() {
 }
 
 bool AmplifierShield::Effect() {
-	battleManager_->ShieldPlayer(value, playrStatus_);
-	battleManager_->DamagePlayer(value / 2, playrStatus_);
+	battleManager_->DamagePlayer(value / 2, playerStatus_);
+	battleManager_->ShieldPlayer(value, playerStatus_);
+
 	return true;
 }
 
 bool AmplifierShield::ReverseEffect() {
-	battleManager_->ShieldPlayer(-value, playrStatus_);
-	battleManager_->HealPlayer(value / 2, playrStatus_);
+	battleManager_->HealPlayer(value / 2, playerStatus_);
+	battleManager_->ShieldPlayer(-value, playerStatus_);
+
 	return true;
 }

@@ -48,10 +48,6 @@ public: // メンバ関数
 	/// </summary>
 	void Draw() override;
 
-	void CheckAllCollisions();
-
-	void GenerateBlocks();
-
 	void Destroy() override;
 
 	Camera skyDomeCamera_;

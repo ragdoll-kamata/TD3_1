@@ -6,16 +6,16 @@ void MiniHeal::IndividualInitialize() {
 	sprite.SetColor({0.5f, 1.0f, 0.0f, 1.0f});
 	cardType = CardType::Skill;
 	cardRange = CardRange::Self;
-	id = 6;
-	value = 1001;
+	id = 1001;
+	value = 8;
 }
 
 bool MiniHeal::Effect() { 
-	battleManager_->HealPlayer(value, playrStatus_);
+	battleManager_->HealPlayer(value, playerStatus_);
 	return true;
 }
 
 bool MiniHeal::ReverseEffect() {
-	battleManager_->DamagePlayer(value, playrStatus_);
+	battleManager_->DamagePlayer(value, playerStatus_);
 	return true;
 }

@@ -5,6 +5,9 @@
 #include "AntiFragile.h"
 #include "AurOfDeath.h"
 #include "AuraOfLife.h"
+#include "NoDraw.h"
+#include "Strongening.h"
+#include "Weakening.h"
 std::unique_ptr<StatusEffect> StatusEffectFactory::CreateStatusEffect(std::string statusEffectName) { 
 	uint32_t th = 0;
 	if (statusEffectName == "Poison") {
@@ -46,6 +49,27 @@ std::unique_ptr<StatusEffect> StatusEffectFactory::CreateStatusEffect(std::strin
 		th = TextureManager::GetInstance()->Load("UI/auraOfLife.png");
 		std::unique_ptr<StatusEffect> statusEffect = std::make_unique<AuraOfLife>();
 		statusEffect->SetStatusEffectName("AuraOfLife");
+		statusEffect->SetSpriteTextureHandle(th);
+		return std::move(statusEffect);
+	}
+	if (statusEffectName == "NoDraw") {
+		th = TextureManager::GetInstance()->Load("white1x1.png");
+		std::unique_ptr<StatusEffect> statusEffect = std::make_unique<NoDraw>();
+		statusEffect->SetStatusEffectName("NoDraw");
+		statusEffect->SetSpriteTextureHandle(th);
+		return std::move(statusEffect);
+	}
+	if (statusEffectName == "Strongening") {
+		th = TextureManager::GetInstance()->Load("white1x1.png");
+		std::unique_ptr<StatusEffect> statusEffect = std::make_unique<Strongening>();
+		statusEffect->SetStatusEffectName("Strongening");
+		statusEffect->SetSpriteTextureHandle(th);
+		return std::move(statusEffect);
+	}
+	if (statusEffectName == "Weakening") {
+		th = TextureManager::GetInstance()->Load("white1x1.png");
+		std::unique_ptr<StatusEffect> statusEffect = std::make_unique<Weakening>();
+		statusEffect->SetStatusEffectName("Weakening");
 		statusEffect->SetSpriteTextureHandle(th);
 		return std::move(statusEffect);
 	}

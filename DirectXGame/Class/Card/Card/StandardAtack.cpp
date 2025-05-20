@@ -6,15 +6,15 @@ void StandardAtack::IndividualInitialize() {
 	cardType = CardType::Damage;
 	cardRange = CardRange::One;
 	id = 0;
-	value = 5;
+	value = 6;
 }
 
 bool StandardAtack::Effect() { 
-	battleManager_->DamageEnemy(value, targetEnemy, playrStatus_);
+	battleManager_->DamageEnemy(value, targetEnemy, playerStatus_);
 	return true;
 }
 
 bool StandardAtack::ReverseEffect() { 
-	battleManager_->DamageEnemy(-value, targetEnemy, playrStatus_);
+	battleManager_->DamageEnemy(-value, targetEnemy, playerStatus_);
 	return true;
 }

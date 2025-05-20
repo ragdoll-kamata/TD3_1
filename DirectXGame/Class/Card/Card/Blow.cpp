@@ -11,13 +11,13 @@ void Blow::IndividualInitialize() {
 }
 
 bool Blow::Effect() {
-	battleManager_->DamageEnemy(value, targetEnemy, playrStatus_);
+	battleManager_->DamageEnemy(value, targetEnemy, playerStatus_);
 	battleManager_->StatusEffectEnemy(targetEnemy, std::move(StatusEffectFactory::CreateStatusEffect("Fragility")), 2);
 	return true;
 }
 
 bool Blow::ReverseEffect() {
-	battleManager_->DamageEnemy(-value, targetEnemy, playrStatus_);
+	battleManager_->DamageEnemy(-value, targetEnemy, playerStatus_);
 	battleManager_->StatusEffectEnemy(targetEnemy, std::move(StatusEffectFactory::CreateStatusEffect("AntiFragile")), 2);
 	return true;
 }

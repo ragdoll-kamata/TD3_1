@@ -1,5 +1,12 @@
 #include "Enemy.h"
 #include <algorithm>
+#include <iostream>
+
+void Enemy::Initialize() {
+	using dist_type = std::uniform_int_distribution<>;
+	dist_type::param_type param(1, 100);
+	dist.param(param);
+}
 
 void Enemy::Update() { 
 	status_->Update();
@@ -50,10 +57,6 @@ bool Enemy::IsOnCollision(Vector2 pos) {
 		return true;
 	}
 	return false;
-}
-
-void Enemy::AddStatusEffect(std::unique_ptr<StatusEffect> statusEffect, int stack) {
-	status_->AddStatusEffect(std::move(statusEffect), stack);
 }
 
 void Enemy::Effect(EffectTiming effectTiming, StackDecreaseTiming stackDecreaseTiming) { 

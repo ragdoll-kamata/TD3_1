@@ -492,7 +492,10 @@ void CardManager::CardDrawMove() {
 	}
 }
 
-void CardManager::CardDraw(int num) { cardDrawNum += num; }
+void CardManager::CardDraw(int num) { 
+	cardDrawNum += num;
+	player_->GetStatus()->Effect(EffectTiming::OnDraw, StackDecreaseTiming::None);
+}
 
 int CardManager::RandomHandDeath(int num) {
 

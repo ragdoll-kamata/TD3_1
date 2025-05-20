@@ -7,17 +7,17 @@ void StandardRiskyAttack::IndividualInitialize() {
 	cardType = CardType::Damage;
 	cardRange = CardRange::One;
 	id = 1;
-	value = 10;
+	value = 12;
 }
 
 bool StandardRiskyAttack::Effect() {
-	battleManager_->DamageEnemy(value, targetEnemy, playrStatus_);
-	battleManager_->ShieldPlayer(-value / 2, playrStatus_);
+	battleManager_->DamageEnemy(value, targetEnemy, playerStatus_);
+	battleManager_->ShieldPlayer(-value / 2, playerStatus_);
 	return true;
 }
 
 bool StandardRiskyAttack::ReverseEffect() {
-	battleManager_->HealEnemy(value, targetEnemy, playrStatus_);
-	battleManager_->ShieldPlayer(value / 2, playrStatus_);
+	battleManager_->HealEnemy(value, targetEnemy, playerStatus_);
+	battleManager_->ShieldPlayer(value / 2, playerStatus_);
 	return true;
 }

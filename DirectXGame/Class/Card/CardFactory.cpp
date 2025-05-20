@@ -5,11 +5,13 @@
 #include "DrawCard.h"
 #include "PoisonDagger.h"
 #include "Reverse.h"
+#include "DrawAttack.h"
 
 #include "Bloodsucking.h"
 #include "StrengthUp.h"
 #include "VeryCareful.h"
 #include "ClusterGrenade.h"
+#include "DesperateAttack.h"
 
 #include "AllReverse.h"
 #include "MiniHeal.h"
@@ -23,6 +25,7 @@ std::unique_ptr<Card> CardFactory::CommonCardCreate(std::mt19937& random) {
 	commonCards.push_back(std::make_unique<DrawCard>());
 	commonCards.push_back(std::make_unique<PoisonDagger>());
 	commonCards.push_back(std::make_unique<Reverse>());
+	commonCards.push_back(std::make_unique<DrawAttack>());
 	int i = 0;
 	for (auto card : unGenerationCard) {
 		RemoveSameClassCard(commonCards, card);
@@ -44,6 +47,7 @@ std::unique_ptr<Card> CardFactory::UnCommonCardCreate(std::mt19937& random) {
 	uncommonCards.push_back(std::make_unique<StrengthUp>());
 	uncommonCards.push_back(std::make_unique<VeryCareful>());
 	uncommonCards.push_back(std::make_unique<ClusterGrenade>());
+	uncommonCards.push_back(std::make_unique<DesperateAttack>());
 	int i = 0;
 	for (auto card : unGenerationCard) {
 		RemoveSameClassCard(uncommonCards, card);

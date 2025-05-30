@@ -67,16 +67,19 @@ private:
 
 	void CardLocationUpdate();
 
-	void CardLocationMove(std::unique_ptr<Card> card, CardLocation cardLocation);
+	void CardLocationMove(std::unique_ptr<Card>& card, CardLocation cardLocation);
 
 	void CardDrawMove();
 
 public:
+
 	/// <summary>
-	/// カードドロー
+	/// カードドロー+ドロー時の強制正位置、逆位置指定
 	/// </summary>
 	/// <param name="num">ドロー枚数</param>
-	void CardDraw(int num);
+	/// <param name="value">指定枚数</param>
+	/// <param name="is">正位置か逆位置か</param>
+	void CardDraw(int num, int value = 0, bool is = false);
 
 	/// <summary>
 	/// ランダム手札破壊!
@@ -99,6 +102,8 @@ public:
 	/// <returns>カードタイプ</returns>
 	CardType GetExecutionCardType() { return executionCardType; }
 
+	Card* GetExecutionCard() { return executionCard; }
+
 	/// <summary>
 	/// 初期デッキ生成
 	/// </summary>
@@ -113,6 +118,17 @@ public:
 
 
 	std::vector<Card*> GetSDeck();
+	std::vector<std::unique_ptr<Card>>& GetSDeckCard() {
+		return sDeck;
+	}
+	void DeleteSDeckCard(Card* c) {
+		for (auto it = sDeck.begin(); it != sDeck.end(); ++it) {
+			if (it->get() == c) {
+				sDeck.erase(it);
+				return;
+			}
+		}
+	}
 
 	void AddDrawNum(int num) { drawNum += num; }
 	void SetCardDrawNum(int num) { cardDrawNum = num; }
@@ -132,6 +148,7 @@ private:
 	std::vector<std::unique_ptr<Card>> exclusion;
 
 	CardType executionCardType;
+	Card* executionCard = nullptr;
 
 	std::vector<int> nnnum;
 
@@ -150,8 +167,8 @@ private:
 	int drawNum = 5;
 	int drawIndex = 0;
 
-	const Vector2 turnEndButtonPos = {1100.0f, 500.0f};
-	const Vector2 turnEndButtonStandbyPos = {1400.0f, 500.0f};
+	const Vector2 turnEndButtonPos = {1100.0f, 490.0f};
+	const Vector2 turnEndButtonStandbyPos = {1400.0f, 490.0f};
 	const Vector2 turnEndButtonSize = {160.0f, 40.0f};
 
 	const Vector2 allReverseButtonSize = {120.0f, 40.0f};
@@ -159,6 +176,7 @@ private:
 	const Vector2 allReverseNoButtonPos = {640.0f + allReverseButtonSize.x / 2.0f + 20.0f, 360.0f};
 
 	std::unique_ptr<Button> turnEndButton;
+	std::unique_ptr<Button> turnEndNotButton;
 	std::unique_ptr<Button> allReverseYssButton;
 	std::unique_ptr<Button> allReverseNoButton;
 
@@ -219,6 +237,8 @@ private:
 
 
 	uint32_t cardDrawNum = 0;
+	int cardDrawPositiveNum = 0;
+	int cardDrawReverseNum = 0;
 
 	const int kCardDrawTimer = 10;
 	int cardDrawTimer = 0;

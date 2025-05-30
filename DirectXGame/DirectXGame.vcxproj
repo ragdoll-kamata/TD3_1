@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -106,6 +106,8 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AbsoluteReversal.cpp" />
+    <ClCompile Include="Caterpillar.cpp" />
     <ClCompile Include="Class\Relic\Relic\BlankRelic.cpp" />
     <ClCompile Include="Class\Card\Card\AllReverse.cpp" />
     <ClCompile Include="Class\StatusEffect\Buff\AntiFragile.cpp" />
@@ -185,6 +187,7 @@
     <ClCompile Include="Class\Card\Card\AmplifierShield.cpp" />
     <ClCompile Include="Class\Card\Card\VeryCareful.cpp" />
     <ClCompile Include="Class\StatusEffect\Debuff\Weakening.cpp" />
+    <ClCompile Include="RestEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\TerrainPS.hlsl">
@@ -262,6 +265,8 @@
     <None Include="Resources\shaders\Sprite.hlsli" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AbsoluteReversal.h" />
+    <ClInclude Include="Caterpillar.h" />
     <ClInclude Include="Class\Relic\Relic\BlankRelic.h" />
     <ClInclude Include="Class\Card\Card\AllReverse.h" />
     <ClInclude Include="Class\StatusEffect\Buff\AntiFragile.h" />
@@ -345,6 +350,7 @@
     <ClInclude Include="Class\Card\Card\AmplifierShield.h" />
     <ClInclude Include="Class\Card\Card\VeryCareful.h" />
     <ClInclude Include="Class\StatusEffect\Debuff\Weakening.h" />
+    <ClInclude Include="RestEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DirectXGame.rc" />

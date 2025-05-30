@@ -4,6 +4,8 @@
 #include "Event.h"
 class RewardManager;
 class MapManager;
+class CardManager;
+class Player;
 class EventManager {
 public:
 	/// <summary>
@@ -29,8 +31,17 @@ public:
 
 	void SetMapManager(MapManager* mapManager) { mapManager_ = mapManager; }
 
+	void SetCardManager(CardManager* cardManager) {
+		cardManager_ = cardManager;
+	}
+	void SetPlayer(Player* player) {
+		player_ = player;
+	}
+
 private:
 	std::unique_ptr<Event> event;
 	RewardManager* rewardManager_ = nullptr;
 	MapManager* mapManager_ = nullptr;
+	CardManager* cardManager_ = nullptr;
+	Player* player_ = nullptr;
 };

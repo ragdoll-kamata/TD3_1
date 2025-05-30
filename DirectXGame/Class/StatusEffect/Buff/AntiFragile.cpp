@@ -2,7 +2,7 @@
 
 void AntiFragile::PeculiarInitialize() {
 	effectTiming_ = EffectTiming::BeforeDefense;
-	stackDecreaseTiming_ = StackDecreaseTiming::StartOfTurn;
+	stackDecreaseTiming_ = StackDecreaseTiming::EndOfTurn;
 }
 
 void AntiFragile::ApplyEffect() {

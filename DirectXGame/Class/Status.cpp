@@ -54,14 +54,15 @@ void Status::Damage(int damage, Status* status) {
 		if (status->GetBonusDamage() != 0) {
 			damage += status->GetBonusDamage();
 		}
-		damageRate_ = 1.0f;
+		
 		status->SetDamageRate(1.0f);
 
 		status->Effect(EffectTiming::BeforeAttack, StackDecreaseTiming::None);
 	}
+	damageRate_ = 1.0f;
 	Effect(EffectTiming::BeforeDefense, StackDecreaseTiming::None);
 
-	damage = static_cast<int>(damage * damageRate_ * status->GetDamageRate());
+	damage = static_cast<int>(damage * damageRate_ * (status != nullptr ? status->GetDamageRate() : 1.0f));
 	if (damage < 0) {
 		DecisionHeal(-damage, status);
 	} else {
@@ -76,13 +77,15 @@ void Status::Heal(int heal, Status* status) {
 		if (status->GetBonusDamage() != 0) {
 			heal -= status->GetBonusDamage();
 		}
-		healRate_ = 1.0f;
+		
 
+		status->SetHealRate(1.0f);
 		status->Effect(EffectTiming::BeforeHeal, StackDecreaseTiming::None);
 	}
+	healRate_ = 1.0f;
 	Effect(EffectTiming::BeforeRecovery, StackDecreaseTiming::None);
 
-	heal = static_cast<int>(heal * healRate_);
+	heal = static_cast<int>(heal * healRate_ * (status != nullptr ? status->GetHealRate() : 1.0f));
 	if (heal < 0) {
 		DecisionDamage(-heal, status);
 	} else {

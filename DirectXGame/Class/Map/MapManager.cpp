@@ -130,6 +130,8 @@ void MapManager::CollisionUpdata() {
 							case NodeType::Elite:
 								break;
 							case NodeType::Rest:
+								SetIsMapOpen(false);
+								eventManager_->CreateRestEvent();
 								break;
 							case NodeType::Treasure:
 								SetIsMapOpen(false);

@@ -14,5 +14,10 @@ void Player::Draw() {
 }
 
 void Player::EndBattle() {
-	status_->ClearStatusEffect();
+	status_->ClearStatusEffect(); }
+
+void Player::Rest() {
+	int i = status_->GetMaxHP();
+	i = static_cast<int>(i * 0.3f);
+	status_->Heal(30, nullptr);
 }

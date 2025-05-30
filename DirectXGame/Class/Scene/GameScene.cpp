@@ -58,12 +58,13 @@ void GameScene::Initialize2() {
 	eventManager_ = std::make_unique<EventManager>();
 	eventManager_->Initialize(rewardManager_.get());
 	eventManager_->SetMapManager(mapManager_.get());
+	eventManager_->SetCardManager(cardManager_.get());
+	eventManager_->SetPlayer(player_.get());
 	mapManager_->SetEventManager(eventManager_.get());
 }
 
 void GameScene::Update() {
-	uiManager_->Update();
-	mapManager_->Update();
+
 	if (!uiManager_->IsSDeckOpen()) {
 		if (!mapManager_->GetIsMapOpen()) {
 			battleManager_->Update();
@@ -71,9 +72,12 @@ void GameScene::Update() {
 		}
 		mapManager_->CollisionUpdata();
 	}
+	uiManager_->Update();
+
+	mapManager_->Update();
+	eventManager_->Update();
 	enemyManager_->Update();
 	relicManager_->Update();
-	eventManager_->Update();
 }
 
 
@@ -91,11 +95,12 @@ void GameScene::Draw() {
 	/// </summary>
 
 	battleManager_->Draw();
+	eventManager_->Draw();
 	rewardManager_->Draw();
 
 	relicManager_->Draw();
 
-	eventManager_->Draw();
+	
 
 	mapManager_->Draw();
 

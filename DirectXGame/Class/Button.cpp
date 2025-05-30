@@ -3,6 +3,7 @@
 using namespace MathUtility;
 void Button::Initialize(const Vector2& pos, const Vector2& size, std::string name, Vector4 color) {
 	TH = TextureManager::GetInstance()->Load(name);
+
 	sprite.Initialize();
 	sprite.SetTextureHandle(TH);
 	sprite.SetAnchorPoint({0.5f, 0.5f});
@@ -30,3 +31,5 @@ bool Button::IsOnCollision(Vector2 pos) {
 	}
 	return false;
 }
+
+void Button::SetTextureRect(Vector2 rect) { sprite.SetTextureRect({}, rect); }

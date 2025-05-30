@@ -2,7 +2,7 @@
 
 void Weakening::PeculiarInitialize() {
 	effectTiming_ = EffectTiming::BeforeAttack;
-	stackDecreaseTiming_ = StackDecreaseTiming::StartOfTurn;
+	stackDecreaseTiming_ = StackDecreaseTiming::EndOfTurn;
 }
 
 void Weakening::ApplyEffect() { status_->SetDamageRate(status_->GetDamageRate() * 0.75f); }

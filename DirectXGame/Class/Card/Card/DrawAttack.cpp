@@ -18,6 +18,6 @@ bool DrawAttack::Effect() {
 
 bool DrawAttack::ReverseEffect() {
 	battleManager_->HealEnemy(8, targetEnemy, playerStatus_);
-	cardManager_->CardDraw(1);
+	cardManager_->CardDraw(1, 1, true);
 	return true;
 }

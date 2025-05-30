@@ -2,6 +2,7 @@
 #include "CardReward.h"
 #include "MapManager.h"
 #include "TreasureReward.h"
+
 void RewardManager::Initialize(CardManager* cardManager, RelicManager* relicManager) {
 	cardManager_=cardManager;
 	relicManager_ = relicManager;
@@ -13,6 +14,8 @@ void RewardManager::Initialize(CardManager* cardManager, RelicManager* relicMana
 
 void RewardManager::Update() {
 	if (isReward && isSelect) {
+		Vector4 color = back.GetColor();
+		back.SetColor({0.0f, 0.0f, 0.0f, MathUtility::Lerp(color.w, 0.7f, 0.3f)});
 		is_ = false;
 		for (int i = 0; i < rewards.size(); i++) {
 			rewards[i]->SetIsU(false);
@@ -31,20 +34,25 @@ void RewardManager::Update() {
 			rewards[i]->Update();
 		}
 		std::erase_if(rewards, [](const auto& asd) { return asd->IsDelete(); });
-		if (Input::GetInstance()->IsTriggerMouse(0)) {
- 			if (skip.IsOnCollision(Input::GetInstance()->GetMousePosition())) {
-				isSkip = true;
-				if (isSkipForSelect) {
-					isSelect = false;
+		if (!is_) {
+			if (Input::GetInstance()->IsTriggerMouse(0)) {
+				if (skip.IsOnCollision(Input::GetInstance()->GetMousePosition())) {
+					isSkip = true;
+					if (isSkipForSelect) {
+						isSelect = false;
+					}
 				}
 			}
 		}
-	} 
+	} else {
+		back.SetColor({0.0f, 0.0f, 0.0f, 0.0f});
+	}
 
 }
 
 void RewardManager::Draw() {
 	if (IsReward() && isSelect) {
+		back.Draw();
 		skip.Draw();
 		for (int i = 0; i < rewards.size(); i++) {
 			rewards[i]->Draw();

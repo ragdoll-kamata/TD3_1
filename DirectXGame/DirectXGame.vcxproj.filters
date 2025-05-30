@@ -121,6 +121,9 @@
     <Filter Include="ソース ファイル\Manager">
       <UniqueIdentifier>{64bc1fc4-1242-44f3-bb94-11d09fdbfb52}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Event">
+      <UniqueIdentifier>{25e359aa-0f2a-4d6e-a969-bd2750a6b056}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -222,19 +225,10 @@
     <ClCompile Include="Class\Easings.cpp">
       <Filter>ソース ファイル\Other</Filter>
     </ClCompile>
-    <ClCompile Include="Class\UIManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Class\StatusEffect\Buff\AntiFragile.cpp">
       <Filter>ソース ファイル\StatusEffect\Buff</Filter>
     </ClCompile>
     <ClCompile Include="Class\HPGauge.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Class\Event\Event.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Class\Event\TreasureEvent.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Class\Relic\Relic\SakeCup.cpp">
@@ -359,6 +353,24 @@
     </ClCompile>
     <ClCompile Include="Class\StatusEffect\Buff\Strongening.cpp">
       <Filter>ソース ファイル\StatusEffect\Buff</Filter>
+    </ClCompile>
+    <ClCompile Include="Caterpillar.cpp">
+      <Filter>ソース ファイル\Enemy\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Event\TreasureEvent.cpp">
+      <Filter>ソース ファイル\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Event\Event.cpp">
+      <Filter>ソース ファイル\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="RestEvent.cpp">
+      <Filter>ソース ファイル\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\UIManager.cpp">
+      <Filter>ソース ファイル\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="AbsoluteReversal.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -658,6 +670,15 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Class\StatusEffect\Buff\Strongening.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Caterpillar.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="RestEvent.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="AbsoluteReversal.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,6 +3,7 @@
 #include "ShieldAction.h"
 #include "ContinuousAttackAction.h"
 #include "ContinuousHealAction.h"
+#include "DebuffAtackAction.h"
 #include "BuffAction.h"
 std::unique_ptr<EnemyAction> ActionFactory::CreateAction(std::string enemyName) {
 	
@@ -20,6 +21,9 @@ std::unique_ptr<EnemyAction> ActionFactory::CreateAction(std::string enemyName) 
 	}
 	if (enemyName == "Buff") {
 		return std::make_unique<BuffAction>();
+	}
+	if (enemyName == "DebuffAttack") {
+		return std::make_unique<DebuffAtackAction>();
 	}
 	
 	return nullptr;

@@ -74,4 +74,5 @@ protected:
 
 	std::unique_ptr<Status> status_;
 	std::uniform_int_distribution<int> dist;
+	std::mt19937 g; 
 };

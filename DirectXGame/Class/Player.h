@@ -14,6 +14,8 @@ public:
 
 	Status* GetStatus() { return status_.get(); }
 
+	void Rest();
+
 private:
 	std::unique_ptr<Status> status_;
 };

@@ -2,7 +2,7 @@
 
 void Fragility::PeculiarInitialize() {
 	effectTiming_ = EffectTiming::BeforeDefense;
-	stackDecreaseTiming_ = StackDecreaseTiming::StartOfTurn;
+	stackDecreaseTiming_ = StackDecreaseTiming::EndOfTurn;
 }
 
 void Fragility::ApplyEffect() {

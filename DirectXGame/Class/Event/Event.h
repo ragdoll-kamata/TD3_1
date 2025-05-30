@@ -1,5 +1,7 @@
 #pragma once
 #include "RewardManager.h"
+#include "CardManager.h"
+#include "Player.h"
 class Event {
 public:
 	virtual ~Event() = default;
@@ -20,7 +22,12 @@ public:
 
 	bool IsEnd() const { return isEnd; }
 
+	void SetCardManager(CardManager* cardManager) { cardManager_ = cardManager; }
+	void SetPlayer(Player* player) { player_ = player; }
+
 protected:
 	RewardManager* rewardManager_ = nullptr;
+	CardManager* cardManager_ = nullptr;
+	Player* player_ = nullptr;
 	bool isEnd = false;
 };

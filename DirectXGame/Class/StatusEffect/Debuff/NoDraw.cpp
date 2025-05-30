@@ -3,7 +3,7 @@
 
 void NoDraw::PeculiarInitialize() {
 	effectTiming_ = EffectTiming::OnDraw;
-	stackDecreaseTiming_ = StackDecreaseTiming::StartOfTurn;
+	stackDecreaseTiming_ = StackDecreaseTiming::EndOfTurn;
 }
 
 void NoDraw::ApplyEffect() {

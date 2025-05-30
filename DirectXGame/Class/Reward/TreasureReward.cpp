@@ -16,5 +16,10 @@ void TreasureReward::Update() {
 	}
 }
 
-void TreasureReward::Draw() {}
+void TreasureReward::Draw() {
+	Reward::Draw();
+	if (isR) {
+		relic->Draw();
+	}
+}
 

@@ -11,15 +11,11 @@ void DrawCard::IndividualInitialize() {
 }
 
 bool DrawCard::Effect() {
-
 	cardManager_->CardDraw(2);
 	return true;
 }
 
 bool DrawCard::ReverseEffect() { 
-	int i = cardManager_->RandomHandDeath(2);
-	for (int j = 0; j < i; j++) {
-		battleManager_->DamagePlayer(3, nullptr);
-	}
+	cardManager_->CardDraw(2, 2, true);
 	return true;
 }

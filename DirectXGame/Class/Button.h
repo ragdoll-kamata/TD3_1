@@ -12,6 +12,8 @@ public:
 
 	void SetPosition(Vector2 pos) { sprite.SetPosition(pos); }
 
+	void SetTextureRect(Vector2 rect);
+
 protected:
 	Sprite sprite;
 	uint32_t TH;

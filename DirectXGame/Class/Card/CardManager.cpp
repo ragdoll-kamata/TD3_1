@@ -22,8 +22,11 @@ void CardManager::Initialize(EnemyManager* enemy, Player* player) {
 	g.seed(rd());
 
 	turnEndButton = std::make_unique<Button>();
-	turnEndButton->Initialize(turnEndButtonStandbyPos, turnEndButtonSize, "white1x1.png", {1.0f, 0.0f, 0.0f, 1.0f});
-
+	turnEndButton->Initialize(turnEndButtonStandbyPos, turnEndButtonSize, "UI/turnEndOn.png", {1.0f, 1.0f, 1.0f, 1.0f});
+	turnEndButton->SetTextureRect({512.0f, 128.0f});
+	turnEndNotButton = std::make_unique<Button>();
+	turnEndNotButton->Initialize(turnEndButtonStandbyPos, turnEndButtonSize, "UI/turnEndOff.png", {1.0f, 1.0f, 1.0f, 1.0f});
+	turnEndNotButton->SetTextureRect({512.0f, 128.0f});
 	allReverseYssButton = std::make_unique<Button>();
 	allReverseYssButton->Initialize(allReverseYssButtonPos, allReverseButtonSize, "white1x1.png", {0.0f, 1.0f, 0.0f, 1.0f});
 
@@ -71,8 +74,11 @@ void CardManager::DrawBattle() {
 		allReverseYssButton->Draw();
 		allReverseNoButton->Draw();
 	}
-
-	turnEndButton->Draw();
+	if (handLack >= 0) {
+		turnEndButton->Draw();
+	} else {
+		turnEndNotButton->Draw();
+	}
 	number.Draw();
 	if (!isDeck) {
 		deckButton->Draw();
@@ -114,6 +120,7 @@ bool CardManager::StartBattleTrue() {
 	if (startTimer <= kStartTimer) {
 		float t = static_cast<float>(startTimer) / static_cast<float>(kStartTimer);
 		turnEndButton->SetPosition(Vector2Lerp(turnEndButtonStandbyPos, turnEndButtonPos, Easings::EaseOutQuart(t)));
+		turnEndNotButton->SetPosition(Vector2Lerp(turnEndButtonStandbyPos, turnEndButtonPos, Easings::EaseOutQuart(t)));
 		deckButton->SetPosition(Vector2Lerp(deckButtonStandbyPos, deckButtonPos, Easings::EaseOutQuart(t)));
 		cemeteryButton->SetPosition(Vector2Lerp(cemeteryButtonStandbyPos, cemeteryButtonPos, Easings::EaseOutQuart(t)));
 		number.SetPosition(Vector2Lerp(numberStandbyPos, numberPos, Easings::EaseOutQuart(t)));
@@ -200,13 +207,15 @@ bool CardManager::MainTurn() {
 
 							if (EH > 0) {
 								handCard[holdH]->SetTargetEnemy(enemyManager->GetEnemy(EH));           // ターゲットエネミーのセット
-								CardLocationMove(std::move(handCard[holdH]), CardLocation::Execution); // ムーブ
-								handCard.erase(handCard.begin() + holdH);                              // 元のリストから削除
+								executionCard = handCard[holdH].get();
+								CardLocationMove(handCard[holdH], CardLocation::Execution); // ムーブ
+								player_->GetStatus()->Effect(EffectTiming::OnExecution, StackDecreaseTiming::None);
 							}
 						} else {
 							if (mousePos.y <= 360.0f) {
-								CardLocationMove(std::move(handCard[holdH]), CardLocation::Execution); // ムーブ
-								handCard.erase(handCard.begin() + holdH);                              // 元のリストから削除
+								executionCard = handCard[holdH].get();
+								CardLocationMove(handCard[holdH], CardLocation::Execution); // ムーブ
+								player_->GetStatus()->Effect(EffectTiming::OnExecution, StackDecreaseTiming::None);
 							}
 						}
 					}
@@ -235,8 +244,7 @@ bool CardManager::MainTurn() {
 bool CardManager::EndMainTurn() {
 	while (handCard.size() > 0) {
 		// handCard から cemetery にカードを移動
-		CardLocationMove(std::move(handCard.back()), CardLocation::Cemetery);
-		handCard.pop_back(); // 移動後に元のデッキから削除
+		CardLocationMove(handCard.back(), CardLocation::Cemetery);
 	}
 
 	return true;
@@ -261,6 +269,7 @@ bool CardManager::EndBattleTrue() {
 			HandCardSetSpritePos(i, pos + pos2, 0.3f);
 		}
 		turnEndButton->SetPosition(Vector2Lerp(turnEndButtonPos, turnEndButtonStandbyPos, Easings::EaseOutQuart(t)));
+		turnEndNotButton->SetPosition(Vector2Lerp(turnEndButtonPos, turnEndButtonStandbyPos, Easings::EaseOutQuart(t)));
 		deckButton->SetPosition(Vector2Lerp(deckButtonPos, deckButtonStandbyPos, Easings::EaseOutQuart(t)));
 		cemeteryButton->SetPosition(Vector2Lerp(cemeteryButtonPos, cemeteryButtonStandbyPos, Easings::EaseOutQuart(t)));
 		number.SetPosition(Vector2Lerp(numberPos, numberStandbyPos, Easings::EaseOutQuart(t)));
@@ -282,6 +291,7 @@ void CardManager::EndBattle() {
 	while (cemetery.size() > 0) {
 		cemetery.pop_back();
 	}
+	player_->GetStatus()->ClearShield();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -299,8 +309,7 @@ void CardManager::DeckShuffle() {
 void CardManager::DeckRefresh() {
 	while (cemetery.size() > 0) {
 		// cemetery から deck にカードを移動
-		CardLocationMove(std::move(cemetery.back()), CardLocation::Deck); // ムーブ
-		cemetery.pop_back();                                              // 移動後に元のデッキから削除
+		CardLocationMove(cemetery.back(), CardLocation::Deck); // ムーブ
 	}
 	DeckShuffle();
 }
@@ -315,8 +324,7 @@ void CardManager::EffectProcessing() {
 		if (execution[0]->GetCardType() == CardType::Ability) {
 			execution.erase(execution.begin()); // 元のリストから削除
 		} else {
-			CardLocationMove(std::move(execution[0]), CardLocation::Cemetery); // ムーブ
-			execution.erase(execution.begin());                                // 元のリストから削除
+			CardLocationMove(execution[0], CardLocation::Cemetery); // ムーブ
 		}
 		relicManager_->RelicEffect(RelicEffectTiming::Play);
 	}
@@ -408,47 +416,83 @@ void CardManager::HandCardSetSpritePos(int i, Vector2 pos, float t) { handCard[i
 void CardManager::CardLocationUpdate() {
 	for (int i = 0; i < deck.size(); i++) {
 		if (deck[i]->GetCardLocation() != CardLocation::Deck) {
-			CardLocationMove(std::move(deck[i]), deck[i]->GetCardLocation());
-			deck.erase(deck.begin() + i); // 元のデッキから削除
+			CardLocationMove(deck[i], deck[i]->GetCardLocation());
 		}
 	}
 	for (int i = 0; i < handCard.size(); i++) {
 		if (handCard[i]->GetCardLocation() != CardLocation::Hand) {
-			CardLocationMove(std::move(handCard[i]), handCard[i]->GetCardLocation());
-			handCard.erase(handCard.begin() + i); // 元のデッキから削除
+			CardLocationMove(handCard[i], handCard[i]->GetCardLocation());
 		}
 	}
 	for (int i = 0; i < cemetery.size(); i++) {
 		if (cemetery[i]->GetCardLocation() != CardLocation::Cemetery) {
-			CardLocationMove(std::move(cemetery[i]), cemetery[i]->GetCardLocation());
-			cemetery.erase(cemetery.begin() + i); // 元のデッキから削除
+			CardLocationMove(cemetery[i], cemetery[i]->GetCardLocation());
 		}
 	}
 	for (int i = 0; i < execution.size(); i++) {
 		if (execution[i]->GetCardLocation() != CardLocation::Execution) {
-			CardLocationMove(std::move(execution[i]), execution[i]->GetCardLocation());
-			execution.erase(execution.begin() + i); // 元のデッキから削除
+			CardLocationMove(execution[i], execution[i]->GetCardLocation());
 		}
 	}
 }
 
-void CardManager::CardLocationMove(std::unique_ptr<Card> card, CardLocation cardLocation) {
-	switch (cardLocation) {
+void CardManager::CardLocationMove(std::unique_ptr<Card>& card, CardLocation cardLocation) {
+	std::unique_ptr<Card> moveC = nullptr;
+	switch (card->GetCardLocation()) {
 	case CardLocation::Deck:
-		card->SetCardLocation(CardLocation::Deck);
-		deck.push_back(std::move(card)); // ムーブ
+		for (auto it = deck.begin(); it != deck.end(); ++it) {
+			if (it->get() == card.get()) {
+				moveC = std::move(*it);
+				deck.erase(it);
+				break;
+			}
+		}
 		break;
 	case CardLocation::Hand:
-		card->SetCardLocation(CardLocation::Hand);
-		handCard.push_back(std::move(card)); // ムーブ
+		for (auto it = handCard.begin(); it != handCard.end(); ++it) {
+			if (it->get() == card.get()) {
+				moveC = std::move(*it);
+				handCard.erase(it);
+				break;
+			}
+		}
 		break;
 	case CardLocation::Cemetery:
-		card->SetCardLocation(CardLocation::Cemetery);
-		cemetery.push_back(std::move(card)); // ムーブ
+		for (auto it = cemetery.begin(); it != cemetery.end(); ++it) {
+			if (it->get() == card.get()) {
+				moveC = std::move(*it);
+				cemetery.erase(it);
+				break;
+			}
+		}
 		break;
 	case CardLocation::Execution:
-		card->SetCardLocation(CardLocation::Execution);
-		execution.push_back(std::move(card)); // ムーブ
+		for (auto it = execution.begin(); it != execution.end(); ++it) {
+			if (it->get() == card.get()) {
+				moveC = std::move(*it);
+				execution.erase(it);
+				break;
+			}
+		}
+		break;
+	}
+
+	switch (cardLocation) {
+	case CardLocation::Deck:
+		moveC->SetCardLocation(CardLocation::Deck);
+		deck.push_back(std::move(moveC)); // ムーブ
+		break;
+	case CardLocation::Hand:
+		moveC->SetCardLocation(CardLocation::Hand);
+		handCard.push_back(std::move(moveC)); // ムーブ
+		break;
+	case CardLocation::Cemetery:
+		moveC->SetCardLocation(CardLocation::Cemetery);
+		cemetery.push_back(std::move(moveC)); // ムーブ
+		break;
+	case CardLocation::Execution:
+		moveC->SetCardLocation(CardLocation::Execution);
+		execution.push_back(std::move(moveC)); // ムーブ
 		break;
 	}
 }
@@ -474,11 +518,17 @@ void CardManager::CardDrawMove() {
 				} else {
 					if (handCard.size() < 8) {
 						Audio::GetInstance()->PlayWave(cardDrawSH, false, 0.5f);
-						std::unique_ptr<Card> card = std::move(deck.back()); // 一番最後のカードを移動
-						deck.pop_back();                                     // 移動後に元のデッキから削除
-
+						std::unique_ptr<Card>& card = deck.back(); // 一番最後のカードを参照
+						if (cardDrawPositiveNum > 0) {
+							card->SetIsReverse(false);
+							cardDrawPositiveNum--;
+						}
+						if (cardDrawReverseNum > 0) {
+							card->SetIsReverse(true);
+							cardDrawReverseNum--;
+						}
 						card->SetSpritePos(deckButtonPos);
-						CardLocationMove(std::move(card), CardLocation::Hand); // 手札に移動
+						CardLocationMove(card, CardLocation::Hand); // 手札に移動
 
 						AllHandLack();
 						cardDrawTimer = 0;
@@ -492,8 +542,31 @@ void CardManager::CardDrawMove() {
 	}
 }
 
-void CardManager::CardDraw(int num) { 
+void CardManager::CardDraw(int num, int value, bool is) { 
 	cardDrawNum += num;
+	if (value > 0) {
+		if (!is) {
+			if (cardDrawReverseNum > 0) {
+				cardDrawReverseNum -= value;
+				if (cardDrawReverseNum < 0) {
+					cardDrawPositiveNum -= cardDrawReverseNum;
+					cardDrawReverseNum = 0;
+				}
+			} else {
+				cardDrawPositiveNum += value;
+			}
+		} else {
+			if (cardDrawPositiveNum > 0) {
+				cardDrawPositiveNum -= value;
+				if (cardDrawPositiveNum < 0) {
+					cardDrawReverseNum -= cardDrawPositiveNum;
+					cardDrawPositiveNum = 0;
+				}
+			} else {
+				cardDrawReverseNum += value;
+			}
+		}
+	}
 	player_->GetStatus()->Effect(EffectTiming::OnDraw, StackDecreaseTiming::None);
 }
 
@@ -506,8 +579,7 @@ int CardManager::RandomHandDeath(int num) {
 		}
 		std::uniform_int_distribution<int> get_rand_uni_int(0, static_cast<int>(handCard.size()) - 1);
 		int a = get_rand_uni_int(g);
-		CardLocationMove(std::move(handCard[a]), CardLocation::Cemetery); // 手札から墓地に移動
-		handCard.erase(handCard.begin() + a);                             // 元のリストから削除
+		CardLocationMove(handCard[a], CardLocation::Cemetery); // 手札から墓地に移動
 	}
 	return 0;
 }

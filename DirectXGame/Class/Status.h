@@ -22,6 +22,7 @@ public:
 
 	void Draw();
 	void AddMaxHP(int v) { maxHP_ += v; }
+
 	int GetMaxHP() const { return maxHP_; }
 
 	int GetHP() const { return HP_; }

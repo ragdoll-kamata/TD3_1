@@ -15,4 +15,5 @@ enum class EffectTiming {
 	OnHeal,         // 回復した時
 	OnDeath,        // 死亡時
 	OnDraw,         // ドロー時
+	OnExecution     // カード使用時
 };

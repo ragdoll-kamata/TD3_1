@@ -6,6 +6,8 @@ void Enemy::Initialize() {
 	using dist_type = std::uniform_int_distribution<>;
 	dist_type::param_type param(1, 100);
 	dist.param(param);
+	std::random_device ra;
+	g.seed(ra());
 }
 
 void Enemy::Update() { 

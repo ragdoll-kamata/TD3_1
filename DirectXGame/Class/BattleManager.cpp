@@ -97,11 +97,16 @@ void BattleManager::StartBattleTurn() {
 
 
 void BattleManager::PlayerStartMainTurn() { 
+	if (!isPlayerStart) {
+		player_->GetStatus()->ClearShield();
+		isPlayerStart = true;
+	}
 	if (cardManager_->StartMainTurn()) {
 		player_->GetStatus()->Effect(EffectTiming::StartOfTurn, StackDecreaseTiming::StartOfTurn);
 		turn = BattlePhase::PlayerMainTurn;
+		isPlayerStart = false;
 	}
-	player_->GetStatus()->ClearShield();
+	
 	
 }
 

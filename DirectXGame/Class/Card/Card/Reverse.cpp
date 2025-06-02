@@ -1,9 +1,11 @@
 #include "Reverse.h"
 #include "CardManager.h"
 void Reverse::IndividualInitialize() {
+	TH = TextureManager::GetInstance()->Load("card/Reverse.png");
+	sprite.SetTextureHandle(TH);
 	luck = 0;
 	reverseLuck = -2;
-	sprite.SetColor({1.0f, 0.0f, 1.0f, 1.0f});
+	//sprite.SetColor({1.0f, 0.0f, 1.0f, 1.0f});
 	cardType = CardType::Skill;
 	cardRange = CardRange::Card;
 	id = 14;

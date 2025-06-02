@@ -81,7 +81,7 @@ private:
 
 private:
 	BattlePhase turn = BattlePhase::PlayerStartMainTurn;
-	BattleEnemyType battleEnemyType_	;
+	BattleEnemyType battleEnemyType_;
 
 	std::unordered_map<BattlePhase, std::function<void()>> mBattlePhase{
 	    {BattlePhase::StartBattleTurn,     [this]() { StartBattleTurn(); }    },
@@ -103,4 +103,6 @@ private:
 
 	bool isEnd = false;
 
+
+	bool isPlayerStart = false;
 };

@@ -17,9 +17,11 @@ void RestEvent::Initialize(RewardManager* rewardManager) {
 
 void RestEvent::Update() {
 	if (is) {
-		float mouseWheel = static_cast<float>(Input::GetInstance()->GetWheel()) / 3.0f - prevWheel;
+		float mouseWheel = 0.0f;
+		if (Input::GetInstance()->GetWheel() != 0) {
+			mouseWheel = static_cast<float>(Input::GetInstance()->GetWheel()) / 3.0f - prevWheel;
+		}
 		prevWheel = static_cast<float>(Input::GetInstance()->GetWheel()) / 3.0f;
-		scroll += mouseWheel;
 		
 		float a = static_cast<float>((sCard.size() - 1) / 5);
 

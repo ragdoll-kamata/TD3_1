@@ -106,6 +106,7 @@ protected:
 	BattleManager* battleManager_ = nullptr;
 
 	Sprite sprite;
+	Sprite sprite2;
 	uint32_t TH;
 
 	NumberSprite number;

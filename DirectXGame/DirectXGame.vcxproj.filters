@@ -369,8 +369,23 @@
     <ClCompile Include="Class\UIManager.cpp">
       <Filter>ソース ファイル\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="DebuffAction.cpp">
+      <Filter>ソース ファイル\Enemy\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>ソース ファイル\Enemy\Enemy</Filter>
+    </ClCompile>
     <ClCompile Include="AbsoluteReversal.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\StatusEffect\Debuff</Filter>
+    </ClCompile>
+    <ClCompile Include="DebuffShieldAction.cpp">
+      <Filter>ソース ファイル\Enemy\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Scene\Over.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Scene\Clear.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -679,6 +694,21 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="AbsoluteReversal.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="DebuffAction.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="DebuffShieldAction.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Scene\Over.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Scene\Clear.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

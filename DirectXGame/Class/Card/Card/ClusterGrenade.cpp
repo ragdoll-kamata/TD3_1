@@ -1,9 +1,11 @@
 #include "ClusterGrenade.h"
 #include "BattleManager.h"
 void ClusterGrenade::IndividualInitialize() {
-	luck = 0;
+	TH = TextureManager::GetInstance()->Load("card/ClusterGrenade.png");
+	sprite.SetTextureHandle(TH);
+	luck = 2;
 	reverseLuck = -3;
-	sprite.SetColor({1.0f, 0.2f, 0.0f, 1.0f});
+	//sprite.SetColor({1.0f, 0.2f, 0.0f, 1.0f});
 	cardType = CardType::Damage;
 	cardRange = CardRange::One;
 	id = 102;

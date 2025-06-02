@@ -45,6 +45,8 @@ public:
 
 	void SelectTrue() { isSelect = true; }
 
+	bool isClear() const { return isClear_; }
+
 private:
 	void CreateBattleNormalReward();
 	void CreateBattleEliteReward();
@@ -70,4 +72,5 @@ private:
 	std::vector<std::unique_ptr<Reward>> rewards;
 
 	MapManager* mapManager_ = nullptr;
+	bool isClear_ = false;
 };

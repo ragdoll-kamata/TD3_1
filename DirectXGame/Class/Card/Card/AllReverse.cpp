@@ -3,9 +3,11 @@
 #include "CardManager.h"
 #include "StatusEffectFactory.h"
 void AllReverse::IndividualInitialize() {
+	TH = TextureManager::GetInstance()->Load("card/AllReverse.png");
+	sprite.SetTextureHandle(TH);
 	luck = 0;
 	reverseLuck = -10;
-	sprite.SetColor({0.0f, 0.0f, 0.0f, 1.0f});
+	//sprite.SetColor({0.0f, 0.0f, 0.0f, 1.0f});
 	cardType = CardType::Skill;
 	cardRange = CardRange::Card;
 	id = 1000;

@@ -4,7 +4,7 @@
 void TreasureReward::Initialize(CardManager* cardManager, RelicManager* relicManager) {
 	Reward::Initialize(cardManager, relicManager);
 	relicManager_ = relicManager;
-	relic = std::move(relicManager_->CreateBlankRelic());
+	relic = std::move(relicManager_->CreateRandomRelic());
 }
 
 void TreasureReward::Update() {

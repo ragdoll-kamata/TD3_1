@@ -95,6 +95,21 @@ void EnemyManager::CreateNormalEnemy() {
 	enemy.push_back(std::move(e));
 }
 
-void EnemyManager::CreateEliteEnemy() {}
+void EnemyManager::CreateEliteEnemy() {
+	std::unique_ptr<Enemy> e = std::move(enmeyFactory_->CreateEnemy("PsychoAxe"));
+	e->Initialize();
 
-void EnemyManager::CreateBossEnemy() {}
+	e->SetBattleManager(battleManager_);
+
+	enemy.push_back(std::move(e));
+
+}
+
+void EnemyManager::CreateBossEnemy() {
+	std::unique_ptr<Enemy> e = std::move(enmeyFactory_->CreateEnemy("Boss"));
+	e->Initialize();
+
+	e->SetBattleManager(battleManager_);
+
+	enemy.push_back(std::move(e));
+}

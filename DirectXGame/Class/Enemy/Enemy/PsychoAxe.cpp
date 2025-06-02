@@ -6,7 +6,7 @@ void PsychoAxe::Initialize() {
 	sprite.Initialize();
 	sprite.SetTextureHandle(TH);
 	sprite.SetAnchorPoint({0.5f, 0.5f});
-	sprite.SetSize({60.0f, 60.0f});
+	sprite.SetSize({60.0f, 120.0f});
 	sprite.SetColor({
 	    1.0f,
 	    0.5f,
@@ -14,7 +14,7 @@ void PsychoAxe::Initialize() {
 	    1.0f,
 	});
 	sprite.SetPosition({640.0f, 320.f});
-	halfSize = {60.0f, 60.0f};
+	halfSize = {60.0f, 120.0f};
 
 	status_ = std::make_unique<Status>();
 	status_->Initialize({640.0f, 320.f}, halfSize, 100);

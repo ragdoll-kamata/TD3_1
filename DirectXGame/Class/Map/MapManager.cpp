@@ -31,8 +31,12 @@ void MapManager::Initialize(BattleManager* battleManager, RewardManager* rewardM
 }
 
 void MapManager::Update() {
-	float mouseWheel = static_cast<float>(Input::GetInstance()->GetWheel()) / 3.0f - prevWheel;
+	float mouseWheel = 0.0f;
+	if (Input::GetInstance()->GetWheel() != 0) {
+		mouseWheel = static_cast<float>(Input::GetInstance()->GetWheel()) / 3.0f - prevWheel;
+	}
 	prevWheel = static_cast<float>(Input::GetInstance()->GetWheel()) / 3.0f;
+	
 	if (displayCloseMapTimer <= kDisplayMapTimer) {
 		float t = static_cast<float>(displayCloseMapTimer) / static_cast<float>(kDisplayMapTimer);
 
@@ -128,6 +132,8 @@ void MapManager::CollisionUpdata() {
 								battleManager_->StartBattle(BattleEnemyType::Normal);
 								break;
 							case NodeType::Elite:
+								SetIsMapOpen(false);
+								battleManager_->StartBattle(BattleEnemyType::Elite);
 								break;
 							case NodeType::Rest:
 								SetIsMapOpen(false);
@@ -142,6 +148,8 @@ void MapManager::CollisionUpdata() {
 							case NodeType::Event:
 								break;
 							case NodeType::Boss:
+								SetIsMapOpen(false);
+								battleManager_->StartBattle(BattleEnemyType::Boss);
 								break;
 							}
 							
@@ -366,13 +374,13 @@ NodeType MapManager::GetRandomNodeType(int floor) {
 		return NodeType::Treasure;
 	}
 
-	if (IsRandomNodeType(shopProbability, i, 3, NodeType::Shop)) {
-		return NodeType::Shop;
-	}
+	//if (IsRandomNodeType(shopProbability, i, 3, NodeType::Shop)) {
+	//	return NodeType::Shop;
+	//}
 
-	if (IsRandomNodeType(eventProbability, i, 3, NodeType::Null, 15)) {
-		return NodeType::Event;
-	}
+	//if (IsRandomNodeType(eventProbability, i, 3, NodeType::Null, 15)) {
+	//	return NodeType::Event;
+	//}
 	
 	return NodeType::Enemy;
 }

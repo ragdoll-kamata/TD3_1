@@ -73,11 +73,18 @@ void GameScene::Update() {
 		mapManager_->CollisionUpdata();
 	}
 	uiManager_->Update();
-
-	mapManager_->Update();
 	eventManager_->Update();
+	mapManager_->Update();
 	enemyManager_->Update();
 	relicManager_->Update();
+	if (player_->GetStatus()->GetHP() <= 0) {
+		blackout_->SetIsStart(true);
+		SceneManager::GetInstance()->SetNextScene(SceneName::OverScene);
+	}
+	if (rewardManager_->isClear()) {
+		blackout_->SetIsStart(true);
+		SceneManager::GetInstance()->SetNextScene(SceneName::ClearScene);
+	}
 }
 
 

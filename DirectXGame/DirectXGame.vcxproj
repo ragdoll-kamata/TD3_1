@@ -107,9 +107,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AbsoluteReversal.cpp" />
+    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Caterpillar.cpp" />
     <ClCompile Include="Class\Relic\Relic\BlankRelic.cpp" />
     <ClCompile Include="Class\Card\Card\AllReverse.cpp" />
+    <ClCompile Include="Class\Scene\Clear.cpp" />
+    <ClCompile Include="Class\Scene\Over.cpp" />
     <ClCompile Include="Class\StatusEffect\Buff\AntiFragile.cpp" />
     <ClCompile Include="Class\StatusEffect\Buff\AuraOfLife.cpp" />
     <ClCompile Include="Class\Card\Card\Bloodsucking.cpp" />
@@ -152,6 +155,8 @@
     <ClCompile Include="Class\Event\EventManager.cpp" />
     <ClCompile Include="Class\HPGauge.cpp" />
     <ClCompile Include="Class\Relic\Relic\MagicPlayingCards.cpp" />
+    <ClCompile Include="DebuffAction.cpp" />
+    <ClCompile Include="DebuffShieldAction.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MathUtilityEX.cpp" />
     <ClCompile Include="Class\NumberSprite.cpp" />
@@ -266,9 +271,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbsoluteReversal.h" />
+    <ClInclude Include="Boss.h" />
     <ClInclude Include="Caterpillar.h" />
     <ClInclude Include="Class\Relic\Relic\BlankRelic.h" />
     <ClInclude Include="Class\Card\Card\AllReverse.h" />
+    <ClInclude Include="Class\Scene\Clear.h" />
+    <ClInclude Include="Class\Scene\Over.h" />
     <ClInclude Include="Class\StatusEffect\Buff\AntiFragile.h" />
     <ClInclude Include="Class\StatusEffect\Buff\AuraOfLife.h" />
     <ClInclude Include="Class\Enemy\BattleEnemyType.h" />
@@ -325,6 +333,8 @@
     <ClInclude Include="Class\Relic\RelicEffectTiming.h" />
     <ClInclude Include="Class\Relic\RelicFactory.h" />
     <ClInclude Include="Class\Relic\RelicManager.h" />
+    <ClInclude Include="DebuffAction.h" />
+    <ClInclude Include="DebuffShieldAction.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Class\Scene\Blackout.h" />
     <ClInclude Include="Class\Scene\GameScene.h" />

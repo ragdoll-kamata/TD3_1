@@ -29,7 +29,9 @@ bool Enemy::StartMainTurn() {
 
 bool Enemy::MainTurn() { 
 	if (!isReverse) {
-		enemyAction->Execute();
+		if (enemyAction) {
+			enemyAction->Execute();
+		}
 	} else {
 		reverseEnemyAction->Execute();
 	}

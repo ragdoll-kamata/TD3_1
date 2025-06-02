@@ -19,7 +19,7 @@ void Caterpillar::Initialize() {
 	halfSize = {90.0f, 60.0f};
 
 	status_ = std::make_unique<Status>();
-	status_->Initialize({640.0f, 320.f}, halfSize, 1);
+	status_->Initialize({640.0f, 320.f}, halfSize, 45);
 
 	halfSize /= 2.0f;
 }

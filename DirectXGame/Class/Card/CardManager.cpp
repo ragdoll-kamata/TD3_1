@@ -292,6 +292,7 @@ void CardManager::EndBattle() {
 		cemetery.pop_back();
 	}
 	player_->GetStatus()->ClearShield();
+	cardDrawNum = 0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -340,7 +341,10 @@ void CardManager::AllHandLack() {
 
 bool CardManager::CardConfirmation() {
 	Vector2 mousePos = Input::GetInstance()->GetMousePosition();
-	float mouseWheel = static_cast<float>(Input::GetInstance()->GetWheel()) / 3.0f - prevWheel;
+	float mouseWheel = 0.0f;
+	if (Input::GetInstance()->GetWheel() != 0) {
+		mouseWheel = static_cast<float>(Input::GetInstance()->GetWheel()) / 3.0f - prevWheel;
+	}
 	prevWheel = static_cast<float>(Input::GetInstance()->GetWheel()) / 3.0f;
 	scroll += mouseWheel;
 	if (Input::GetInstance()->IsTriggerMouse(0)) {
@@ -539,6 +543,66 @@ void CardManager::CardDrawMove() {
 				}
 			}
 		}
+	}
+}
+
+void CardManager::CardLocationMove(Card* card, CardLocation cardLocation) {
+	std::unique_ptr<Card> moveC = nullptr;
+	switch (card->GetCardLocation()) {
+	case CardLocation::Deck:
+		for (auto it = deck.begin(); it != deck.end(); ++it) {
+			if (it->get() == card) {
+				moveC = std::move(*it);
+				deck.erase(it);
+				break;
+			}
+		}
+		break;
+	case CardLocation::Hand:
+		for (auto it = handCard.begin(); it != handCard.end(); ++it) {
+			if (it->get() == card) {
+				moveC = std::move(*it);
+				handCard.erase(it);
+				break;
+			}
+		}
+		break;
+	case CardLocation::Cemetery:
+		for (auto it = cemetery.begin(); it != cemetery.end(); ++it) {
+			if (it->get() == card) {
+				moveC = std::move(*it);
+				cemetery.erase(it);
+				break;
+			}
+		}
+		break;
+	case CardLocation::Execution:
+		for (auto it = execution.begin(); it != execution.end(); ++it) {
+			if (it->get() == card) {
+				moveC = std::move(*it);
+				execution.erase(it);
+				break;
+			}
+		}
+		break;
+	}
+	switch (cardLocation) {
+	case CardLocation::Deck:
+		moveC->SetCardLocation(CardLocation::Deck);
+		deck.push_back(std::move(moveC)); // ムーブ
+		break;
+	case CardLocation::Hand:
+		moveC->SetCardLocation(CardLocation::Hand);
+		handCard.push_back(std::move(moveC)); // ムーブ
+		break;
+	case CardLocation::Cemetery:
+		moveC->SetCardLocation(CardLocation::Cemetery);
+		cemetery.push_back(std::move(moveC)); // ムーブ
+		break;
+	case CardLocation::Execution:
+		moveC->SetCardLocation(CardLocation::Execution);
+		execution.push_back(std::move(moveC)); // ムーブ
+		break;
 	}
 }
 

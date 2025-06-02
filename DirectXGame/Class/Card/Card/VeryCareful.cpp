@@ -2,9 +2,11 @@
 #include "CardManager.h"
 
 void VeryCareful::IndividualInitialize() {
+	TH = TextureManager::GetInstance()->Load("card/VeryCareful.png");
+	sprite.SetTextureHandle(TH);
 	luck = 0;
 	reverseLuck = 0;
-	sprite.SetColor({0.5f, 0.5f, 0.5f, 1.0f});
+	//sprite.SetColor({0.5f, 0.5f, 0.5f, 1.0f});
 	cardType = CardType::Skill;
 	cardRange = CardRange::Card;
 	id = 101;
@@ -23,7 +25,8 @@ bool VeryCareful::Effect() {
 			if (s == nullptr) {
 				break;
 			}
-			s->SetCardLocation(CardLocation::Cemetery);
+			cardManager_->CardLocationMove(s, CardLocation::Cemetery);
+			
 		}
 		isSS = false;
 		return true;
@@ -39,7 +42,7 @@ bool VeryCareful::ReverseEffect() {
 			if (s == nullptr) {
 				break;
 			}
-			s->SetCardLocation(CardLocation::Cemetery);
+			cardManager_->CardLocationMove(s, CardLocation::Cemetery);
 		}
 		cardManager_->CardDraw(1);
 		return true;

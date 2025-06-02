@@ -3,9 +3,11 @@
 #include "BattleManager.h"
 
 void Bloodsucking::IndividualInitialize() {
+	TH = TextureManager::GetInstance()->Load("card/Bloodsucking.png");
+	sprite.SetTextureHandle(TH);
 	luck = 1;
 	reverseLuck = -1;
-	sprite.SetColor({0.1f, 0.0f, 0.0f, 1.0f});
+	//sprite.SetColor({0.1f, 0.0f, 0.0f, 1.0f});
 	cardType = CardType::Damage;
 	cardRange = CardRange::One;
 	id = 100;

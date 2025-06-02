@@ -21,7 +21,10 @@ void UIManager::Initialize(Player* player, CardManager* cardManager, MapManager*
 }
 
 void UIManager::Update() {
-	float mouseWheel = static_cast<float>(Input::GetInstance()->GetWheel()) / 3.0f - prevWheel;
+	float mouseWheel = 0.0f;
+	if (Input::GetInstance()->GetWheel() != 0) {
+		mouseWheel = static_cast<float>(Input::GetInstance()->GetWheel()) / 3.0f - prevWheel;
+	}
 	prevWheel = static_cast<float>(Input::GetInstance()->GetWheel()) / 3.0f;
 	scroll += mouseWheel;
 	Vector2 mouse = Input::GetInstance()->GetMousePosition();

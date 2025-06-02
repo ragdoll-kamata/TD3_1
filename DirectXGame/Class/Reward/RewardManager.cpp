@@ -100,6 +100,9 @@ void RewardManager::CreateBattleNormalReward() {
 	rewards.push_back(std::make_unique<CardReward>());
 }
 
-void RewardManager::CreateBattleEliteReward() {}
+void RewardManager::CreateBattleEliteReward() {
+	rewards.push_back(std::make_unique<CardReward>());
+	rewards.push_back(std::make_unique<TreasureReward>());
+}
 
-void RewardManager::CreateBattleBossReward() {}
+void RewardManager::CreateBattleBossReward() { isClear_ = true; }

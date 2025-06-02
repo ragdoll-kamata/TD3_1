@@ -3,9 +3,11 @@
 #include "BattleManager.h"
 
 void DesperateAttack::IndividualInitialize() {
+	TH = TextureManager::GetInstance()->Load("card/DesperateAttack.png");
+	sprite.SetTextureHandle(TH);
 	luck = 1;
 	reverseLuck = 1;
-	sprite.SetColor({1.0f, 0.0f, 0.0f, 1.0f});
+	//sprite.SetColor({1.0f, 0.0f, 0.0f, 1.0f});
 	cardType = CardType::Skill;
 	cardRange = CardRange::Self;
 	id = 104;

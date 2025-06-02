@@ -72,6 +72,7 @@ private:
 	void CardDrawMove();
 
 public:
+	void CardLocationMove(Card* card, CardLocation cardLocation);
 
 	/// <summary>
 	/// カードドロー+ドロー時の強制正位置、逆位置指定

@@ -8,6 +8,7 @@
 #include "NoDraw.h"
 #include "Strongening.h"
 #include "Weakening.h"
+#include "AbsoluteReversal.h"
 std::unique_ptr<StatusEffect> StatusEffectFactory::CreateStatusEffect(std::string statusEffectName) { 
 	uint32_t th = 0;
 	if (statusEffectName == "Poison") {
@@ -73,7 +74,12 @@ std::unique_ptr<StatusEffect> StatusEffectFactory::CreateStatusEffect(std::strin
 		statusEffect->SetSpriteTextureHandle(th);
 		return std::move(statusEffect);
 	}
+	if (statusEffectName == "AbsoluteReversal") {
+		th = TextureManager::GetInstance()->Load("white1x1.png");
+		std::unique_ptr<StatusEffect> statusEffect = std::make_unique<AbsoluteReversal>();
+		statusEffect->SetStatusEffectName("AbsoluteReversal");
+		statusEffect->SetSpriteTextureHandle(th);
+		return std::move(statusEffect);
+	}
 	return nullptr;
-
-
 }

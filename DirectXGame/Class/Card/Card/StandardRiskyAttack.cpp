@@ -1,9 +1,11 @@
 #include "StandardRiskyAttack.h"
 
 void StandardRiskyAttack::IndividualInitialize() {
+	TH = TextureManager::GetInstance()->Load("card/StanderdRiskyAttack.png");
+	sprite.SetTextureHandle(TH);
 	luck = 1;
 	reverseLuck = -1;
-	sprite.SetColor({1.0f, 0.7f, 0.7f, 1.0f});
+	//sprite.SetColor({1.0f, 0.7f, 0.7f, 1.0f});
 	cardType = CardType::Damage;
 	cardRange = CardRange::One;
 	id = 1;

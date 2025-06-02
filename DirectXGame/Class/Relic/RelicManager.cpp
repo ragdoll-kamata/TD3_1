@@ -14,11 +14,13 @@ void RelicManager::Initialize(CardManager* cardManager, BattleManager* battleMan
 	this->player_ = player;
 	relicFactory_ = std::make_unique<RelicFactory>();
 
-	relics.push_back(std::make_unique<MagicPlayingCards>());
-	relics.push_back(std::make_unique<SakeCup>());
+	//relics.push_back(std::make_unique<MagicPlayingCards>());
+	//relics.push_back(std::make_unique<SakeCup>());
 	for (const auto& relic : relics) {
 		relic->Initialize(cardManager_, battleManager_);
 	}
+	unCommonProbability = std::max<int>(unCommonMinProbability, unCommonProbability + 5);
+	rareProbability = std::max<int>(rareMinProbability, rareProbability + 5);
 }
 
 void RelicManager::Update() {

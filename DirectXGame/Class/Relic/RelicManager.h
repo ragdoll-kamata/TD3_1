@@ -42,5 +42,5 @@ private:
 	const int rareMinProbability = 5;
 
 	int unCommonProbability = 0;
-	const int unCommonMinProbability = 10;
+	const int unCommonMinProbability = 15;
 };

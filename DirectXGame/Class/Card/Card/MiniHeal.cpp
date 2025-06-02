@@ -1,9 +1,11 @@
 #include "MiniHeal.h"
 #include "BattleManager.h"
 void MiniHeal::IndividualInitialize() { 
+	TH = TextureManager::GetInstance()->Load("card/MiniHeal.png");
+	sprite.SetTextureHandle(TH);
 	luck = 1;
 	reverseLuck = -1;
-	sprite.SetColor({0.5f, 1.0f, 0.0f, 1.0f});
+	//sprite.SetColor({0.5f, 1.0f, 0.0f, 1.0f});
 	cardType = CardType::Skill;
 	cardRange = CardRange::Self;
 	id = 1001;

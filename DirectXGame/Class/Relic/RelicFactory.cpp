@@ -2,6 +2,11 @@
 #include <random>
 
 #include "SakeCup.h"
+
+#include "MagicPlayingCards.h"
+
+#include "DisposableShield.h"
+
 #include "BlankRelic.h"
 
 std::unique_ptr<Relic> RelicFactory::CreateRandomRelic(int& unCommon, int& rare) {
@@ -20,13 +25,26 @@ std::unique_ptr<Relic> RelicFactory::CreateRandomRelic(int& unCommon, int& rare)
 		return CreateUnCommonRelic();
 	}
 
-	isRare = false;
 	return CreateCommonRelic();
 }
 
-std::unique_ptr<Relic> RelicFactory::CreateCommonRelic() { return std::unique_ptr<Relic>(); }
+std::unique_ptr<Relic> RelicFactory::CreateCommonRelic() {
+	if (!electedRelic.contains("DisposableShield")) {
+		electedRelic.insert({"DisposableShield", ""});
+		return std::make_unique<DisposableShield>();
+	}
+	isCommon = false;
+	return ReCreateRandomRelic();
+}
 
-std::unique_ptr<Relic> RelicFactory::CreateUnCommonRelic() { return std::unique_ptr<Relic>(); }
+std::unique_ptr<Relic> RelicFactory::CreateUnCommonRelic() {
+	if (!electedRelic.contains("MagicPlayingCards")) {
+		electedRelic.insert({"MagicPlayingCards", ""});
+		return std::make_unique<MagicPlayingCards>();
+	}
+	isUnCommon = false;
+	return CreateCommonRelic(); 
+}
 
 std::unique_ptr<Relic> RelicFactory::CreateRareRelic() { 
 	if (!electedRelic.contains("SakeCup")) {
@@ -34,7 +52,7 @@ std::unique_ptr<Relic> RelicFactory::CreateRareRelic() {
 		return std::make_unique<SakeCup>();
 	}
 
-
+	isRare = false;
 	return CreateUnCommonRelic();
 }
 

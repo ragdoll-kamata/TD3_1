@@ -122,9 +122,11 @@ void Status::DecisionHeal(int heal, Status* status) {
 }
 
 void Status::AddShield(int v, Status* status) { 
-	status->Effect(EffectTiming::BonusShield, StackDecreaseTiming::None);
-	if (status->GetBonusShield() != 0) {
-		v += status->GetBonusShield();
+	if (status) {
+		status->Effect(EffectTiming::BonusShield, StackDecreaseTiming::None);
+		if (status->GetBonusShield() != 0) {
+			v += status->GetBonusShield();
+		}
 	}
 	shield_ += v;
 }

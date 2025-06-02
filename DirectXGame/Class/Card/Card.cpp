@@ -11,9 +11,17 @@ void Card::Initialize() {
 	sprite.SetAnchorPoint({0.5f, 0.5f});
 	sprite.SetSize({120.0f, 160.0f});
 	sprite.SetTextureRect({}, {120.0f, 160.0f});
+	sprite.SetColor({0.9f, 0.9f, 0.9f, 1.0f});
 
+	sprite2.Initialize();
+	TH = TextureManager::GetInstance()->Load("card/cardBottom.png");
+	sprite2.SetTextureHandle(TH);
+	sprite2.SetAnchorPoint({0.5f, 0.5f});
+	sprite2.SetSize({120.0f, 160.0f});
+	sprite2.SetTextureRect({}, {120.0f, 160.0f});
+	
 	IndividualInitialize();
-
+	
 	number.Initialize({}, 0.5f, {0.0f, 0.0f});
 	number.SetNumber(luck);
 	nextNumberRotate = 0.0f;
@@ -26,6 +34,7 @@ void Card::Initialize() {
 
 void Card::SetSpritePos(const Vector2& pos) {
 	sprite.SetPosition(pos);
+	sprite2.SetPosition(pos);
 	number.SetPosition(pos);
 	number2.SetPosition(pos);
 }
@@ -38,8 +47,10 @@ void Card::Updata() {
 		nextNumber2Rotate += PI;
 	}
 	sprite.SetSize({120.0f * size_, 160.0f * size_});
+	sprite2.SetSize({120.0f * size_, 160.0f * size_});
 	rotate = Lerp(rotate, nextRotate, 0.2f);
 	sprite.SetRotation(rotate);
+	sprite2.SetRotation(rotate);
 
 	Vector2 ppp = {
 	    -60.0f * size_,
@@ -71,6 +82,7 @@ void Card::Updata() {
 void Card::Draw() { 
 	sprite.SetSize({120.0f * size_, 160.0f * size_});
 	sprite.Draw();
+	sprite2.Draw();
 	number.Draw();
 	number2.Draw();
 }

@@ -2,28 +2,26 @@
 #include "SceneManager.h"
 
 void Clear::Initialize2() {
-
-	GH_ = TextureManager::Load("backGround/crearScene.png");
-	sprite = Sprite::Create(GH_, { 0, 0 });
-	SH_ = audio_->LoadWave("audio/ClearBGM.mp3");
-
-	VH_ = audio_->PlayWave(SH_, true, 0.5f);
+	button = std::make_unique<Button>();
+	button->Initialize({640.0f, 360.0f}, {1280.0f, 720.0f}, "back/clear.png", {1.0f, 1.0f, 1.0f, 1.0f});
+	button->SetTextureRect({1280.0f, 720.0f});
 }
 
 void Clear::Update()
 {
-	input_->GetJoystickState(0, xinput);
-	input_->GetJoystickStatePrevious(0, preXinput);
 
-	if (xinput.Gamepad.wButtons == XINPUT_GAMEPAD_A && preXinput.Gamepad.wButtons != XINPUT_GAMEPAD_A) {
-		if (blackout_->GetIsEnd()) {
-			blackout_->SetIsStart(true);
-			SceneManager::GetInstance()->SetNextScene(SceneName::TitleScene);
+
+	if (input_->IsTriggerMouse(0)) {
+		if (button->IsOnCollision(input_->GetMousePosition())) {
+			if (blackout_->GetIsEnd()) {
+				blackout_->SetIsStart(true);
+				SceneManager::GetInstance()->SetNextScene(SceneName::TitleScene);
+			}
 		}
 	}
 	if (blackout_->GetIsStart() && blackout_->GetIsMiddle()) {
 		isFinish = true;
-		audio_->StopWave(VH_);
+		//audio_->StopWave(VH_);
 	}
 }
 
@@ -67,10 +65,10 @@ void Clear::Draw()
 	/// ここに前景スプライトの描画処理を追加できる
 	/// </summary>
 
-	sprite->Draw();
+	button->Draw();
 
 	// スプライト描画後処理
 	Sprite::PostDraw();
 }
 
-void Clear::Destroy() { delete sprite; }
+void Clear::Destroy() {  }

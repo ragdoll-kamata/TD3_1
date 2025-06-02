@@ -1,5 +1,7 @@
 #pragma once
+#include "memory"
 #include "Scene.h"
+#include "Button.h"
 class Clear : public Scene
 {
 public:
@@ -24,7 +26,6 @@ private:
 	XINPUT_STATE xinput;
 	XINPUT_STATE preXinput;
 
-	uint32_t GH_;
-	Sprite* sprite;
+	std::unique_ptr<Button> button;
 };
 

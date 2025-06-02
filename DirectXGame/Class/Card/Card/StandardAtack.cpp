@@ -1,6 +1,8 @@
 #include "StandardAtack.h"
 #include "Enemy.h"
-void StandardAtack::IndividualInitialize() { 
+void StandardAtack::IndividualInitialize() {
+	TH = TextureManager::GetInstance()->Load("card/StanderdAttack.png");
+	sprite.SetTextureHandle(TH);
 	luck = 1;
 	reverseLuck = -1;
 	cardType = CardType::Damage;

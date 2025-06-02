@@ -1,5 +1,7 @@
 #pragma once
+#include <memory>
 #include "Scene.h"
+#include "Button.h"
 class TitleScene : public Scene
 {
 public:
@@ -27,10 +29,9 @@ private:
 
 	uint32_t GH_;
 	Sprite* sprite;
-	uint32_t GH2_;
-	Sprite* sprite2;
-	uint32_t GH3_;
-	Sprite* sprite3;
+
+	std::unique_ptr<Button> button;
+
 	bool isSousa;
 	bool isSousa2;
 };
